@@ -6,6 +6,10 @@
 <meta name="theme-color" content="#1e3a5f">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="גיבור המבצעים">
 <meta name="description" content="גיבור המבצעים – משחק חינוכי חב"די למשפחה, גילאי 4–12">
 <script>if("serviceWorker" in navigator&&(location.protocol==="https:"||location.hostname==="localhost"))addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})});</script>
 <title>גיבור המבצעים</title>
@@ -153,10 +157,13 @@ html{overflow:hidden!important;height:100%}body{box-sizing:border-box;height:100
 .icons{display:flex!important;flex-wrap:wrap;justify-content:center;overflow:visible!important}.icons .ibtn{width:76px}
 *{scrollbar-width:thin;scrollbar-color:rgba(201,162,39,.7) transparent}
 ::-webkit-scrollbar{width:7px;height:0}::-webkit-scrollbar-button{display:none;width:0;height:0}::-webkit-scrollbar-thumb{background:rgba(201,162,39,.7);border-radius:8px}::-webkit-scrollbar-track,::-webkit-scrollbar-corner{background:transparent}
+#amb{position:fixed;inset:0;width:100%;height:100%;filter:blur(22px) brightness(.6) saturate(1.2);transform:scale(1.2);pointer-events:none;z-index:0;opacity:0;transition:opacity .4s}
+.cab{position:relative;z-index:1}
 #card .grps{display:flex;flex-wrap:wrap;gap:4px 14px}
 #card .grp{flex-grow:1;min-width:150px}
 #card.tight2 .grid .tile{position:relative}
 #card.tight2 .grid .tile>button:only-of-type:not([data-act="buy"]){position:absolute!important;inset:0;width:100%;height:100%;opacity:0;margin:0!important}
+#card.tight2 .grid .tile>span{position:relative;z-index:1}
 #card.tight2 .grid .tile.lock{opacity:.55}
 #card.tight2 .grid{gap:6px!important;grid-template-columns:repeat(auto-fill,minmax(145px,1fr))!important}
 #card.tight2 .hmb{flex-direction:row!important;min-height:46px!important;padding:4px 10px!important;gap:8px!important}
@@ -3499,7 +3506,7 @@ const PSET=(()=>{try{return JSON.parse(localStorage.getItem('mivtzaim-parents'))
 function saveBlob(blob,fn){try{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=fn;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},800);}catch(e){floater(W/2,H/2,'לֹא הִצְלַחְנוּ לִשְׁמֹר','#fff');}}
 async function exportSave(){const o={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(/^mivtzaim/.test(k))o[k]=localStorage.getItem(k);}const blob=new Blob([JSON.stringify({app:'gibor-hamivtzaim',v:1,date:new Date().toISOString(),data:o})],{type:'application/json'});const fn='gibor-hamivtzaim-backup.json';
  try{const dl=window.claude&&window.claude.use?await window.claude.use('downloads'):null;if(dl){await dl.save({filename:fn,data:blob});return;}}catch(e){if(e&&e.code==='declined')return;}saveBlob(blob,fn);}
-function importSave(){const inp=document.createElement('input');inp.type='file';inp.accept='.json,application/json';inp.onchange=()=>{const f=inp.files&&inp.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const j=JSON.parse(r.result);if(!j||j.app!=='gibor-hamivtzaim'||!j.data)throw 0;for(const [k,v] of Object.entries(j.data))if(/^mivtzaim/.test(k))localStorage.setItem(k,v);sfx.win();setTimeout(()=>location.reload(),400);}catch(e){sfx.oops();floater(W/2,140,'הַקֹּבֶץ לֹא תָּקִין','#fff');}};r.readAsText(f);};inp.click();}
+function importSave(){const inp=document.createElement('input');inp.type='file';inp.accept='.json,application/json';inp.onchange=()=>{const f=inp.files&&inp.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const j=JSON.parse(r.result);if(!j||j.app!=='gibor-hamivtzaim'||!j.data)throw 0;for(const [k,v] of Object.entries(j.data)){if(!/^mivtzaim/.test(k))continue;if(k===PKEY){try{const nw=JSON.parse(v),od=JSON.parse(localStorage.getItem(PKEY)||'null');if(od&&od.list&&nw&&nw.list){for(const q of od.list)if(!nw.list.some(x=>x.id===q.id))nw.list.push(q);localStorage.setItem(k,JSON.stringify(nw));continue;}}catch(e){}}if(/^mivtzaim-hero-v1-/.test(k)&&localStorage.getItem(k)){try{const a_=JSON.parse(localStorage.getItem(k)),b_=JSON.parse(v);if((a_.coins||0)+(a_.lvl||0)>(b_.coins||0)+(b_.lvl||0))continue;}catch(e){}}localStorage.setItem(k,v);}sfx.win();setTimeout(()=>location.reload(),400);}catch(e){sfx.oops();floater(W/2,140,'הַקֹּבֶץ לֹא תָּקִין','#fff');}};r.readAsText(f);};inp.click();}
 function savePSet(){try{localStorage.setItem('mivtzaim-parents',JSON.stringify(PSET))}catch(e){}applyComfort();}
 function applyComfort(){try{const small=!!(FAM.me&&FAM.me.age<=6);cab.classList.toggle('calm',!!PSET.calm);cab.classList.toggle('bigpad',!!PSET.big||small);cab.classList.toggle('hand-r',PSET.hand==='r');cab.classList.toggle('hand-l',PSET.hand==='l');const sb=$('slowBtn');if(sb)sb.classList.toggle('on',!!(PSET.slow||R.slowLive));}catch(e){}}
 function playSecs(st,k){return((st||{}).time||{})[k||todayKey()]||0;}
@@ -3516,7 +3523,7 @@ function parentGate(ok){const a=6+Math.floor(Math.random()*4),b=6+Math.floor(Mat
  show(`<h2>🔐 כְּנִיסַת הוֹרִים</h2><p>כַּמָּה זֶה ${a} × ${b}?</p><p><input id="pgIn" type="number" inputmode="numeric" style="font-size:22px;width:120px;padding:6px;border:3px solid var(--ink);border-radius:10px"></p><div class="btns row"><button data-act="chk">כְּנִיסָה</button><button class="alt" data-act="back">בִּטּוּל</button></div>`);
  const i=$('pgIn');if(i){i.addEventListener('keydown',e=>{e.stopPropagation();if(e.key==='Enter')ACT.chk();});setTimeout(()=>i.focus(),50);}}
 function parentScreen(){confirmLeave();R.screen='parents';R.scene='show';R.stage=0;const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-i);return todayKey(d);});
- bind({rec:()=>recStudio(),exp:()=>exportSave(),imp:()=>importSave(),cf:v=>{PSET[v]=!PSET[v];savePSet();parentScreen();},vb:()=>{PSET.vib=PSET.vib===false;savePSet();parentScreen();},hd:v=>{PSET.hand=v;savePSet();parentScreen();},lim:v=>{PSET.limit=+v;savePSet();parentScreen();},sh:()=>{PSET.shabbat=!PSET.shabbat;PSET.unlockS=false;savePSet();parentScreen();},back:()=>mapScreen()});
+ bind({rec:()=>recStudio(),exp:()=>exportSave(),imp:()=>importSave(),slink:()=>syncLink(),cf:v=>{PSET[v]=!PSET[v];savePSet();parentScreen();},vb:()=>{PSET.vib=PSET.vib===false;savePSet();parentScreen();},hd:v=>{PSET.hand=v;savePSet();parentScreen();},lim:v=>{PSET.limit=+v;savePSet();parentScreen();},sh:()=>{PSET.shabbat=!PSET.shabbat;PSET.unlockS=false;savePSet();parentScreen();},back:()=>mapScreen()});
  const rows=P.list.map(p=>{const st=p.id===P.cur?S:(lsGet2(KEY+'-'+p.id)||{});const t=Math.round(playSecs(st)/60),wk=Math.round(days.reduce((a,k)=>a+playSecs(st,k),0)/60);const rd=(st.read||{}).done||{};
   const weak=Object.keys((st.read||{}).err||{}).map(k=>[k,((st.read.err[k]||0)-((st.read.ok||{})[k]||0)*.5)]).filter(x=>x[1]>0&&/^[LVW]/.test(x[0])).sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0][0]==='V'&&VOW[x[0].slice(2)]?VOW[x[0].slice(2)].n[0]:x[0].slice(2));
   return `<div class="tile" style="align-items:stretch;text-align:right"><b>${p.name} ${p.level==='easy'?'(6–8)':'(9–12)'}</b><small>⏱️ הַיּוֹם: ${t} דַּק׳ · הַשָּׁבוּעַ: ${wk} דַּק׳<br>🗺️ מִבְצָעִים: ${Object.keys(st.done||{}).length}/13 · 🏅 מֶדַלְיוֹת: ${Object.keys(st.medals||{}).length} · 🔥 רֶצֶף: ${(st.streak||{}).n||0} · 🪙 ${st.coins||0}<br>📚 שִׁעוּרֵי קְרִיאָה: ${Object.keys(rd).length}/${RLES.length}${weak.length?` · עוֹד קָשֶׁה: <b class="rfont">${weak.join(' · ')}</b>`:''}</small></div>`;}).join('');
@@ -3528,7 +3535,7 @@ function parentScreen(){confirmLeave();R.screen='parents';R.scene='show';R.stage
  <p class="fact">💡 לִילָדִים עַד גִּיל 6 הַכַּפְתּוֹרִים גְּדוֹלִים אוֹטוֹמָטִית. כַּפְתּוֹר 🐢 לְמַעְלָה בִּזְמַן מִשְׂחָק מְאַט אֶת הַמִּשְׂחָק לְכָל יֶלֶד.</p>
  <p><b>🕯️ מַצַּב שַׁבָּת:</b> הַמִּשְׂחָק נִנְעָל מִיּוֹם שִׁשִּׁי בְּ־14:00 וְעַד מוֹצָאֵי שַׁבָּת בְּ־21:00 (לְפִי הַשָּׁעוֹן בַּמַּכְשִׁיר). <button class="small ${PSET.shabbat?'green':'alt'}" data-act="sh">${PSET.shabbat?'פּוֹעֵל ✓':'כָּבוּי'}</button></p>
  <p class="fact" style="background:#fff3c4">🎙️ <b>הַקְלִיטוּ אֶת הַקּוֹלוֹת שֶׁל הַמִּשְׁפָּחָה!</b> בְּ"אוּלְפַּן הַהַקְלָטוֹת" אֶפְשָׁר לְהַקְלִיט מִשְׁפְּטֵי עִדּוּד וּשְׁמוֹת – וְהַמִּשְׂחָק יַשְׁמִיעַ אוֹתָם בִּמְקוֹם הַקּוֹל הַמְּמֻחְשָׁב. יְלָדִים מְאוֹד אוֹהֲבִים לִשְׁמֹעַ קוֹל מֻכָּר.</p>
- <p><b>💾 גִּבּוּי הַהִתְקַדְּמוּת</b> (לְהַעֲבָרָה לְמַחְשֵׁב אוֹ טֶלֶפוֹן אַחֵר):</p><div class="btns row"><button class="small" data-act="exp">💾 שְׁמִירַת גִּבּוּי</button><button class="small alt" data-act="imp">📂 טְעִינַת גִּבּוּי</button><button class="small alt" data-act="rec">🎙️ אוּלְפַּן הַקְלָטוֹת</button></div>
+ <p><b>💾 גִּבּוּי הַהִתְקַדְּמוּת</b> (לְהַעֲבָרָה לְמַחְשֵׁב אוֹ טֶלֶפוֹן אַחֵר):</p><div class="btns row"><button class="small" data-act="exp">💾 שְׁמִירַת גִּבּוּי</button><button class="small alt" data-act="imp">📂 טְעִינַת גִּבּוּי</button>${SYNC.ok?'<span class="small">☁️ מְסֻנְכְּרָן אוֹטוֹמָטִית</span>':'<button class="small green" data-act="slink">📲 שְׁלִיחָה לְמַכְשִׁיר אַחֵר</button>'}<button class="small alt" data-act="rec">🎙️ אוּלְפַּן הַקְלָטוֹת</button></div>
  <p class="fact">🔒 <b>פְּרָטִיּוּת:</b> הַמִּשְׂחָק לֹא אוֹסֵף וְלֹא שׁוֹלֵחַ שׁוּם מֵידָע. כָּל הַהִתְקַדְּמוּת, הַשֵּׁמוֹת וְהַהַקְלָטוֹת נִשְׁמָרִים רַק בַּמַּכְשִׁיר הַזֶּה. אֵין פִּרְסוֹמוֹת וְאֵין רְכִישׁוֹת.</p><div class="btns row"><button class="alt" data-act="back">חֲזָרָה לַמִּשְׂחָק</button></div>`);}
 /* ================= SHABBAT MODE ================= */
 function shabbatNow(){if(!PSET.shabbat)return false;const d=new Date(),day=d.getDay(),h=d.getHours()+d.getMinutes()/60;return(day===5&&h>=14)||(day===6&&h<21);}
@@ -4122,10 +4129,10 @@ function welcomeScreen(){confirmLeave();R.screen='who';R.scene='show';R.stage=0;
  <p class="fact">👨‍👩‍👧 לְכָל יֶלֶד בַּבַּיִת – פְּרוֹפִיל מִשֶּׁלּוֹ, עִם הַמַּטְבְּעוֹת, הַמַּדְבֵּקוֹת וְהַהִתְקַדְּמוּת שֶׁלּוֹ.${old&&old.level?' הַהִתְקַדְּמוּת הַקַּיֶּמֶת תַּעֲבֹר לַשַּׂחְקָן הָרִאשׁוֹן שֶׁנִּרְשָׁם.':''}</p>
  <div class="btns row"><button data-act="reg">➕ נִרְשָׁמִים וּבוֹנִים דְּמוּת!</button></div>`);}
 function whoScreen(){confirmLeave();ttsStop();R.screen='who';R.scene='show';R.stage=0;
- bind({use:id=>{useProfile(id);sfx.win();celebrate(cheerPre()+FAM.me.name+'!',120);appHome();},reg:()=>ccScreen(),edit:id=>ccScreen(id),del:id=>delAsk(id)});
- show(`<h2>👤 מִי מְשַׂחֵק עַכְשָׁו?</h2><div class="grid">${P.list.map(p=>{const st=lsGet2(KEY+'-'+p.id)||{};return`<div class="tile ${p.id===P.cur?'on':''}"><img src="${lookImg(p.look)}" alt="" style="width:72px;height:72px;border-radius:50%;background:#eaf3ff;border:3px solid var(--ink)"><b>${p.name}</b><small>${p.age?'גִּיל '+p.age:(st.level==='easy'?'6–8':'9–12')} · 🪙 ${st.coins||0}${st.streak&&st.streak.n?' · 🔥'+st.streak.n:''}</small><button class="small" data-act="use" data-v="${p.id}">${p.f?'זֹאת אֲנִי!':'זֶה אֲנִי!'}</button><span><button class="small alt" data-act="edit" data-v="${p.id}">✏️</button> <button class="small alt" data-act="del" data-v="${p.id}">🗑️</button></span></div>`}).join('')}
+ bind({use:id=>{useProfile(id);sfx.win();celebrate(cheerPre()+FAM.me.name+'!',120);appHome();},reg:()=>ccScreen(),edit:id=>ccScreen(id)});
+ show(`<h2>👤 מִי מְשַׂחֵק עַכְשָׁו?</h2><div class="grid">${P.list.map(p=>{const st=lsGet2(KEY+'-'+p.id)||{};return`<div class="tile ${p.id===P.cur?'on':''}"><img src="${lookImg(p.look)}" alt="" style="width:72px;height:72px;border-radius:50%;background:#eaf3ff;border:3px solid var(--ink)"><b>${p.name}</b><small>${p.age?'גִּיל '+p.age:(st.level==='easy'?'6–8':'9–12')} · 🪙 ${st.coins||0}${st.streak&&st.streak.n?' · 🔥'+st.streak.n:''}</small><button class="small" data-act="use" data-v="${p.id}">${p.f?'זֹאת אֲנִי!':'זֶה אֲנִי!'}</button><span><button class="small alt" data-act="edit" data-v="${p.id}">✏️</button></span></div>`}).join('')}
  <div class="tile"><span class="ic">➕</span>שַׂחְקָן חָדָשׁ<small>נִרְשָׁמִים וּבוֹנִים דְּמוּת</small><button class="small green" data-act="reg">לְהִרָּשֵׁם</button></div></div>`);}
-function delAsk(id){const p=P.list.find(x=>x.id===id);if(!p)return;bind({yes:()=>{P.list=P.list.filter(x=>x.id!==id);try{localStorage.removeItem(KEY+'-'+id)}catch(e){}if(P.cur===id){P.cur=null;applyProfile();}saveP();P.list.length?whoScreen():welcomeScreen();},no:whoScreen});
+function delAsk(id){return whoScreen();const p=P.list.find(x=>x.id===id);if(!p)return;bind({yes:()=>{P.list=P.list.filter(x=>x.id!==id);try{localStorage.removeItem(KEY+'-'+id)}catch(e){}if(P.cur===id){P.cur=null;applyProfile();}saveP();P.list.length?whoScreen():welcomeScreen();},no:whoScreen});
  show(`<h2>🗑️ לִמְחֹק אֶת ${p.name}?</h2><p>כָּל הַמַּטְבְּעוֹת, הַמַּדְבֵּקוֹת וְהַהִתְקַדְּמוּת שֶׁל ${p.name} יִמָּחֲקוּ. אִי אֶפְשָׁר לְהַחְזִיר.</p><div class="btns row"><button class="alt" data-act="no">לֹא, חֲזָרָה</button><button class="red" data-act="yes">כֵּן, לִמְחֹק</button></div>`);}
 function ccScreen(editId){const ed=editId?P.list.find(x=>x.id===editId):null;
  if(!R.cc||R.cc._for!==(editId||'new'))R.cc=ed?Object.assign({_for:editId,age:ed.age||(ed.level==='easy'?6:10)},ed.cc):{_for:'new',name:'',f:0,skin:0,hair:0,style:0,kip:0,shirt:0,glasses:0,level:'easy',age:6};ccRender(ed);}
@@ -4435,5 +4442,39 @@ new MutationObserver(()=>fit()).observe(hud,{childList:true});
 fit();setTimeout(fit,300);
 startApp();
 requestAnimationFrame(frame);
+/* ---- sync between devices (auto via account; manual via link) ---- */
+const SYTS='mivtzaim-sync-ts';const SYNC={ts:{},db:null,uid:null,dirty:new Set(),applying:false,t:null,busy:false,ok:false};
+try{SYNC.ts=JSON.parse(localStorage.getItem(SYTS))||{};}catch(e){}
+const syncable=k=>typeof k==='string'&&/^mivtzaim/.test(k)&&k!==SYTS;
+(()=>{try{const o=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){o.call(this,k,v);try{if(this===localStorage&&syncable(k)&&!SYNC.applying){SYNC.ts[k]=Date.now();o.call(this,SYTS,JSON.stringify(SYNC.ts));SYNC.dirty.add(k);syncSoon();}}catch(e){}};}catch(e){}})();
+function syncSoon(){if(!SYNC.ok)return;clearTimeout(SYNC.t);SYNC.t=setTimeout(syncPush,3000);}
+async function syncPush(){if(!SYNC.ok||SYNC.busy)return;SYNC.busy=true;try{for(const k of [...SYNC.dirty]){SYNC.dirty.delete(k);const v=localStorage.getItem(k);if(v==null)continue;await SYNC.db.doc('data/users/'+SYNC.uid+'/kv/'+k).set({v,ts:SYNC.ts[k]||Date.now()});}}catch(e){}SYNC.busy=false;if(SYNC.dirty.size)syncSoon();}
+function mergeProfiles(a,b){try{const A=JSON.parse(a)||{list:[]},B=JSON.parse(b)||{list:[]};const out=Object.assign({},A);out.list=[...(A.list||[])];for(const q of (B.list||[]))if(!out.list.some(x=>x.id===q.id))out.list.push(q);if(!out.cur)out.cur=B.cur;return JSON.stringify(out);}catch(e){return a||b;}}
+function mergeIn(entries){let changed=false;SYNC.applying=true;try{for(const [k,e] of Object.entries(entries)){if(!syncable(k)||!e||typeof e.v!=='string')continue;const lv=localStorage.getItem(k),lt=SYNC.ts[k]||0,rt=e.ts||0;
+  if(k===PKEY){const m=lv==null?e.v:mergeProfiles(lv,e.v);if(m!==lv){localStorage.setItem(k,m);changed=true;}if(m!==e.v)SYNC.dirty.add(k);SYNC.ts[k]=Math.max(lt,rt)||Date.now();continue;}
+  if(lv==null){localStorage.setItem(k,e.v);SYNC.ts[k]=rt||Date.now();changed=true;continue;}
+  if(lv===e.v){SYNC.ts[k]=Math.max(lt,rt);continue;}
+  const takeRemote=(!lt||!rt)?e.v.length>lv.length:rt>lt;
+  if(takeRemote){localStorage.setItem(k,e.v);SYNC.ts[k]=rt||Date.now();changed=true;}else{SYNC.ts[k]=lt||Date.now();SYNC.dirty.add(k);}}
+ localStorage.setItem(SYTS,JSON.stringify(SYNC.ts));}catch(e){}SYNC.applying=false;return changed;}
+function syncReload(){try{P=lsGet2(PKEY)||P;if(P.cur&&P.list.some(x=>x.id===P.cur)){S=Object.assign(SDEF(),load()||{});applyProfile();updHud();}if(R.screen==='who')whoScreen();else if(R.screen==='home')appHome();}catch(e){}}
+async function syncPull(){if(!SYNC.ok||R.screen==='play')return;try{const snap=await SYNC.db.collection('data/users/'+SYNC.uid+'/kv').limit(500).get();const ent={};for(const d of snap.docs){const x=d.data();if(x)ent[d.id]=x;}
+ for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(syncable(k)&&!ent[k]){SYNC.dirty.add(k);if(!SYNC.ts[k])SYNC.ts[k]=Date.now();}}
+ if(mergeIn(ent))syncReload();syncSoon();}catch(e){}}
+(async()=>{try{let n=0;while(!(window.claude&&window.claude.use)&&n<30){await new Promise(r=>setTimeout(r,100));n++;}if(!(window.claude&&window.claude.use))return;
+ const db=await window.claude.use('db');const us=await window.claude.use('user');if(!db||!us)return;const uid=await us.id();if(!uid)return;
+ SYNC.db=db;SYNC.uid=uid;SYNC.ok=true;await syncPull();document.addEventListener('visibilitychange',()=>{if(document.hidden)syncPush();else syncPull();});setInterval(syncPull,45000);}catch(e){}})();
+/* manual link: works anywhere (GitHub, offline copy) */
+const b64u={enc:u=>{let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');},dec:t=>{t=t.replace(/-/g,'+').replace(/_/g,'/');const s=atob(t);const u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u;}};
+async function zip(str,inv){const cs=inv?new DecompressionStream('deflate-raw'):new CompressionStream('deflate-raw');const st=new Blob([inv?str:new TextEncoder().encode(str)]).stream().pipeThrough(cs);const buf=new Uint8Array(await new Response(st).arrayBuffer());return inv?new TextDecoder().decode(buf):buf;}
+async function syncLink(){try{const o={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(syncable(k))o[k]={v:localStorage.getItem(k),ts:SYNC.ts[k]||0};}
+ const url=location.href.split('#')[0]+'#sync='+b64u.enc(await zip(JSON.stringify(o)));
+ if(navigator.share){try{await navigator.share({title:'גִּבּוֹר הַמִּבְצָעִים',url});return;}catch(e){if(e&&e.name==='AbortError')return;}}
+ try{await navigator.clipboard.writeText(url);floater(W/2,160,'📋 ✓','#fff');}catch(e){prompt('',url);}}catch(e){sfx.oops();}}
+(async()=>{try{const h=location.hash;if(!h.startsWith('#sync='))return;const o=JSON.parse(await zip(b64u.dec(h.slice(6)),true));history.replaceState(null,'',location.href.split('#')[0]);const ch=mergeIn(o);syncSoon();if(ch)setTimeout(()=>{syncReload();try{sfx.win();celebrate('📲 ✓',150,true);}catch(e){}},600);}catch(e){}})();
+/* phone: fill the screen (fullscreen + landscape on first touch) and soft backdrop instead of black bars */
+addEventListener('pointerdown',function fsOnce(e){if(e.pointerType!=='touch')return;removeEventListener('pointerdown',fsOnce,true);try{const d=document,el=d.documentElement;if(!(d.fullscreenElement||d.webkitFullscreenElement)){const f=el.requestFullscreen||el.webkitRequestFullscreen;if(f){const r=f.call(el,{navigationUI:'hide'});if(r&&r.then)r.then(()=>{try{screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape').catch(()=>{});}catch(e){}}).catch(()=>{});}}}catch(e){}},true);
+(()=>{const a=document.createElement('canvas');a.id='amb';a.width=96;a.height=54;a.setAttribute('aria-hidden','true');document.body.prepend(a);const x=a.getContext('2d');const g=document.getElementById('game');
+ setInterval(()=>{try{const sc=document.getElementById('screen').getBoundingClientRect();const bars=innerWidth-sc.width>24||innerHeight-sc.height>24;a.style.opacity=bars&&!document.hidden?'1':'0';if(bars&&!document.hidden)x.drawImage(g,0,0,96,54);}catch(e){}},150);})();
 })();
 </script>
