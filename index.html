@@ -1324,7 +1324,7 @@ function arcadeScreen(msg=''){confirmLeave();R.screen='arcade';R.stage=0;R.scene
   {k:'karaoke',ic:'🎤',t:'קָרִיּוֹקִי הַנִּגּוּנִים',d:'שָׁרִים יַחַד – הַמִּלִּים נִדְלָקוֹת בִּזְמַן הַשִּׁיר: מוֹדֶה אֲנִי, שָׁלוֹם עֲלֵיכֶם, יְחִי הַמֶּלֶךְ וְעוֹד!',pr:()=>{const n=Object.keys(S.songs||{}).length;return n?'שִׁירִים: '+n+'/'+SONGS.length:''}},
   {k:'read',ic:'🏫',t:'בֵּית הַסֵּפֶר לִקְרִיאָה',d:'לוֹמְדִים לִקְרֹא עִם הָרַבָּנִית כֹּהֵן: אוֹתִיּוֹת, נִקּוּד, מִלִּים, מִשְׁפָּטִים וְסִפּוּרִים!',pr:()=>{const d=((S.read||{}).done)||{};const n=Object.keys(d).length;return n?'שִׁעוּרִים: '+n+'/'+RLES.length:''}},
   {k:'challah',ic:'🍞',t:'הַחַלּוֹת שֶׁל רָחֵלִי',d:'אוֹפִים חַלּוֹת עִם רָחֵלִי, מַפְרִישִׁים חַלָּה, עוֹרְכִים שֻׁלְחָן וּמַדְלִיקִים נֵרוֹת שַׁבָּת!',pr:()=>S.best&&S.best.challah?'⭐'.repeat(S.best.challah):''},
-  {k:'hero',ic:'🦸',pr:()=>S.hero&&S.hero.v===3&&S.hero.lvl?'שְׁלַבִּים: '+Math.min(30,S.hero.lvl)+'/30':'',t:'שִׁמְעוֹן הַגִּבּוֹר',d:'6 עוֹלָמוֹת וְ-30 שְׁלַבִּים – מְנַצְּחִים אֶת הַיֵּצֶר הָרַע בְּאוֹר!'},
+  {k:'hero',ic:'🦸',pr:()=>S.hero&&S.hero.v===3&&S.hero.lvl?'שְׁלַבִּים: '+Math.min(30,S.hero.lvl)+'/30':'',t:'הַשָּׁלִיחַ הַגִּבּוֹר',d:'6 עוֹלָמוֹת וְ-30 שְׁלַבִּים – מְנַצְּחִים אֶת הַיֵּצֶר הָרַע בְּאוֹר!'},
   {k:'kart',ic:'🏎️',pr:()=>{const b=(S.best||{}).kart;return b&&Object.keys(b).length?'🏆 '+Object.values(b).filter(v=>v===1).length+' נִצְחוֹנוֹת':''},t:'קַרְטִינְג הַמִּבְצָעִים',d:'מֵרוֹץ תְּלַת־מְמַדִּי בִּירוּשָׁלַיִם, צְפַת וּבַחוֹף – שַׁעֲרֵי מִצְווֹת נוֹתְנִים טוּרְבּוֹ!'},
   {k:'det',ic:'🕵️',pr:()=>S.det?'נִפְתְּרוּ: '+Object.keys(S.det).length+'/'+CASES.length:'',t:'הַבַּלָּשׁ יְחִיאֵל',d:'אוֹסְפִים רְמָזִים, פּוֹתְרִים חִידוֹת וּמְגַלִּים אֶת הַתַּעֲלוּמָה!'},
   {k:'sea',ic:'🌊',pr:()=>(S.best||{}).sea?'שִׂיא: '+S.best.sea:'',t:'קְרִיעַת יַם סוּף',d:'בּוֹרְחִים מֵהַמֶּרְכָּבוֹת, אוֹסְפִים מָן – וְרָצִים בְּתוֹךְ הַיָּם!'},
@@ -1342,7 +1342,7 @@ function arcadeScreen(msg=''){confirmLeave();R.screen='arcade';R.stage=0;R.scene
    brachot:()=>{R.scene='show';brachotTask({head:headOf('rebbetzin','🍎','אֵיזוֹ בְּרָכָה?')},()=>{celebrate('אָמֵן! אַחְלָה!',150,true);addCoins(5);arcadeScreen(say('rebbetzin','יִישַׁר כֹּחַ! עַכְשָׁו אַתֶּם יוֹדְעִים לְבָרֵךְ עַל הַכֹּל.'));});},
    dreidel:()=>{R.scene='show';dreidel(()=>arcadeScreen(say('benny','עוֹד פַּעַם! עוֹד פַּעַם!')));},
    chametz:()=>{R.scene='show';chametzHunt(()=>{addCoins(5);arcadeScreen(say('rabbi','כָּל הַכָּבוֹד! הַבַּיִת נָקִי מֵחָמֵץ.'));},'חֲזָרָה לְפִנַּת הַמִּשְׂחָקִים');}})[k](),map:()=>appHome()});
- const SHORT={shl:'שְׁלִיחוּת מִ־770',hero:'שִׁמְעוֹן הַגִּבּוֹר',kart:'קַרְטִינְג',sea:'יַם סוּף',det:'הַבַּלָּשׁ',runner:'מֵרוֹץ',stack:'מִגְדָּל',arena:'אֶחָד נֶגֶד הַשֵּׁנִי',camp:'הַקַּיְטָנָה',read:'קְרִיאָה',champ:'חִידוֹן',brachot:'בְּרָכוֹת',karaoke:'קָרִיּוֹקִי',challah:'חַלּוֹת',niggun:'נִגּוּנִים',dreidel:'סְבִיבוֹן',chametz:'חָמֵץ',shl:'770'};
+ const SHORT={shl:'שְׁלִיחוּת מִ־770',hero:'הַשָּׁלִיחַ הַגִּבּוֹר',kart:'קַרְטִינְג',sea:'יַם סוּף',det:'הַבַּלָּשׁ',runner:'מֵרוֹץ',stack:'מִגְדָּל',arena:'אֶחָד נֶגֶד הַשֵּׁנִי',camp:'הַקַּיְטָנָה',read:'קְרִיאָה',champ:'חִידוֹן',brachot:'בְּרָכוֹת',karaoke:'קָרִיּוֹקִי',challah:'חַלּוֹת',niggun:'נִגּוּנִים',dreidel:'סְבִיבוֹן',chametz:'חָמֵץ',shl:'770'};
  const HM=(()=>{try{return new Intl.DateTimeFormat('en-u-ca-hebrew',{month:'long'}).format(new Date());}catch(e){return'';}})();const SEAS=[];if(/Kislev|Tevet/.test(HM))SEAS.push('dreidel');if(/Adar|Nisan/.test(HM))SEAS.push('chametz');
  const GRP=[['🏃 עוֹד הַרְפַּתְקָאוֹת',['runner','sea','det','kart','shl']],['🏠 בַּיִת',['challah']],['👫 שְׁנַיִם עַל מָסָךְ אֶחָד',['arena']]].concat(SEAS.length?[['🕯️ לִכְבוֹד הֶחָג',SEAS]]:[]);
  show(`<h2 class="hello">🎮 עוֹד מִשְׂחָקִים</h2>${msg||''}${GRP.map(([h,ks])=>`<h3 class="ghead">${h}</h3><div class="ggrid">${ks.map(k=>{const g=G.find(x=>x.k===k);if(!g)return'';const pr=g.pr&&g.pr();return `<button class="gtile" data-act="play" data-v="${k}"><span>${g.ic}</span><b>${SHORT[k]||g.t}</b>${pr?`<small>${pr}</small>`:g.best&&bestOf(g.best)?`<small>🏆 ${bestOf(g.best)}</small>`:''}</button>`;}).join('')}</div>`).join('')}
@@ -2478,7 +2478,7 @@ function drawHParade(){const P_=R.hpr;if(!P_)return;const t=P_.t;const g=ctx.cre
  ctx.font='900 30px '+FONT;ctx.lineWidth=6;ctx.strokeText('👑 יְחִי הַמֶּלֶךְ! 👑',W/2,170);ctx.fillStyle='#fff';ctx.fillText('👑 יְחִי הַמֶּלֶךְ! 👑',W/2,170);ctx.globalAlpha=1;}
 function heroMenu(){confirmLeave();cab.classList.add('isMP');R.scene='show';R.stage=0;const sv=HS();if(hHachCheck())return;const nx=Math.min(29,sv.lvl);const D=hDef(nx);const k=hHeroes().includes(sv.k)?sv.k:'shimon';const fresh=sv.lvl===0&&!sv.seen.intro;
  bind({go:()=>heroStart(nx),map:()=>heroLevels(D.w),pick:()=>heroPick(0),more:heroMore,dif:v=>{sv.dif=v;save();heroMenu();},back:()=>appHome()});
- show(`<div class="hmenu"><h2 class="hello">🦸 שִׁמְעוֹן הַגִּבּוֹר</h2>${hVerse(hGifts())}
+ show(`<div class="hmenu"><h2 class="hello">🦸 הַשָּׁלִיחַ הַגִּבּוֹר</h2>${hVerse(hGifts())}
  <button class="big1 hgo" data-act="go">▶ ${fresh?'מַתְחִילִים!':sv.lvl>=30?'🏆 '+D.W.ic+' '+(nx+1)+'. '+D.name:'שָׁלָב '+(nx+1)+': '+D.W.ic+' '+D.name}</button>
  <p class="mlab">רָמָה:</p>${hDifRow('dif')}
  <div class="hmain">
@@ -3324,7 +3324,7 @@ const MEDALS=[
  ['allstages','👑','גִּבּוֹר הַמִּבְצָעִים','סַיְּמוּ אֶת כָּל הַמִּבְצָעִים',s=>Object.keys(s.done||{}).length>=13],
  ['det','🕵️','בַּלָּשׁ מֻסְמָךְ','פִּתְרוּ אֶת כָּל הַתַּעֲלוּמוֹת',s=>Object.keys(s.det||{}).length>=4],
  ['kart','🏎️','נֶהָג אַלּוּף','נַצְּחוּ בְּכָל שְׁלֹשֶׁת הַמַּסְלוּלִים',s=>Object.values((s.best||{}).kart||{}).filter(v=>v===1).length>=3],
- ['hero','🦸','גִּבּוֹר עַל','סַיְּמוּ אֶת כָּל שְׁלַבֵּי שִׁמְעוֹן הַגִּבּוֹר',s=>((s.hero||{}).v===3&&(s.hero.lvl||0)>=30)],
+ ['hero','🦸','גִּבּוֹר עַל','סַיְּמוּ אֶת כָּל שְׁלַבֵּי הַשָּׁלִיחַ הַגִּבּוֹר',s=>((s.hero||{}).v===3&&(s.hero.lvl||0)>=30)],
  ['sea','🌊','עוֹבֵר הַיָּם','עִבְרוּ אֶת יַם סוּף',s=>!!(s.best||{}).sea],
  ['challah','🍞','אוֹפֶה שֶׁל שַׁבָּת','אִפּוּ חַלּוֹת עִם רָחֵלִי',s=>!!(s.best||{}).challah],
  ['streak3','🔥','רֶצֶף שֶׁל 3','שַׂחֲקוּ 3 יָמִים בִּרְצִיפוּת',s=>((s.streak||{}).n||0)>=3],
@@ -3906,7 +3906,7 @@ let ZI=(()=>{try{return +localStorage.getItem('mivtzaim-zoom')||0}catch(e){retur
 function applyZoom(){document.documentElement.style.setProperty('--z',ZOOMS[ZI]||1);const b=$('btnZoom');if(b)b.textContent=['🔍 A','🔍 A+','🔍 A++','🔍 a'][ZI];}
 function rotHint(){let el=$('rotHint');if(!el){document.body.insertAdjacentHTML('beforeend','<div id="rotHint"><div><span class="rph">📱</span><b>סוֹבְבוּ אֶת הַטֶּלֶפוֹן לָרֹחַב</b><small>👆 לוֹחֲצִים לִסְגֹּר</small></div></div>');el=$('rotHint');el.onclick=()=>el.hidden=true;}el.hidden=false;clearTimeout(rotHint.t);rotHint.t=setTimeout(()=>{el.hidden=true;},4000);}
 async function rotateNow(){const d=document,el=d.documentElement;try{if(!(d.fullscreenElement||d.webkitFullscreenElement)){const f=el.requestFullscreen||el.webkitRequestFullscreen;if(f)await f.call(el,{navigationUI:'hide'});}if(screen.orientation&&screen.orientation.lock){await screen.orientation.lock('landscape');return;}throw 0;}catch(e){rotHint();}}
-const HOME_BTN=[['hero','🦸','שִׁמְעוֹן הַגִּבּוֹר','#ffb3b3'],['map','🗺️','הַמִּבְצָעִים','#ffd400'],['city','🚗','מְצוֹד הַמִּבְצָעִים','#9fd3ff'],['learn','📚','לוֹמְדִים','#b9f0a0']];
+const HOME_BTN=[['hero','🦸','הַשָּׁלִיחַ הַגִּבּוֹר','#ffb3b3'],['map','🗺️','הַמִּבְצָעִים','#ffd400'],['city','🚗','מְצוֹד הַמִּבְצָעִים','#9fd3ff'],['learn','📚','לוֹמְדִים','#b9f0a0']];
 function learnScreen(){confirmLeave();cab.classList.add('isMP');R.scene='show';R.screen='arcade';R.stage=0;
  bind({read:readMenu,song:karaokeMenu,br:()=>{R.scene='show';brachotTask({head:headOf('rebbetzin','🍎','אֵיזוֹ בְּרָכָה?')},()=>{celebrate('אָמֵן!',150,true);addCoins(5);learnScreen();});},back:()=>appHome()});
  show(`<h2 class="hello">📚 לוֹמְדִים</h2><div class="homeg homeg3"><button class="hbtn" data-act="read" style="--c:#b9f0a0"><span>🏫</span><b>קְרִיאָה</b></button><button class="hbtn" data-act="song" style="--c:#d9c2ff"><span>🎤</span><b>שִׁירִים וְנִגּוּנִים</b></button><button class="hbtn" data-act="br" style="--c:#ffcf7a"><span>🍎</span><b>בְּרָכוֹת</b></button></div><div class="btns row"><button class="alt" data-act="back">🏠 חֲזָרָה</button></div>`);}
@@ -3914,12 +3914,12 @@ function markHome(){if(!S.seenHome){S.seenHome=1;save();}}
 function appHome(){confirmLeave();cab.classList.add('isMP');R.scene='home';R.screen='home';R.stage=0;R.timerOn=false;R.goal=0;
  if(S.lvlBackup){S.level=S.lvlBackup;delete S.lvlBackup;save();}
  const d=P.cur?daily():null;const nm=FAM.me?FAM.me.name:'';
- bind({hero:()=>{markHome();heroMenu();},city:()=>{markHome();cityMenu();},learn:()=>{markHome();learnScreen();},map:()=>{markHome();mapScreen();},shl:()=>shlMenu(),arc:()=>{markHome();arcadeScreen();},read:readMenu,song:karaokeMenu,daily:()=>dailyScreen(),cal:calScreen,me:()=>P.list.length?whoScreen():welcomeScreen(),say:()=>speak([['שָׁלוֹם! לוֹחֲצִים עַל דֶּלֶת גְּדוֹלָה כְּדֵי לְשַׂחֵק. שִׁמְעוֹן הַגִּבּוֹר, הַמִּבְצָעִים, מְצוֹד הַמִּבְצָעִים, אוֹ לוֹמְדִים.','shimon']])});
+ bind({hero:()=>{markHome();heroMenu();},city:()=>{markHome();cityMenu();},learn:()=>{markHome();learnScreen();},map:()=>{markHome();mapScreen();},shl:()=>shlMenu(),arc:()=>{markHome();arcadeScreen();},read:readMenu,song:karaokeMenu,daily:()=>dailyScreen(),cal:calScreen,me:()=>P.list.length?whoScreen():welcomeScreen(),say:()=>speak([['שָׁלוֹם! לוֹחֲצִים עַל דֶּלֶת גְּדוֹלָה כְּדֵי לְשַׂחֵק. הַשָּׁלִיחַ הַגִּבּוֹר, הַמִּבְצָעִים, מְצוֹד הַמִּבְצָעִים, אוֹ לוֹמְדִים.','shimon']])});
  const n=upcoming()[0];
  show(`<div class="yechi ttsSkip">👑 יְחִי הַמֶּלֶךְ! 👑</div><h2 class="hello">שָׁלוֹם${nm?' '+nm:''}! 👋</h2>
  <div class="homeg homeg4">${HOME_BTN.map((b,i)=>`<button class="hbtn ${i===0&&!S.seenHome?'firstHint':''}" data-act="${b[0]}" style="--c:${b[3]}"><span>${b[1]}</span><b>${b[2]}</b>${i===0&&!S.seenHome?'<em class="hand" aria-hidden="true">👆</em>':''}</button>`).join('')}</div>
  <div class="btns row homesub"><button class="alt" data-act="arc">🎮 עוֹד מִשְׂחָקִים</button><button class="alt" data-act="daily">🌟 אֶתְגָּר הַיּוֹם${d&&d.done?' ✅':''}</button><button class="alt" data-act="say" aria-label="הַקְרָאָה">🔊</button></div>
- <button class="small alt calchip ttsSkip" data-act="cal">📅 ${hebStr(new Date(),true)}${n?' · '+n.H.ic+' '+n.H.n+' '+daysTxt(n.days):''}</button>`);if(!S.seenHome&&!appHome.said){appHome.said=1;setTimeout(()=>{try{if(R.screen==='home')speak([['לוֹחֲצִים עַל שִׁמְעוֹן הַגִּבּוֹר כְּדֵי לְהַתְחִיל!','shimon']]);}catch(e){}},700);}}
+ <button class="small alt calchip ttsSkip" data-act="cal">📅 ${hebStr(new Date(),true)}${n?' · '+n.H.ic+' '+n.H.n+' '+daysTxt(n.days):''}</button>`);if(!S.seenHome&&!appHome.said){appHome.said=1;setTimeout(()=>{try{if(R.screen==='home')speak([['לוֹחֲצִים עַל הַשָּׁלִיחַ הַגִּבּוֹר כְּדֵי לְהַתְחִיל!','shimon']]);}catch(e){}},700);}}
 function drawHomeScene(){const st=R.stage;R.stage=0;sky();R.stage=st;ctx.drawImage(bg,0,0,W,H);drawDecor&&0;
  const b=drawBus(W-260+Math.sin(R.t*2)*4,H-6,HELPERS.slice(0,4),1);const fam=['shimon','racheli',...HELPERS];fam.slice(0,7).forEach((k,i)=>{if(FAM[k])drawP(ctx,70+i*70,GY+8,famLook(k,{face:1,armA:i%2?-2.2+Math.sin(R.t*3+i)*.3:null}));});}
 /* ---- 770 hub (standalone game) ---- */
@@ -4110,7 +4110,7 @@ function todayKey(d=new Date()){return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+
 function hashStr(s){let h=2166136261;for(let i=0;i<s.length;i++)h=Math.imul(h^s.charCodeAt(i),16777619);return h>>>0;}
 const DCH=[
  {id:'kart',ev:'kart',ic:'🏎️',t:()=>'סַיְּמוּ מֵרוֹץ קַרְטִינְג בְּמָקוֹם רִאשׁוֹן אוֹ שֵׁנִי',ok:v=>v<=2,go:()=>kartMenu()},
- {id:'hero',ev:'hero',ic:'🦸',t:()=>'סַיְּמוּ שָׁלָב בְּ"שִׁמְעוֹן הַגִּבּוֹר"',go:()=>heroMenu()},
+ {id:'hero',ev:'hero',ic:'🦸',t:()=>'סַיְּמוּ שָׁלָב בְּ"הַשָּׁלִיחַ הַגִּבּוֹר"',go:()=>heroMenu()},
  {id:'det',ev:'det',ic:'🕵️',t:()=>'פִּתְרוּ תַּעֲלוּמָה עִם הַבַּלָּשׁ יְחִיאֵל',go:()=>detMenu()},
  {id:'sea',ev:'sea',ic:'🌊',t:()=>'עִבְרוּ אֶת יַם סוּף עַד הַסּוֹף',go:()=>seaMenu()},
  {id:'challah',ev:'challah',ic:'🍞',t:()=>'אִפּוּ חַלּוֹת לְשַׁבָּת עִם רָחֵלִי',go:()=>challahMenu()},
