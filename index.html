@@ -394,7 +394,7 @@ const FAM={
  shimon:{name:'הַשָּׁלִיחַ',look:{s:1.12,wf:1.3,shirt:'#fafafa',pants:'#141414',vest:true,tzitzit:true,skin:'#f0c39a',hair:'#2a1d14',hat:true,beard:{c:'#2a1d14',z:1.15}}},
  mendy:{name:'הַמַּדְרִיךְ מֶנְדִּי',look:{s:1,shirt:'#ff8c1a',pants:'#2b2b2b',skin:'#e9b98f',hair:'#3a2618',kippah:'#1a1a1a',beard:{c:'#3a2618',z:.6}}},
  rebbetzin:{name:'הָרַבָּנִית כֹּהֵן',f:1,look:{s:1.0,wf:1.1,shirt:'#5b6c8f',skirt:'#2f3d5a',pants:'#2f3d5a',skin:'#efc3a0',hair:'#7a5638',style:'tichel',tichel:'#1f3a5f',apron:true}},
- racheli:{name:'רָחֵלִי',f:1,look:{s:1.0,shirt:'#c9d6ea',skirt:'#4e6a9a',pants:'#4e6a9a',skin:'#f3cfac',hair:'#e8c37a',style:'tichel',tichel:'#7a4fc9'}},
+ racheli:{name:'הַשְּׁלוּחָה',f:1,look:{s:1.0,shirt:'#c9d6ea',skirt:'#4e6a9a',pants:'#4e6a9a',skin:'#f3cfac',hair:'#e8c37a',style:'tichel',tichel:'#7a4fc9'}},
  rabbi:{name:'הָרַב כֹּהֵן',look:{s:1.05,wf:1.1,shirt:'#fafafa',coat:true,pants:'#141414',skin:'#ecbf98',hair:'#e8e8e8',hat:true,beard:{c:'#f2f2f2',z:1.6}}},
  yechiel:{name:'יְחִיאֵל',age:13,power:'מַזְמִין נַיֶּדֶת מִשְׁטָרָה שֶׁמְּפַנָּה פְּקָקִים: עוֹד 15 שְׁנִיּוֹת בַּשְּׁלַבִּים עִם שָׁעוֹן!',look:{s:.9,hf:1.08,shirt:'#fafafa',pants:'#1f2a44',skin:'#f1c7a2',hair:'#3a2618',kippah:'#1f2a44',glasses:true}},
  dobi:{name:'דּוּבִי',age:11,power:'הֲכִי מָהִיר בַּמִּשְׁפָּחָה: הַשָּׁלִיחַ רָץ וְתוֹפֵס מַהֵר יוֹתֵר!',look:{s:.82,hf:1.12,shirt:'#2f80ed',pants:'#2b2b2b',skin:'#eebd94',hair:'#4a2c17',kippah:'#2f80ed'}},
@@ -733,7 +733,7 @@ const YES_W=['אֵיזֶה רַעְיוֹן יָפֶה! תּוֹדָה!','בְּ
 const NO_W=['אֲנִי מְמַהֶרֶת לַגַּן...','אוּלַי בַּשָּׁבוּעַ הַבָּא?','יֵשׁ לִי יָדַיִם מְלֵאוֹת שַׂקִּיּוֹת!'];
 const QUIPS=['אֵיפֹה שַׂמְתִּי אֶת הַמַּפְתְּחוֹת?!','אֲנִי מְאַחֵר!','מִי רוֹצֶה פָלָאפֶל?','אֵיזֶה מֶזֶג אֲוִיר יָפֶה!','הָאוֹטוֹבּוּס שׁוּב מְאַחֵר...'];
 const GIFTS=[
- {k:'yechiel',item:'נַיֶּדֶת מִשְׁטָרָה עִם סִירֶנָה',ic:'🚓',price:40,thanks:'וָאוּ! נַיֶּדֶת עִם אוֹרוֹת וְסִירֶנָה! תּוֹדָה, הַשָּׁלִיחַ וְרָחֵלִי!'},
+ {k:'yechiel',item:'נַיֶּדֶת מִשְׁטָרָה עִם סִירֶנָה',ic:'🚓',price:40,thanks:'וָאוּ! נַיֶּדֶת עִם אוֹרוֹת וְסִירֶנָה! תּוֹדָה, הַשָּׁלִיחַ וְהַשְּׁלוּחָה!'},
  {k:'dobi',item:'כַּדּוּרֶגֶל חָדָשׁ',ic:'⚽',price:25,thanks:'יֵשׁ! מָחָר אֲנִי מַבְקִיעַ שַׁעַר בִּשְׁבִילְכֶם!'},
  {k:'rivkush',item:'סֵפֶר חִידוֹת',ic:'📘',price:20,thanks:'אֲנִי אֶפְתֹּר אֶת כֻּלּוֹ עַד שַׁבָּת!'},
  {k:'dvora',item:'בֻּבָּה עִם שִׂמְלַת שַׁבָּת',ic:'🎎',price:20,thanks:'הִיא כָּל כָּךְ יָפָה! תּוֹדָה!'},
@@ -774,7 +774,7 @@ function turnNow(){return turnBanner(kidTurn());}
 /* ================= SCREENS ================= */
 function title(){R.screen='title';R.stage=0;R.scene='show';R.timerOn=false;R.goal=0;
  bind({lvl:v=>{S.level=v;save();mapScreen();}});
- show(`<h2>גִּבּוֹר הַמִּבְצָעִים</h2>${say('shimon',hi()+' '+'שָׁלוֹם! אֲנִי הַשָּׁלִיחַ. יַחַד עִם רָחֵלִי, הָרַב וְהָרַבָּנִית כֹּהֵן וְכָל הַיְּלָדִים – יוֹצְאִים לְמִבְצָעִים בְּכָל הַשָּׁנָה!')}
+ show(`<h2>גִּבּוֹר הַמִּבְצָעִים</h2>${say('shimon',hi()+' '+'שָׁלוֹם! אֲנִי הַשָּׁלִיחַ. יַחַד עִם הַשְּׁלוּחָה, הָרַב וְהָרַבָּנִית כֹּהֵן וְכָל הַיְּלָדִים – יוֹצְאִים לְמִבְצָעִים בְּכָל הַשָּׁנָה!')}
  <p>אוֹסְפִים נְקֻדּוֹת, לוֹמְדִים עַל חַגִּים וּמִצְווֹת, וְקוֹנִים מַתָּנוֹת לַיְּלָדִים. מָה הַגִּיל שֶׁל הַשַּׂחְקָן?</p>
  <div class="btns row"><button data-act="lvl" data-v="easy">גִּילְאֵי 6–8 (קַל)</button><button class="blue" data-act="lvl" data-v="normal">גִּילְאֵי 9–12 (רָגִיל)</button></div>`);}
 function mapScreen(){liveMap();}
@@ -818,12 +818,12 @@ function finishStage(){const id=R.stage,st=STAGES.find(x=>x.id===id);R.timerOn=f
  <p>קִבַּלְתֶּם: <b>${st.sticker}</b>${perfect?' + <b>כּוֹכַב חִידוֹן מֻשְׁלָם</b>':''}${first&&id!==13?' · נִפְתְּחוּ מִבְצָעִים חֲדָשִׁים!':''}${id===13?'</p>'+say('yechiel','תּוֹדָה לְכֻלָּם! זֶה הַיּוֹם הֲכִי שָׂמֵחַ שֶׁלִּי – וְהַנַּיֶּדֶת הָיְתָה מַדְהִימָה!')+say('rabbi','סִיַּמְתֶּם אֶת כָּל הַמִּבְצָעִים שֶׁל הַשָּׁנָה! אַתֶּם גִּבּוֹרֵי הַמִּבְצָעִים הָאֲמִתִּיִּים.')+'<p>':''}</p>
  <div class="btns row"><button data-act="shop">לַחֲנוּת הַמַּתָּנוֹת</button><button class="alt" data-act="map">לַמַּפָּה</button></div>`);}
 function shopScreen(){R.screen='shop';R.scene='show';R.timerOn=false;R.goal=0;if(!R.stage)R.stage=1;
- const render=(msg='')=>{show(`<h2>חֲנוּת הַמַּתָּנוֹת שֶׁל הַשָּׁלִיחַ וְרָחֵלִי</h2>${msg||say('racheli','מָה נִקְנֶה הַיּוֹם? יֵשׁ לָנוּ '+S.coins+' מַטְבְּעוֹת.')}
+ const render=(msg='')=>{show(`<h2>חֲנוּת הַמַּתָּנוֹת שֶׁל הַשָּׁלִיחַ וְהַשְּׁלוּחָה</h2>${msg||say('racheli','מָה נִקְנֶה הַיּוֹם? יֵשׁ לָנוּ '+S.coins+' מַטְבְּעוֹת.')}
   <div class="grid">${GIFTS.map(g=>{const gid=g.id||g.k,own=S.gifts[gid];return`<div class="tile ${own?'on':''}">${pimg(g.k)}<span>${g.ic} ${g.item}</span><small>לְ${FAM[g.k].name}</small><button class="small" data-act="buy" data-v="${gid}" ${own||S.coins<g.price?'disabled':''}>${own?'נִתַּן ✓':g.price+' מַטְבְּעוֹת'}</button></div>`}).join('')}
   <div class="tile"><span class="ic">🪙</span>קֻפַּת צְדָקָה<small>10 מַטְבְּעוֹת = 25 נְקֻדּוֹת. צְדָקָה זוֹ מִצְוָה גְּדוֹלָה!</small><button class="small green" data-act="tz" ${S.coins<10?'disabled':''}>לִתְרֹם 10</button></div></div>
   <div class="btns row"><button class="alt" data-act="map">לַמַּפָּה</button><button class="alt" data-act="album">לָאַלְבּוֹם</button></div>`);};
  bind({buy:gid=>{const g=GIFTS.find(x=>(x.id||x.k)===gid);if(!g||S.coins<g.price||S.gifts[gid])return;const k=g.k;S.coins-=g.price;S.gifts[gid]=true;save();celebrate(cheerPre()+FAM[k].name.replace(/^הָרַבָּנִית |^הָרַב /,'')+'!',150);
-   render(say(k,g.thanks)+say('shimon',k==='racheli'?'אַחְלָה רָחֵלִי! מַגִּיעַ לָךְ!':(k==='rebbetzin'?'אַחְלָה, הָרַבָּנִית! מַגִּיעַ לָךְ!':cheerPre()+FAM[k].name+'! '+chabad())));},
+   render(say(k,g.thanks)+say('shimon',k==='racheli'?'כָּל הַכָּבוֹד לַשְּׁלוּחָה! מַגִּיעַ לָךְ!':(k==='rebbetzin'?'אַחְלָה, הָרַבָּנִית! מַגִּיעַ לָךְ!':cheerPre()+FAM[k].name+'! '+chabad())));},
   tz:()=>{if(S.coins<10)return;S.coins-=10;S.points+=25;save();celebrate('אַחְלָה צְדָקָה!',80);render(say('noa','תּוֹדָה! הַכֶּסֶף הוֹלֵךְ לְמִשְׁפָּחוֹת שֶׁצְּרִיכוֹת עֶזְרָה.'));},
   map:()=>mapScreen(),album:()=>albumScreen()});
  render();}
@@ -1345,7 +1345,7 @@ function startBarMitzvah(){R.scene='show';R.screen='play';R.noYech=true;setTimeo
   {d:'"הַתְּפִלִּין שֶׁל רֹאשׁ מֻנָּחוֹת מוּל ___"',ok:'הַמֹּחַ',w:['הַכָּתֵף','הָאַף'],fact:'כְּדֵי שֶׁגַּם הַמַּחְשָׁבוֹת יִהְיוּ לַה׳.'},
   {d:'"בְּבַר מִצְוָה הַנְּשָׁמָה ___"',ok:'נִכְנֶסֶת בִּשְׁלֵמוּת',w:['יוֹצֵאת לְחֻפְשָׁה','הוֹלֶכֶת לִישֹׁן'],fact:'בַּחֲסִידוּת מְבֹאָר שֶׁבְּבַר מִצְוָה הַנֶּפֶשׁ הָאֱלֹקִית נִכְנֶסֶת בִּשְׁלֵמוּת.'},
   {d:'"מִצְוָה" – מִלְּשׁוֹן "צַוְתָּא", שֶׁפֵּרוּשׁוֹ ___',ok:'חִבּוּר – הַמִּצְוָה מְחַבֶּרֶת אוֹתָנוּ לַה׳',w:['מַתָּנָה','שִׁעוּרֵי בַּיִת'],fact:'כָּל מִצְוָה – חִבּוּר עִם הַקָּדוֹשׁ בָּרוּךְ הוּא.'}];
- const finale=()=>sayTask({head:headOf('yechiel','🎤','יְחִיאֵל מוֹדֶה לְכֻלָּם'),title:'תּוֹדָה רַבָּה!',text:'תּוֹדָה לְאַבָּא וּלְאִמָּא, לְרָחֵלִי וְלַשָּׁלִיחַ, לְדוּבִי, רִבְקוּשׁ, דְּבוֹרָה, בֶּנִי וְנוֹעָה! מֵהַיּוֹם אֲנִי מַנִּיחַ תְּפִלִּין כָּל יוֹם – וּמַבְטִיחַ לַעֲזֹר בְּכָל הַמִּבְצָעִים!',fact:'וְהַנַּיֶּדֶת? מְחַכָּה בַּחוּץ עִם אוֹרוֹת – רַק בִּשְׁבִיל יְחִיאֵל! 🚓',btn:'מַזָּל טוֹב! 🎉'},()=>{sfx.siren();celebrate('מַזָּל טוֹב יְחִיאֵל!',300,true);setTimeout(()=>quiz(shuffle(QUIZ[13]).slice(0,easy()?3:4),'חִידוֹן בַּר מִצְוָה',()=>finishStage()),1500);});
+ const finale=()=>sayTask({head:headOf('yechiel','🎤','יְחִיאֵל מוֹדֶה לְכֻלָּם'),title:'תּוֹדָה רַבָּה!',text:'תּוֹדָה לְאַבָּא וּלְאִמָּא, לַשְּׁלוּחָה וְלַשָּׁלִיחַ, לְדוּבִי, רִבְקוּשׁ, דְּבוֹרָה, בֶּנִי וְנוֹעָה! מֵהַיּוֹם אֲנִי מַנִּיחַ תְּפִלִּין כָּל יוֹם – וּמַבְטִיחַ לַעֲזֹר בְּכָל הַמִּבְצָעִים!',fact:'וְהַנַּיֶּדֶת? מְחַכָּה בַּחוּץ עִם אוֹרוֹת – רַק בִּשְׁבִיל יְחִיאֵל! 🚓',btn:'מַזָּל טוֹב! 🎉'},()=>{sfx.siren();celebrate('מַזָּל טוֹב יְחִיאֵל!',300,true);setTimeout(()=>quiz(shuffle(QUIZ[13]).slice(0,easy()?3:4),'חִידוֹן בַּר מִצְוָה',()=>finishStage()),1500);});
  const dancing=()=>{show(`${say('rabbi','וְעַכְשָׁו – רִקּוּדִים! מְרִימִים אֶת יְחִיאֵל עַל הַכְּתֵפַיִם, וְכֻלָּם רוֹקְדִים בְּמַעְגָּל.')}${say('shimon',hi()+' '+'לוֹחֲצִים בַּקֶּצֶב – וְכֻלָּם רוֹקְדִים! שִׂמְחָה פּוֹרֶצֶת גֶּדֶר!')}<div class="btns row"><button data-act="go">לָרִקּוּדִים! 💃</button></div>`);bind({go:()=>startRhythm(()=>{R.scene='show';finale();})});};
  const maamar=()=>sayTask({head:headOf('rabbi','📜','הַמַּאֲמָר'),title:'יְחִיאֵל אוֹמֵר מַאֲמָר חֲסִידוּת',text:'שֶׁקֶט בְּבַקָּשָׁה... חֲתַן הַבַּר מִצְוָה אוֹמֵר מַאֲמָר!',fact:'כָּךְ נוֹהֲגִים בְּחַבָּ"ד: חֲתַן הַבַּר מִצְוָה אוֹמֵר מַאֲמָר חֲסִידוּת עַל מִצְוַת תְּפִלִּין.',btn:'מַקְשִׁיבִים 🤫'},()=>
    choiceSeries({head:headOf('yechiel','📜','עוֹזְרִים לִיחִיאֵל לִזְכֹּר'),title:'מָה אוֹמֵר הַמַּאֲמָר?',cases:MAAMAR},()=>{celebrate('לְחַיִּים! יִישַׁר כֹּחַ יְחִיאֵל!',200,true);setTimeout(dancing,1300);}));
@@ -1364,7 +1364,7 @@ function arcadeScreen(msg=''){confirmLeave();R.screen='arcade';R.stage=0;R.scene
   {k:'shl',ic:'🌍',t:'שְׁלִיחוּת מִ-770',nw:1,d:'יוֹצְאִים מִ-770 לְכָל הָעוֹלָם, מְזַכִּים יְהוּדִים בְּמִצְווֹת וּפוֹתְחִים בָּתֵּי חַבַּ"ד!',pr:()=>{const n=Object.keys((S.shl||{}).c||{}).length;return n?'בָּתֵּי חַבַּ"ד: '+n+'/'+CITIES.length:''}},
   {k:'karaoke',ic:'🎤',t:'קָרִיּוֹקִי הַנִּגּוּנִים',d:'שָׁרִים יַחַד – הַמִּלִּים נִדְלָקוֹת בִּזְמַן הַשִּׁיר: מוֹדֶה אֲנִי, שָׁלוֹם עֲלֵיכֶם, יְחִי הַמֶּלֶךְ וְעוֹד!',pr:()=>{const n=Object.keys(S.songs||{}).length;return n?'שִׁירִים: '+n+'/'+SONGS.length:''}},
   {k:'read',ic:'🏫',t:'בֵּית הַסֵּפֶר לִקְרִיאָה',d:'לוֹמְדִים לִקְרֹא עִם הָרַבָּנִית כֹּהֵן: אוֹתִיּוֹת, נִקּוּד, מִלִּים, מִשְׁפָּטִים וְסִפּוּרִים!',pr:()=>{const d=((S.read||{}).done)||{};const n=Object.keys(d).length;return n?'שִׁעוּרִים: '+n+'/'+RLES.length:''}},
-  {k:'challah',ic:'🍞',t:'הַחַלּוֹת שֶׁל רָחֵלִי',d:'אוֹפִים חַלּוֹת עִם רָחֵלִי, מַפְרִישִׁים חַלָּה, עוֹרְכִים שֻׁלְחָן וּמַדְלִיקִים נֵרוֹת שַׁבָּת!',pr:()=>S.best&&S.best.challah?'⭐'.repeat(S.best.challah):''},
+  {k:'challah',ic:'🍞',t:'הַחַלּוֹת שֶׁל הַשְּׁלוּחָה',d:'אוֹפִים חַלּוֹת עִם הַשְּׁלוּחָה, מַפְרִישִׁים חַלָּה, עוֹרְכִים שֻׁלְחָן וּמַדְלִיקִים נֵרוֹת שַׁבָּת!',pr:()=>S.best&&S.best.challah?'⭐'.repeat(S.best.challah):''},
   {k:'hero',ic:'🦸',pr:()=>S.hero&&S.hero.v===3&&S.hero.lvl?'שְׁלַבִּים: '+Math.min(30,S.hero.lvl)+'/30':'',t:'הַשָּׁלִיחַ הַגִּבּוֹר',d:'6 עוֹלָמוֹת וְ-30 שְׁלַבִּים – מְנַצְּחִים אֶת הַיֵּצֶר הָרַע בְּאוֹר!'},
   {k:'kart',ic:'🏎️',pr:()=>{const b=(S.best||{}).kart;return b&&Object.keys(b).length?'🏆 '+Object.values(b).filter(v=>v===1).length+' נִצְחוֹנוֹת':''},t:'קַרְטִינְג הַמִּבְצָעִים',d:'מֵרוֹץ תְּלַת־מְמַדִּי בִּירוּשָׁלַיִם, צְפַת וּבַחוֹף – שַׁעֲרֵי מִצְווֹת נוֹתְנִים טוּרְבּוֹ!'},
   {k:'det',ic:'🕵️',pr:()=>S.det?'נִפְתְּרוּ: '+Object.keys(S.det).length+'/'+CASES.length:'',t:'הַבַּלָּשׁ יְחִיאֵל',d:'אוֹסְפִים רְמָזִים, פּוֹתְרִים חִידוֹת וּמְגַלִּים אֶת הַתַּעֲלוּמָה!'},
@@ -3110,13 +3110,13 @@ function chHead(t,k){return `<div class="who">${pimg('racheli')}<span>🍞 ${t}$
 function challahMenu(){confirmLeave();R.scene='challah';R.screen='play';R.stage=0;R.tod=null;R.team=[...HELPERS];cab.classList.add('isMP');
  R.ch={step:'intro',bowl:[],dough:0,knead:0,rise:0,braid:0,strands:[0,1,2],glaze:0,dots:[],top:null,bake:0,baking:false,table:[],lit:[],night:0,stars:3,kt:0,hearts:[],piece:false,squish:0};
  bind({go:chIng,back:()=>arcadeScreen()});const b=(S.best||{}).challah;
- show(`<h2>🍞 הַחַלּוֹת שֶׁל רָחֵלִי</h2>${say('racheli','יוֹם שִׁשִּׁי בַּבֹּקֶר! 🌞 בּוֹאוּ, כָּל הַיְּלָדִים, נָאֲפֶה יַחַד חַלּוֹת לְשַׁבָּת – נַעֲשֶׂה הַפְרָשַׁת חַלָּה, נַעֲרֹךְ שֻׁלְחָן יָפֶה וְנַדְלִיק נֵרוֹת!')}
+ show(`<h2>🍞 הַחַלּוֹת שֶׁל הַשְּׁלוּחָה</h2>${say('racheli','יוֹם שִׁשִּׁי בַּבֹּקֶר! 🌞 בּוֹאוּ, כָּל הַיְּלָדִים, נָאֲפֶה יַחַד חַלּוֹת לְשַׁבָּת – נַעֲשֶׂה הַפְרָשַׁת חַלָּה, נַעֲרֹךְ שֻׁלְחָן יָפֶה וְנַדְלִיק נֵרוֹת!')}
  <p class="fact">✨ לָשִׁים, קוֹלְעִים, אוֹפִים, עוֹרְכִים אֶת הַשֻּׁלְחָן – וּמַדְלִיקִים נֵרוֹת שַׁבָּת בְּיַחַד.</p>${b?`<p>🏆 הַכִּי טוֹב: ${'⭐'.repeat(b)}</p>`:''}
  <div class="btns row"><button data-act="go">מַתְחִילִים! 👩‍🍳</button><button class="alt" data-act="back">חֲזָרָה</button></div>`);}
 function chIng(msg=''){const c=R.ch;c.step='ing';const i=c.bowl.length;if(i>=CH_ING.length){celebrate('כָּל הַמִּצְרָכִים בִּפְנִים!',100);setTimeout(chKnead,700);return;}
  const k=chKid();const ing=CH_ING[i];const opts=shuffle([[ing[0],1],...shuffle([...CH_FUNNY]).slice(0,2).map(f=>[f[0],0,f[1]])]);
  bind({a:v=>{const o=opts[+v];if(o[1]){c.bowl.push(ing[1]);sfx.coin();floater(480,300,cheerName(k),'#ffc93c');chIng();}else{sfx.oops();c.stars=Math.max(1,c.stars-.1);chIng(say('racheli',o[2]));}}});
- show(`${chHead('מַכְנִיסִים לַקְּעָרָה ('+(i+1)+'/'+CH_ING.length+')',k)}${msg}<h2>מָה שָׂמִים עַכְשָׁו? רָחֵלִי צְרִיכָה: <b>${ing[0]}</b></h2><div class="btns row">${opts.map((o,j)=>`<button class="alt" data-act="a" data-v="${j}">${o[0]}</button>`).join('')}</div>`,'top');}
+ show(`${chHead('מַכְנִיסִים לַקְּעָרָה ('+(i+1)+'/'+CH_ING.length+')',k)}${msg}<h2>מָה שָׂמִים עַכְשָׁו? הַשְּׁלוּחָה צְרִיכָה: <b>${ing[0]}</b></h2><div class="btns row">${opts.map((o,j)=>`<button class="alt" data-act="a" data-v="${j}">${o[0]}</button>`).join('')}</div>`,'top');}
 function chKnead(){const c=R.ch;c.step='knead';c.need=S.level==='easy'?18:26;c.knead=0;c.kk=chKid();chKneadUI();}
 function chKneadUI(){const c=R.ch;bind({k:()=>chKneadTap()});show(`${chHead('לָשִׁים אֶת הַבָּצֵק!',c.kk)}<p>לוֹחֲצִים מַהֵר עַל הַבָּצֵק (אוֹ עַל הַכַּפְתּוֹר) – לָשִׁים, לָשִׁים! 💪</p><div class="btns row"><button data-act="k">👐 לָלוּשׁ!</button></div>`,'top');}
 function chKneadTap(){const c=R.ch;if(c.step!=='knead')return;c.knead++;c.squish=1;beep(200+c.knead*12,.04,'sine',.04);c.dough=Math.min(1,c.knead/c.need);
@@ -3155,7 +3155,7 @@ function chBake(){const c=R.ch;c.step='bake';c.bake=0;c.baking=true;const k=chKi
  bind({out:()=>{const b=c.bake,lo=S.level==='easy'?.45:.55,hi=S.level==='easy'?.9:.8;
   if(b<lo){sfx.oops();floater(480,300,'עוֹד קְצָת... עֲדַיִן לְבָנָה!','#fff');return;}
   c.baking=false;let m;if(b<=hi){sfx.big();celebrate('זְהֻבָּה וּמֻשְׁלֶמֶת!',200,true);m='וַוי, אֵיזֶה רֵיחַ! 😍 חַלָּה זְהֻבָּה בְּדִיּוּק!';}else{sfx.win();c.stars=Math.max(1,c.stars-1);m='קְצָת שְׁחוּמָה... לֹא נוֹרָא – סַבָּא אוֹהֵב קְרִיסְפִּי! 😄';}
-  show(`${chHead('יָצָא מֵהַתַּנּוּר!')}${say('racheli',m)}${say('shimon','אַחְלָה רָחֵלִי! אַחְלָה יְלָדִים! הָרֵיחַ מַגִּיעַ עַד בֵּית הַכְּנֶסֶת!')}<div class="btns row"><button data-act="n">עוֹרְכִים אֶת הַשֻּׁלְחָן 🍽️</button></div>`,'top');bind({n:chTable});}});
+  show(`${chHead('יָצָא מֵהַתַּנּוּר!')}${say('racheli',m)}${say('shimon','כָּל הַכָּבוֹד לַשְּׁלוּחָה! אַחְלָה יְלָדִים! הָרֵיחַ מַגִּיעַ עַד בֵּית הַכְּנֶסֶת!')}<div class="btns row"><button data-act="n">עוֹרְכִים אֶת הַשֻּׁלְחָן 🍽️</button></div>`,'top');bind({n:chTable});}});
  show(`${chHead('אוֹפִים!',k)}<p>מְחַכִּים שֶׁהַחַלָּה תִּהְיֶה <b>זְהֻבָּה</b> – וְאָז מוֹצִיאִים! לֹא לְבָנָה וְלֹא שְׂרוּפָה 😉</p><div class="btns row"><button data-act="out">🧤 לְהוֹצִיא מֵהַתַּנּוּר!</button></div>`,'top');}
 function chTable(msg=''){const c=R.ch;c.step='table';c.oven=false;const i=c.table.length;if(i>=CH_TABLE.length){chCandles();return;}
  const k=chKid();const left=CH_TABLE.filter(t=>!c.table.includes(t[0]));const bad=rnd(CH_NOT);const opts=shuffle([...shuffle(left).slice(0,2).map(t=>[t,1]),[bad,0]]);
@@ -3172,7 +3172,7 @@ function chShalom(){const c=R.ch;c.step='shabbat';c.night=0.01;sfx.big();
  const stars=Math.max(1,Math.round(c.stars));S.best=S.best||{};S.best.challah=Math.max(S.best.challah||0,stars);dailyEvent('challah',stars);addCoins(10+stars*4);save();
  setTimeout(()=>{celebrate('שַׁבָּת שָׁלוֹם!',300,true);
   bind({again:challahMenu,arc:()=>{R.tod=null;arcadeScreen();}});
-  show(`<h2>🕯️ שַׁבָּת שָׁלוֹם! ${'⭐'.repeat(stars)}</h2>${say('shimon','שַׁבָּת שָׁלוֹם! חָזַרְנוּ מִבֵּית הַכְּנֶסֶת – וְאֵיזֶה שֻׁלְחָן! אַחְלָה רָחֵלִי! אַחְלָה כָּל הַיְּלָדִים!')}<p class="say" style="text-align:center">🎶 "שָׁלוֹם עֲלֵיכֶם, מַלְאֲכֵי הַשָּׁרֵת, מַלְאֲכֵי עֶלְיוֹן..." 🎶</p>${say('racheli','הַחַלּוֹת הֲכִי טְעִימוֹת הֵן אֵלֶּה שֶׁאוֹפִים בְּיַחַד, בְּאַהֲבָה 💕')}<div class="btns row"><button data-act="again">אוֹפִים שׁוּב 🍞</button><button class="alt" data-act="arc">לְפִנַּת הַמִּשְׂחָקִים</button></div>`,'top');},2200);}
+  show(`<h2>🕯️ שַׁבָּת שָׁלוֹם! ${'⭐'.repeat(stars)}</h2>${say('shimon','שַׁבָּת שָׁלוֹם! חָזַרְנוּ מִבֵּית הַכְּנֶסֶת – וְאֵיזֶה שֻׁלְחָן! כָּל הַכָּבוֹד לַשְּׁלוּחָה! אַחְלָה כָּל הַיְּלָדִים!')}<p class="say" style="text-align:center">🎶 "שָׁלוֹם עֲלֵיכֶם, מַלְאֲכֵי הַשָּׁרֵת, מַלְאֲכֵי עֶלְיוֹן..." 🎶</p>${say('racheli','הַחַלּוֹת הֲכִי טְעִימוֹת הֵן אֵלֶּה שֶׁאוֹפִים בְּיַחַד, בְּאַהֲבָה 💕')}<div class="btns row"><button data-act="again">אוֹפִים שׁוּב 🍞</button><button class="alt" data-act="arc">לְפִנַּת הַמִּשְׂחָקִים</button></div>`,'top');},2200);}
 function updateChallah(dt){const c=R.ch;if(!c)return;c.squish=Math.max(0,c.squish-dt*5);c.wob=Math.max(0,(c.wob||0)-dt);
  if(c.step==='bake'&&c.baking)c.bake=Math.min(1.05,c.bake+dt/(S.level==='easy'?9:7));
  if(c.night>0)c.night=Math.min(1,c.night+dt*.5);for(const h of c.hearts)h.t+=dt;c.hearts=c.hearts.filter(h=>h.t<2.5);}
@@ -3233,7 +3233,7 @@ const RW=[['אַבָּא','👨',['אַ','בָּא']],['אִמָּא','👩',['�
  ['בַּיִת','🏠',['בַּ','יִת']],['כֶּלֶב','🐶',['כֶּ','לֶב']],['חָתוּל','🐱',['חָ','תוּל']],['סֵפֶר','📖',['סֵ','פֶר']],['שֶׁמֶשׁ','☀️',['שֶׁ','מֶשׁ']],['יָרֵחַ','🌙',['יָ','רֵ','חַ']],['עוּגָה','🎂',['עוּ','גָה']],['כַּדּוּר','⚽',['כַּ','דּוּר']],
  ['בָּנָנָה','🍌',['בָּ','נָ','נָה']],['תַּפּוּחַ','🍎',['תַּ','פּוּ','חַ']],['גְּלִידָה','🍦',['גְּ','לִי','דָה']],['מֶלֶךְ','👑',['מֶ','לֶךְ']],['שָׁעוֹן','⏰',['שָׁ','עוֹן']],['פֶּרַח','🌸',['פֶּ','רַח']],['כּוֹכָב','⭐',['כּוֹ','כָב']],['מְכוֹנִית','🚗',['מְ','כוֹ','נִית']],
  ['רַכֶּבֶת','🚂',['רַ','כֶּ','בֶת']],['אוֹטוֹבּוּס','🚌',['אוֹ','טוֹ','בּוּס']],['מַתָּנָה','🎁',['מַ','תָּ','נָה']],['שׁוֹפָר','📯',['שׁוֹ','פָר']],['סֻכָּה','🛖',['סֻ','כָּה']],['חַלָּה','🍞',['חַ','לָּה']],['פַּרְפַּר','🦋',['פַּר','פַּר']],['אַרְיֵה','🦁',['אַר','יֵה']],['אֲוִירוֹן','✈️',['אֲ','וִי','רוֹן']],['מִשְׁקָפַיִם','👓',['מִשְׁ','קָ','פַ','יִם']],['כֶּתֶר','👑',['כֶּ','תֶר']],['נָחָשׁ','🐍',['נָ','חָשׁ']]];
-const RSENT=[['הַמִּינִיבּוּס שֶׁל סַבָּא ____ לַמִּבְצָעִים.','נוֹסֵעַ',['אוֹכֵל','יָשֵׁן']],['רָחֵלִי אוֹפָה ____ לִכְבוֹד שַׁבָּת.','חַלּוֹת',['נַעֲלַיִם','כִּסְאוֹת']],['יְחִיאֵל אוֹהֵב ____ שֶׁל מִשְׁטָרָה.','נַיֶּדֶת',['עוּגָה','מִטָּה']],['בַּחֲנֻכָּה מַדְלִיקִים ____.','נֵרוֹת',['שׁוֹפָר','מַצּוֹת']],
+const RSENT=[['הַמִּינִיבּוּס שֶׁל סַבָּא ____ לַמִּבְצָעִים.','נוֹסֵעַ',['אוֹכֵל','יָשֵׁן']],['הַשְּׁלוּחָה אוֹפָה ____ לִכְבוֹד שַׁבָּת.','חַלּוֹת',['נַעֲלַיִם','כִּסְאוֹת']],['יְחִיאֵל אוֹהֵב ____ שֶׁל מִשְׁטָרָה.','נַיֶּדֶת',['עוּגָה','מִטָּה']],['בַּחֲנֻכָּה מַדְלִיקִים ____.','נֵרוֹת',['שׁוֹפָר','מַצּוֹת']],
  ['דְּבוֹרָה שָׂמָה מַטְבֵּעַ בְּקֻפַּת ____.','צְדָקָה',['גְּלִידָה','חָתוּל']],['בֶּנִי וְנוֹעָה מְשַׂחֲקִים בְּ____.','כַּדּוּר',['מְזוּזָה','חַלָּה']],['בַּבֹּקֶר אוֹמְרִים "מוֹדֶה ____".','אֲנִי',['שָׁלוֹם','טוֹב']],['עַל הַדֶּלֶת יֵשׁ ____.','מְזוּזָה',['גְּלִידָה','סוּס']],
  ['דּוּבִי רָץ ____ מְאוֹד.','מַהֵר',['יָרֹק','מָתוֹק']],['רִבְקוּשׁ קוֹרֵאת ____.','סֵפֶר',['תַּפּוּחַ','שֶׁמֶשׁ']],['הַשָּׁלִיחַ אוֹמֵר: "____ דּוּבִי!"','אַחְלָה',['לַיְלָה','מָחָר']],['בְּפֶסַח אוֹכְלִים ____.','מַצָּה',['סֻפְגָּנִיָּה','לֶחֶם']],['הַשֶּׁמֶשׁ זוֹרַחַת ____.','בַּבֹּקֶר',['בַּלַּיְלָה','בַּמַּיִם']],['בְּסֻכּוֹת יוֹשְׁבִים בַּ____.','סֻּכָּה',['יָם','מְכוֹנִית']]];
 const RPICS=[['הַכֶּלֶב רָץ בַּגִּנָּה.','🐶🏃'],['הַדָּג שׂוֹחֶה בַּיָּם.','🐟🌊'],['הַיֶּלֶד אוֹכֵל גְּלִידָה.','👦🍦'],['הַמִּינִיבּוּס נוֹסֵעַ בַּכְּבִישׁ.','🚐🛣️'],['הַנֵּר דּוֹלֵק בַּלַּיְלָה.','🕯️🌙'],['הַקּוֹף אוֹכֵל בָּנָנָה.','🐒🍌'],['הַצִּפּוֹר עָפָה בַּשָּׁמַיִם.','🐦☁️'],['יוֹרֵד גֶּשֶׁם.','🌧️☂️'],['הֶחָתוּל יָשֵׁן.','🐱💤'],['הַיַּלְדָּה קוֹרֵאת סֵפֶר.','👧📖']];
@@ -3367,7 +3367,7 @@ const MEDALS=[
  ['kart','🏎️','נֶהָג אַלּוּף','נַצְּחוּ בְּכָל שְׁלֹשֶׁת הַמַּסְלוּלִים',s=>Object.values((s.best||{}).kart||{}).filter(v=>v===1).length>=3],
  ['hero','🦸','גִּבּוֹר עַל','סַיְּמוּ אֶת כָּל שְׁלַבֵּי הַשָּׁלִיחַ הַגִּבּוֹר',s=>((s.hero||{}).v===3&&(s.hero.lvl||0)>=30)],
  ['sea','🌊','עוֹבֵר הַיָּם','עִבְרוּ אֶת יַם סוּף',s=>!!(s.best||{}).sea],
- ['challah','🍞','אוֹפֶה שֶׁל שַׁבָּת','אִפּוּ חַלּוֹת עִם רָחֵלִי',s=>!!(s.best||{}).challah],
+ ['challah','🍞','אוֹפֶה שֶׁל שַׁבָּת','אֲפוּ חַלּוֹת עִם הַשְּׁלוּחָה',s=>!!(s.best||{}).challah],
  ['streak3','🔥','רֶצֶף שֶׁל 3','שַׂחֲקוּ 3 יָמִים בִּרְצִיפוּת',s=>((s.streak||{}).n||0)>=3],
  ['streak7','🔥','שָׁבוּעַ שָׁלֵם','שַׂחֲקוּ 7 יָמִים בִּרְצִיפוּת',s=>((s.streak||{}).n||0)>=7],
  ['daily5','🌟','מְלַךְ הָאֶתְגָּרִים','סַיְּמוּ 5 אֶתְגָּרִים יוֹמִיִּים',s=>(s.dailyCount||0)>=5],
@@ -3459,7 +3459,7 @@ const SONGS=[
  {id:'hine',t:'הִנֵּה מַה טּוֹב',ic:'🤝',bpm:104,f:'"שֶׁבֶת אַחִים גַּם יָחַד" – כַּמָּה טוֹב כְּשֶׁכֻּלָּם בְּיַחַד, בְּאַהֲבָה!',
   L:[['הִנֵּה מַה טּוֹב וּמַה נָּעִים','E4 G4 B4:2 B4 A4 G4 A4 B4:2','Em Am'],['שֶׁבֶת אַחִים גַּם יָחַד','B4 C5 B4 A4 G4 F#4 E4:3','Am B7 Em'],['הִנֵּה מַה טּוֹב וּמַה נָּעִים','E5 D5 C5:2 B4 A4 G4 A4 B4:2','C Am'],['שֶׁבֶת אַחִים גַּם יָחַד!','B4 C5 B4 A4 G4 F#4 E4:4','Am B7 Em']]},
  {id:'bus',t:'הַמִּינִיבּוּס שֶׁל סַבָּא',ic:'🚐',bpm:132,orig:1,f:'שִׁיר מְקוֹרִי שֶׁל הַמִּשְׁפָּחָה – בִּיפּ בִּיפּ, יוֹצְאִים לַמִּבְצָעִים!',
-  L:[['הַמִּינִיבּוּס שֶׁל סַבָּא נוֹסֵעַ לַמִּבְצָעִים','G4 G4 A4 B4 B4 A4 G4 B4 D5 D5 C5 B4 A4:2','G D G'],['כָּל הַיְּלָדִים בִּפְנִים – שָׁרִים וּשְׂמֵחִים!','B4 B4 C5 D5 D5 C5 B4 A4 G4 A4 B4 A4:2','C D G'],['הַשָּׁלִיחַ אוֹמֵר "אַחְלָה!", רָחֵלִי מְחַיֶּכֶת','D5 D5 E5 D5 C5 B4 C5 B4 A4 G4 A4 B4:2','G C D'],['וְהַמִּינִיבּוּס שֶׁל סַבָּא מַמְשִׁיךְ בְּשִׂמְחָה לָלֶכֶת!','G4 A4 B4 C5 D5 C5 B4 A4 B4 A4 G4 A4 G4:3','C D G'],['בִּיפּ בִּיפּ! יְחִי! אַחְלָה! יוֹצְאִים לַמִּבְצָעִים!','D5 D5 - G5:2 E5 D5 B4 D5 C5 B4 A4 G4:3','G C D G']]},
+  L:[['הַמִּינִיבּוּס שֶׁל סַבָּא נוֹסֵעַ לַמִּבְצָעִים','G4 G4 A4 B4 B4 A4 G4 B4 D5 D5 C5 B4 A4:2','G D G'],['כָּל הַיְּלָדִים בִּפְנִים – שָׁרִים וּשְׂמֵחִים!','B4 B4 C5 D5 D5 C5 B4 A4 G4 A4 B4 A4:2','C D G'],['הַשָּׁלִיחַ אוֹמֵר "אַחְלָה!", הַשְּׁלוּחָה מְחַיֶּכֶת','D5 D5 E5 D5 C5 B4 C5 B4 A4 G4 A4 B4:2','G C D'],['וְהַמִּינִיבּוּס שֶׁל סַבָּא מַמְשִׁיךְ בְּשִׂמְחָה לָלֶכֶת!','G4 A4 B4 C5 D5 C5 B4 A4 B4 A4 G4 A4 G4:3','C D G'],['בִּיפּ בִּיפּ! יְחִי! אַחְלָה! יוֹצְאִים לַמִּבְצָעִים!','D5 D5 - G5:2 E5 D5 B4 D5 C5 B4 A4 G4:3','G C D G']]},
  {id:'alef',t:'שִׁיר הָאָלֶף־בֵּית',ic:'🔤',bpm:116,orig:1,f:'עֶשְׂרִים וּשְׁתַּיִם אוֹתִיּוֹת – וְאִתָּן קוֹרְאִים אֶת כָּל הַתּוֹרָה!',
   L:[['אָלֶף בֵּית גִּימֶל דָּלֶת – הֵא וָו זַיִן','C5 C5 D5 E5 E5 D5 C5 D5:2 E5 E5 F5 E5:2','C G C'],['חֵית טֵית יוּד כַּף לָמֶד – מֵם נוּן סָמֶךְ','G4 A4 B4 C5 D5 E5 D5 C5:2 B4 A4 B4 C5:2','F G C'],['עַיִן פֵּא צָדִי קוּף – רֵישׁ שִׁין תָּו','E5 D5 C5 D5 E5 F5 G5:2 F5 E5 D5:2','Am F G'],['אֶת כָּל הָאוֹתִיּוֹת לָמַדְנוּ – אַחְלָה! כָּל הַכָּבוֹד!','C5 D5 E5 F5 G5 G5 F5 E5 D5 C5:2 D5 E5 C5:4','F G C']]},
  {id:'ani',t:'אֲנִי מַאֲמִין',ic:'✨',bpm:80,f:'אֶחָד מִשְּׁלֹשָׁה עָשָׂר עִקְּרֵי הָאֱמוּנָה שֶׁל הָרַמְבַּ"ם – מְחַכִּים לַמָּשִׁיחַ כָּל יוֹם!',
@@ -3644,7 +3644,7 @@ const REC=[
  ['s01','shimon','בְּהַצְלָחָה יְלָדִים!'],['s02','shimon','כָּל הַכָּבוֹד!'],['s03','shimon','יִישַׁר כֹּחַ!'],['s04','shimon','מְצֻיָּן!'],['s05','shimon','אַחְלָה!'],['s06','shimon','יֶעס!'],
  ['s07','shimon','הָרַבִּי גֵּאֶה בְּךָ!'],['s08','shimon','הָרַבִּי גֵּאֶה בָּךְ!'],['s09','shimon','כָּל הַכָּבוֹד, חָסִיד שֶׁל הָרַבִּי!'],['s10','shimon','כָּל הַכָּבוֹד, חֲסִידָה שֶׁל הָרַבִּי!'],['s11','shimon','הָרַבִּי מְחַיֵּךְ!'],
  ['s12','shimon','יְחִי הַמֶּלֶךְ!'],['s13','shimon','שַׁבָּת שָׁלוֹם!'],['s14','shimon','כִּמְעַט! נַסּוּ שׁוּב'],['s15','shimon','יַאלְלָה, מַתְחִילִים!'],['s16','shimon','שָׁלוֹם יְלָדִים!'],
- ...['יְחִיאֵל','דּוּבִי','רִבְקוּשׁ','דְּבוֹרָה','בֶּנִי','נוֹעָה','רָחֵלִי','הַשָּׁלִיחַ'].map((n,i)=>['n0'+(i+1),'shimon',n]),
+ ...['יְחִיאֵל','דּוּבִי','רִבְקוּשׁ','דְּבוֹרָה','בֶּנִי','נוֹעָה','הַשְּׁלוּחָה','הַשָּׁלִיחַ'].map((n,i)=>['n0'+(i+1),'shimon',n]),
  ...LETS.concat(FINS).map((L,i)=>['l'+String(i+1).padStart(2,'0'),'rebbetzin',L[1]]),
  ...['קָמָץ','פַּתָּח','צֵירֵי','סֶגּוֹל','חִירִיק','חוֹלָם','שׁוּרוּק','קֻבּוּץ','שְׁוָא'].map((n,i)=>['v0'+(i+1),'rebbetzin',n])];
 const RECG=[['s','🎙️ הַשָּׁלִיחַ – שְׁבָחִים וּבְרָכוֹת'],['n','👨‍👩‍👧 שֵׁמוֹת הַיְּלָדִים'],['l','🔤 שְׁמוֹת הָאוֹתִיּוֹת (לְבֵית הַסֵּפֶר לִקְרִיאָה)'],['v','✏️ שְׁמוֹת הַנִּקּוּד']];
@@ -3667,7 +3667,7 @@ function recStudio(){confirmLeave();R.screen='rec';R.scene='show';R.stage=0;cons
 /* ================= MAP v2: worlds by difficulty ================= */
 const LVN={1:['🌱','קַל'],2:['🔥','בֵּינוֹנִי'],3:['💎','קָשֶׁה']};
 const WORLDS=[
- {k:'home',ic:'🏠',n:'בַּבַּיִת – סֵדֶר, נִקָּיוֹן וְהֶרְגֵּלִים',d:'מִצְווֹת שֶׁל כָּל יוֹם: נֶעגֶל וַוסֶער, צִחְצוּחַ, עֶזְרָה בַּבַּיִת וְסֵדֶר',items:[{s:6,lv:1},{s:5,lv:1},{g:'challah',ic:'🍞',n:'אוֹפִים חַלּוֹת עִם רָחֵלִי',lv:2}]},
+ {k:'home',ic:'🏠',n:'בַּבַּיִת – סֵדֶר, נִקָּיוֹן וְהֶרְגֵּלִים',d:'מִצְווֹת שֶׁל כָּל יוֹם: נֶעגֶל וַוסֶער, צִחְצוּחַ, עֶזְרָה בַּבַּיִת וְסֵדֶר',items:[{s:6,lv:1},{s:5,lv:1},{g:'challah',ic:'🍞',n:'אוֹפִים חַלּוֹת עִם הַשְּׁלוּחָה',lv:2}]},
  {k:'miv',ic:'👑',n:'מִבְצְעֵי הָרַבִּי',d:'יוֹצְאִים לָרְחוֹב וּמְזַכִּים יְהוּדִים בְּמִצְווֹת',items:[{s:1,lv:1},{s:9,lv:2},{s:8,lv:2},{g:'shl',ic:'🌍',n:'שְׁלִיחוּת מִ-770',lv:3}],miv:1},
  {k:'chag',ic:'📅',n:'חַגֵּי הַשָּׁנָה',d:'מִתִּשְׁרֵי וְעַד שָׁבוּעוֹת – מִבְצָעִים לְכָל חַג',items:[{s:2,lv:1},{s:3,lv:2},{s:4,lv:2},{s:10,lv:3},{s:11,lv:3},{s:12,lv:3}]},
  {k:'sim',ic:'🎉',n:'שְׂמָחוֹת וְנִגּוּנִים',d:'רוֹקְדִים, שָׁרִים וְחוֹגְגִים',items:[{s:7,lv:1},{s:13,lv:3}]}];
@@ -3845,7 +3845,7 @@ function drawHouseCity(){const c=CITIES.find(x=>x.id===SH().home),n=SH().comm||0
 
 /* ================= LIVE NEIGHBORHOOD MAP (round 1) ================= */
 const MNODES=[
- {id:'s6',w:'home',x:845,y:455,s:6,lv:1},{id:'s5',w:'home',x:745,y:475,s:5,lv:1},{id:'gch',w:'home',x:645,y:455,g:'challah',ic:'🍞',n:'אוֹפִים חַלּוֹת עִם רָחֵלִי',lv:2},{id:'b_home',w:'home',x:550,y:478,boss:'home',ic:'⏰',n:'עֶרֶב שַׁבָּת בַּלַּחַץ',lv:3},
+ {id:'s6',w:'home',x:845,y:455,s:6,lv:1},{id:'s5',w:'home',x:745,y:475,s:5,lv:1},{id:'gch',w:'home',x:645,y:455,g:'challah',ic:'🍞',n:'אוֹפִים חַלּוֹת עִם הַשְּׁלוּחָה',lv:2},{id:'b_home',w:'home',x:550,y:478,boss:'home',ic:'⏰',n:'עֶרֶב שַׁבָּת בַּלַּחַץ',lv:3},
  {id:'s1',w:'miv',x:860,y:300,s:1,lv:1},{id:'s9',w:'miv',x:770,y:255,s:9,lv:2},{id:'s8',w:'miv',x:675,y:290,s:8,lv:2},{id:'b_miv',w:'miv',x:590,y:245,boss:'miv',ic:'🏙️',n:'יוֹם מִבְצָעִים עֲנָק',lv:3},
  {id:'s2',w:'chag',x:430,y:125,s:2,lv:1},{id:'s3',w:'chag',x:330,y:98,s:3,lv:2},{id:'s4',w:'chag',x:225,y:122,s:4,lv:2},{id:'s10',w:'chag',x:135,y:190,s:10,lv:3},{id:'s11',w:'chag',x:105,y:290,s:11,lv:3},{id:'s12',w:'chag',x:170,y:380,s:12,lv:3},{id:'b_chag',w:'chag',x:270,y:325,boss:'chag',ic:'🏆',n:'חִידוֹן הַחַגִּים הַגָּדוֹל',lv:3},
  {id:'s7',w:'sim',x:420,y:300,s:7,lv:1},{id:'s13',w:'sim',x:395,y:430,s:13,lv:3},{id:'b_sim',w:'sim',x:290,y:470,boss:'sim',ic:'🎶',n:'הַהִתְוַעֲדוּת הַגְּדוֹלָה',lv:3},
@@ -4101,7 +4101,7 @@ function updTTSBtn(){const b=$('btnTTS');if(b){b.textContent=TTS.on?'🔊':'🔇
 function voiceScreen(){confirmLeave();ttsPick();R.screen='voice';R.scene='show';R.stage=0;const C=TTS.cfg;
  bind({tog:()=>{TTS.on=!TTS.on;saveTTS();voiceScreen();},v:i=>{C.name=TTS.voices[+i].name;saveTTS();ttsPick();voiceScreen();speak([['שָׁלוֹם! כָּכָה אֲנִי נִשְׁמָע. אַחְלָה!','shimon']]);},
   sp:v=>{C.rate=+v;saveTTS();voiceScreen();speak([['כָּכָה אֲנִי מְדַבֵּר עַכְשָׁו.','racheli']]);},dual:()=>{C.dual=!C.dual;saveTTS();voiceScreen();},
-  test:()=>speak([['שָׁלוֹם! אֲנִי הַשָּׁלִיחַ – אַחְלָה!','shimon'],['וַאֲנִי רָחֵלִי. בּוֹאוּ נִקְרָא יַחַד!','racheli'],['וַאֲנִי דּוּבִי, הֲכִי מָהִיר בַּמִּשְׁפָּחָה!','dobi'],['וַאֲנִי נוֹעָה!','noa']]),back:()=>mapScreen()});
+  test:()=>speak([['שָׁלוֹם! אֲנִי הַשָּׁלִיחַ – אַחְלָה!','shimon'],['וַאֲנִי הַשְּׁלוּחָה. בּוֹאוּ נִקְרָא יַחַד!','racheli'],['וַאֲנִי דּוּבִי, הֲכִי מָהִיר בַּמִּשְׁפָּחָה!','dobi'],['וַאֲנִי נוֹעָה!','noa']]),back:()=>mapScreen()});
  show(`<h2>🗣️ הַגְדָּרוֹת הַקְרָאָה</h2>
  <p class="ttsSkip"><b>הַקְרָאָה אוֹטוֹמָטִית שֶׁל כָּל מָסָךְ:</b> <button class="small ${TTS.on?'green':'alt'}" data-act="tog">${TTS.on?'פּוֹעֶלֶת ✓':'כְּבוּיָה'}</button></p>
  ${TTS.voices.length?`<p class="ttsSkip"><b>בּוֹחֲרִים קוֹל:</b></p><div class="btns">${TTS.voices.map((v,i)=>`<button class="small ${v===TTS.voice?'':'alt'}" data-act="v" data-v="${i}">${v===TTS.voice?'✓ ':''}${v.name}${vScore(v)>=5?' · ⭐ קוֹל טִבְעִי':''}${vMale(v)?' · 👨':''}</button>`).join('')}</div>`:`<p class="fact ttsSkip">😕 בַּמַּכְשִׁיר הַזֶּה לֹא נִמְצָא קוֹל עִבְרִי.</p>`}
@@ -4155,7 +4155,7 @@ function calScreen(){confirmLeave();R.screen='cal';R.scene='show';R.stage=0;cons
  bind({ph:i=>playHol(l[+i].H),ch:challahMenu,back:()=>mapScreen(),arc:()=>arcadeScreen()});
  show(`<h2>📅 לוּחַ הַשָּׁנָה שֶׁל הַמִּבְצָעִים</h2>
  <div class="tile on" style="text-align:center"><span style="font-size:1.5em">${hebStr(now)||''}</span><small>${now.toLocaleDateString('he-IL',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</small></div>
- <p class="fact">${shab} <button class="small" data-act="ch">אוֹפִים עִם רָחֵלִי</button></p>
+ <p class="fact">${shab} <button class="small" data-act="ch">אוֹפִים עִם הַשְּׁלוּחָה</button></p>
  ${n?`<div class="tile" style="border-color:#ffc93c"><span class="ic">${n.H.ic}</span><b>הַחַג הַבָּא: ${n.H.n} – ${daysTxt(n.days)}</b><small>${hebStr(n.date,true)} · ${n.date.toLocaleDateString('he-IL',{day:'numeric',month:'long'})}</small><p>${n.H.f}</p><button class="small green" data-act="ph" data-v="0">מִתְכּוֹנְנִים לַחַג! 🎮</button></div>`:''}
  <div class="grid">${l.slice(1,7).map((x,i)=>`<div class="tile"><span class="ic">${x.H.ic}</span>${x.H.n}<small>${hebStr(x.date,true)}<br>${daysTxt(x.days)}</small><button class="small alt" data-act="ph" data-v="${i+1}">לְשַׂחֵק</button></div>`).join('')}</div>
  <div class="btns row"><button class="alt" data-act="back">לַמַּפָּה</button><button class="alt" data-act="arc">לְפִנַּת הַמִּשְׂחָקִים</button></div>`);}
@@ -4168,7 +4168,7 @@ const DCH=[
  {id:'hero',ev:'hero',ic:'🦸',t:()=>'סַיְּמוּ שָׁלָב בְּ"הַשָּׁלִיחַ הַגִּבּוֹר"',go:()=>heroMenu()},
  {id:'det',ev:'det',ic:'🕵️',t:()=>'פִּתְרוּ תַּעֲלוּמָה עִם הַבַּלָּשׁ יְחִיאֵל',go:()=>detMenu()},
  {id:'sea',ev:'sea',ic:'🌊',t:()=>'עִבְרוּ אֶת יַם סוּף עַד הַסּוֹף',go:()=>seaMenu()},
- {id:'challah',ev:'challah',ic:'🍞',t:()=>'אִפּוּ חַלּוֹת לְשַׁבָּת עִם רָחֵלִי',go:()=>challahMenu()},
+ {id:'challah',ev:'challah',ic:'🍞',t:()=>'אֲפוּ חַלּוֹת לְשַׁבָּת עִם הַשְּׁלוּחָה',go:()=>challahMenu()},
  {id:'runner',ev:'runner',ic:'🚐',t:e=>`צִבְרוּ ${e?300:500} נְקֻדּוֹת בְּמֵרוֹץ הַמִּינִיבּוּס`,ok:(v,e)=>v>=(e?300:500),go:()=>startRunner()},
  {id:'stack',ev:'stack',ic:'🏗️',t:e=>`בְּנוּ מִגְדַּל מִצְווֹת שֶׁל ${e?5:8} קוֹמוֹת`,ok:(v,e)=>v>=(e?5:8),go:()=>startStack()},
  {id:'champ',ev:'champ',ic:'🧠',t:e=>`צִבְרוּ ${e?3:6} נְקֻדּוֹת בְּחִידוֹן הָאַלּוּפִים`,ok:(v,e)=>v>=(e?3:6),go:()=>champQuiz()},
