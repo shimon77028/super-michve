@@ -118,7 +118,24 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 #pauseBtn{position:absolute;top:6px;left:50%;transform:translateX(-50%);z-index:5;display:none;opacity:.85;padding:4px 12px}
 .canPause #pauseBtn{display:block}
 .mpb{position:absolute;pointer-events:auto;width:clamp(48px,7vw,66px);height:clamp(48px,7vw,66px);border-radius:50%;background:rgba(255,255,255,.4);border:4px solid;font-size:22px;padding:0;display:flex;align-items:center;justify-content:center;touch-action:none;user-select:none;-webkit-user-select:none;box-shadow:none;color:#1a1410}
-.isMP .pad{display:none!important} .playing #hud,.playing #btnZoom,.playing #btnMe{visibility:hidden} #slowBtn{position:absolute;top:6px;left:calc(50% + 78px);z-index:5;display:none;opacity:.85;padding:4px 10px} .canPause #slowBtn,.playing #slowBtn{display:block} #slowBtn.on{background:#9fd3ff;opacity:1} .calm *{animation:none!important;transition:none!important} .bigpad .pad button{min-width:84px!important;min-height:84px!important;font-size:30px!important} .bigpad .mpb{width:clamp(66px,10vw,92px)!important;height:clamp(66px,10vw,92px)!important;font-size:30px!important} .hand-r .pad{justify-content:flex-end!important;gap:14px} .hand-l .pad{justify-content:flex-start!important;gap:14px}
+.isMP .pad{display:none!important} .playing #hud,.playing #btnZoom,.playing #btnMe{visibility:hidden}
+#card{font-size:clamp(17px,2.15vw,21px);line-height:1.75}
+#card p,#card .say{font-size:max(17px,1em)}
+#card small{font-size:max(14px,.82em)}
+#card button{min-height:48px}
+#card .btns button.alt,#card .qbtns button{min-height:54px;font-size:max(17px,1.05em)}
+.compact #card .fact{max-height:3.6em;overflow:hidden;position:relative;cursor:pointer}
+.compact #card .fact::after{content:'⬇ עוֹד';position:absolute;left:4px;bottom:0;background:#fff8e8;padding:0 6px;border-radius:8px;font-size:13px;font-weight:800}
+.compact #card .fact.open{max-height:none}.compact #card .fact.open::after{content:none}
+.hud{font-size:18px!important;gap:4px 22px!important}.hud b{font-size:1.1em}
+.portrait .rot{display:none!important}.portrait.playing .rot,.portrait.canPause .rot{display:flex!important}
+@media (min-width:1400px) and (min-height:800px){#card{max-width:min(900px,100%)!important}}
+@media (hover:hover){#card button:hover,.hbtn:hover,.gtile:hover,.topbtns button:hover{transform:translateY(-2px) scale(1.03);filter:brightness(1.05)}#card button,.hbtn,.gtile,.topbtns button{transition:transform .12s,filter .12s}}
+#keyhint{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:6;display:flex;gap:10px;align-items:center;background:rgba(20,33,61,.88);color:#fff;border-radius:16px;padding:8px 14px;font-weight:800;font-size:17px;pointer-events:none;transition:opacity .4s}
+#keyhint[hidden]{display:none}#keyhint .kc{display:inline-flex;min-width:36px;height:36px;align-items:center;justify-content:center;border:2px solid #fff;border-bottom-width:5px;border-radius:9px;background:#fff;color:#14213d;font-size:17px;padding:0 6px;margin:0 2px}
+.openbtn{font-size:clamp(22px,3.6vw,34px)!important;padding:12px 34px!important;background:linear-gradient(#ffe066,#ffb627)!important;border:4px solid #1a1410!important;box-shadow:0 6px 0 #1a1410,0 0 30px rgba(255,210,63,.7)!important;animation:qpulse 1.1s infinite}
+.cab.opening .panel{background:transparent;align-items:center!important;justify-content:center!important}.cab.opening #card{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin-top:4%}
+@media (prefers-reduced-motion:reduce){.openbtn{animation:none}} #slowBtn{position:absolute;top:6px;left:calc(50% + 78px);z-index:5;display:none;opacity:.85;padding:4px 10px} .canPause #slowBtn,.playing #slowBtn{display:block} #slowBtn.on{background:#9fd3ff;opacity:1} .calm *{animation:none!important;transition:none!important} .bigpad .pad button{min-width:84px!important;min-height:84px!important;font-size:30px!important} .bigpad .mpb{width:clamp(66px,10vw,92px)!important;height:clamp(66px,10vw,92px)!important;font-size:30px!important} .hand-r .pad{justify-content:flex-end!important;gap:14px} .hand-l .pad{justify-content:flex-start!important;gap:14px}
 #fx{position:absolute;inset:0;pointer-events:none;z-index:5}
 .rot{display:none;align-items:center;justify-content:space-between;gap:8px;background:#ffc93c;color:#1a1410;border:2px solid #1a1410;border-radius:10px;padding:2px 10px;font-weight:800;font-size:14px;line-height:1.7}
 .portrait .rot{display:flex}
@@ -160,7 +177,7 @@ button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
 button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
 button.alt{background:#fff}
 button.blue{background:#2667b3;color:#fff}
-button.green{background:var(--leaf);color:#fff}
+button.green{background:#2a7a37;color:#fff}
 button.small{font-size:14px;padding:2px 10px}
 button:disabled{opacity:.45;cursor:not-allowed}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
@@ -319,7 +336,7 @@ button:focus-visible{outline:4px solid #ffc93c!important;outline-offset:2px}
     <canvas id="fx"></canvas>
     <div id="toast"></div>
     <div id="mpad" hidden></div>
-    <button id="pauseBtn" class="small alt" aria-label="הַפְסָקָה">⏸ הַפְסָקָה</button><button id="slowBtn" class="small alt" aria-label="לְאַט">🐢</button>
+    <button id="pauseBtn" class="small alt" aria-label="הַפְסָקָה">⏸ הַפְסָקָה</button><button id="slowBtn" class="small alt" aria-label="לְאַט">🐢</button><div id="keyhint" hidden aria-hidden="true"></div>
     <div class="panel" id="panel"><div class="card" id="card"></div></div>
   </div>
   <div class="pad">
@@ -366,7 +383,7 @@ const sfx={
  win:()=>[523,659,784,1046].forEach((f,i)=>beep(f,.16,'triangle',.07,i*.09)),
  big:()=>[523,659,784,1046,784,1046,1318].forEach((f,i)=>beep(f,.18,'triangle',.07,i*.1)),
  coin:()=>{beep(988,.06,'square',.04);beep(1318,.1,'square',.04,.06)},
- oops:()=>{beep(330,.12,'sine',.06);beep(262,.18,'sine',.06,.12)},
+ oops:()=>{beep(330,.12,'sine',.06);beep(262,.18,'sine',.06,.12);vib([30,40,30]);},
  click:()=>beep(700,.03,'triangle',.03),
  noise:()=>{for(let i=0;i<8;i++)beep(200+Math.random()*600,.05,'square',.04,i*.04)},
  siren:()=>{for(let i=0;i<4;i++){beep(700,.18,'sine',.05,i*.36);beep(950,.18,'sine',.05,i*.36+.18)}}
@@ -440,7 +457,7 @@ function drawP(c,x,y,o){
  c.restore();
  c.restore();
 }
-const famLook=(k,extra={})=>Object.assign({},FAM[k].look,extra);
+const famLook=(k,extra={})=>Object.assign({},FAM[k].look,extra),GENKID=[{s:.66,hf:1.22,shirt:'#ff8a3d',pants:'#2b2b2b',skin:'#f1c7a2',hair:'#6a4020',kippah:'#ff8a3d'},{s:.64,hf:1.24,shirt:'#9b6bd1',skirt:'#5a3a8a',pants:'#5a3a8a',skin:'#e9b98f',hair:'#2a1d14',style:'pony'},{s:.68,hf:1.2,shirt:'#2fb7a8',pants:'#24405e',skin:'#c98d68',hair:'#1a1a1a',kippah:'#24405e'},{s:.65,hf:1.22,shirt:'#ffc531',skirt:'#c27c0e',pants:'#c27c0e',skin:'#f6d0ad',hair:'#a0522d',style:'braids'},{s:.67,hf:1.2,shirt:'#e2475e',pants:'#3a3a55',skin:'#f3cfac',hair:'#3a2618',kippah:'#2f6fde'},{s:.64,hf:1.24,shirt:'#5fd38d',skirt:'#2d6b48',pants:'#2d6b48',skin:'#d9a27a',hair:'#3a2618',style:'pony'}],genLook=(w,extra={})=>Object.assign({},GENKID[((w%6)+6)%6],extra);
 const portraits={};
 function makePortraits(){for(const k in FAM){const pc=document.createElement('canvas');pc.width=pc.height=128;const c=pc.getContext('2d');const L=FAM[k].look,s=L.s||1,hf=L.hf||1;
  const sc=1.5/(s*hf);c.translate(64,70);c.scale(sc,sc);drawP(c,0,(98+15*hf)*s,famLook(k,{face:1}));
@@ -473,6 +490,27 @@ function drawBg(){const b=bg.getContext('2d');b.setTransform(DPR,0,0,DPR,0,0);b.
  b.fillStyle='#f2f2f2';for(let xx=10;xx<W;xx+=80)b.fillRect(xx,GY+60,44,5);
 }
 drawBg();
+const BGS={street:bg};
+function mkBg(theme){const c=document.createElement('canvas');c.width=W*DPR;c.height=H*DPR;const b=c.getContext('2d');b.setTransform(DPR,0,0,DPR,0,0);const tree=(x,y,s)=>{b.fillStyle='#7a5235';b.fillRect(x-6*s,y-40*s,12*s,40*s);b.fillStyle='#4fb35f';b.beginPath();b.arc(x,y-58*s,30*s,0,7);b.arc(x-20*s,y-44*s,20*s,0,7);b.arc(x+20*s,y-44*s,20*s,0,7);b.fill();};
+ if(theme==='park'){b.fillStyle='#a6dc95';b.beginPath();b.moveTo(0,GY-60);for(let x=0;x<=W;x+=20)b.lineTo(x,GY-190+Math.sin(x*.008)*40);b.lineTo(W,GY-60);b.fill();b.fillStyle='#8fd07a';b.beginPath();b.moveTo(0,GY-60);for(let x=0;x<=W;x+=20)b.lineTo(x,GY-130+Math.sin(x*.013+2)*30);b.lineTo(W,GY-60);b.fill();
+  for(let i=0;i<9;i++)tree(30+i*118,GY-60,.9+(i%3)*.15);
+  b.strokeStyle='#e2475e';b.lineWidth=6;b.beginPath();b.moveTo(700,GY-60);b.lineTo(740,GY-170);b.lineTo(780,GY-60);b.stroke();b.beginPath();b.moveTo(740,GY-170);b.lineTo(860,GY-170);b.lineTo(880,GY-60);b.stroke();b.strokeStyle='#555';b.lineWidth=2;b.beginPath();b.moveTo(800,GY-170);b.lineTo(800,GY-100);b.moveTo(830,GY-170);b.lineTo(830,GY-100);b.stroke();b.fillStyle='#2f80ed';b.fillRect(794,GY-102,42,8);
+  b.fillStyle='#ffc93c';b.beginPath();b.moveTo(120,GY-160);b.lineTo(200,GY-60);b.lineTo(180,GY-60);b.lineTo(110,GY-150);b.fill();b.fillStyle='#888';b.fillRect(100,GY-170,8,110);
+  b.fillStyle='#7ccf6b';b.fillRect(0,GY-60,W,H);b.fillStyle='#e8d6a8';b.fillRect(0,GY-20,W,46);b.fillStyle='rgba(0,0,0,.06)';for(let x=0;x<W;x+=40)b.fillRect(x,GY-20,2,46);
+  b.font='26px serif';b.textAlign='center';for(const [x,e] of [[300,'🌼'],[420,'🌷'],[560,'🌻'],[640,'🌼'],[920,'🌷']])b.fillText(e,x,GY-28);}
+ else if(theme==='market'){for(let i=0;i<6;i++){const x=i*165-5,cols=[['#e2475e','#fff'],['#2f80ed','#fff'],['#3fa34d','#fff'],['#ffb627','#fff'],['#7a4fc9','#fff'],['#e2475e','#ffe08a']][i];b.fillStyle='#d9c195';b.fillRect(x,GY-260,160,200);b.fillStyle='#4a6a8f';b.fillRect(x+20,GY-240,50,40);b.fillRect(x+90,GY-240,50,40);
+   b.fillStyle='#8b5a2b';b.fillRect(x+8,GY-170,8,110);b.fillRect(x+144,GY-170,8,110);for(let s2=0;s2<6;s2++){b.fillStyle=cols[s2%2];b.beginPath();b.moveTo(x+s2*27,GY-180);b.lineTo(x+(s2+1)*27,GY-180);b.lineTo(x+(s2+1)*27,GY-150);b.quadraticCurveTo(x+s2*27+13,GY-138,x+s2*27,GY-150);b.closePath();b.fill();}
+   b.fillStyle='#c8955f';b.fillRect(x+4,GY-100,152,40);b.font='24px serif';b.textAlign='center';b.fillText(['🍎🍊🍋','🥒🍅🥕','🍞🥯🥖','🍇🍐🍌','🧀🥚🥛','🌻🌷🌼'][i],x+80,GY-72);}
+  b.strokeStyle='#555';b.lineWidth=2;b.beginPath();b.moveTo(0,GY-200);b.quadraticCurveTo(W/2,GY-150,W,GY-200);b.stroke();for(let i=0;i<16;i++){const x=i*62+20,y=GY-200+Math.sin(i/15*Math.PI)*42;b.fillStyle=['#ffd23f','#ff6fa8','#5fd38d','#3f8cff'][i%4];b.beginPath();b.arc(x,y+6,6,0,7);b.fill();}
+  b.fillStyle='#d9cdb5';b.fillRect(0,GY-60,W,H);b.strokeStyle='rgba(0,0,0,.08)';for(let x=0;x<W;x+=44){b.beginPath();b.moveTo(x,GY-60);b.lineTo(x-16,H);b.stroke();}for(let y=GY-40;y<H;y+=26){b.beginPath();b.moveTo(0,y);b.lineTo(W,y);b.stroke();}}
+ else if(theme==='shul'){b.drawImage(bg,0,0,W,H);b.fillStyle='rgba(255,255,255,.18)';b.fillRect(0,0,W,GY-60);const x=300,w=360,top=GY-330;b.fillStyle='#efe2c4';b.fillRect(x,top,w,270);b.strokeStyle='#8a6a3a';b.lineWidth=3;b.strokeRect(x,top,w,270);b.beginPath();b.moveTo(x-16,top);b.lineTo(x+w/2,top-70);b.lineTo(x+w+16,top);b.closePath();b.fillStyle='#d9c195';b.fill();b.stroke();
+  b.fillStyle='#3f8cff';b.beginPath();b.arc(x+w/2,top-24,22,0,7);b.fill();b.strokeStyle='#ffd23f';b.lineWidth=3;b.beginPath();for(let k=0;k<2;k++){const a0=k*Math.PI/3-Math.PI/2;b.moveTo(x+w/2+Math.cos(a0)*15,top-24+Math.sin(a0)*15);for(let j=1;j<=3;j++){const a=a0+j*2*Math.PI/3;b.lineTo(x+w/2+Math.cos(a)*15,top-24+Math.sin(a)*15);}}b.stroke();
+  for(let i=0;i<4;i++){const wx=x+28+i*84;b.fillStyle='#5a7fb0';b.beginPath();b.moveTo(wx,top+150);b.lineTo(wx,top+70);b.arc(wx+28,top+70,28,Math.PI,0);b.lineTo(wx+56,top+150);b.fill();}
+  b.fillStyle='#7a5235';b.beginPath();b.moveTo(x+w/2-46,GY-60);b.lineTo(x+w/2-46,top+190);b.arc(x+w/2,top+190,46,Math.PI,0);b.lineTo(x+w/2+46,GY-60);b.fill();
+  b.fillStyle='#2f6fde';b.fillRect(x+w/2-90,top+14,180,34);b.fillStyle='#fff';b.font='800 19px '+FONT;b.textAlign='center';b.direction='rtl';b.fillText('בֵּית הַכְּנֶסֶת',x+w/2,top+38);}
+ return c;}
+const STAGE_TH={2:'market',4:'market',9:'market',8:'shul',13:'shul',11:'park',12:'park'};
+function bgT(){let th=STAGE_TH[R.stage]||'street';if(['stack','hoops','sack','bounce','camp'].includes(R.scene)||(R.screen==='arcade'&&R.scene==='show'))th='park';if(R.screen==='read'||R.screen==='kar')th='shul';if(!BGS[th]){try{BGS[th]=mkBg(th);}catch(e){BGS[th]=bg;}}return BGS[th];}
 const SKY={1:[[110,185,240],[200,232,250]],2:[[90,170,240],[210,238,255]],3:[[30,40,95],[230,120,80]],4:[[120,170,240],[255,210,230]],0:[[110,185,240],[200,232,250]]};
 function sky(){const [a,b]=SKY[R.stage]||SKY[0];const g=ctx.createLinearGradient(0,0,0,GY);g.addColorStop(0,`rgb(${a})`);g.addColorStop(1,`rgb(${b})`);ctx.fillStyle=g;ctx.fillRect(0,0,W,GY);
  if(R.stage===3){ctx.fillStyle='#fff';for(let i=0;i<30;i++){ctx.globalAlpha=.4+.6*Math.abs(Math.sin(R.t+i));ctx.fillRect((i*137)%W,(i*71)%180,2,2);}ctx.globalAlpha=1;ctx.fillStyle='#fff6c8';ctx.beginPath();ctx.arc(820,70,26,0,7);ctx.fill();}
@@ -540,7 +578,10 @@ function drawPolice(x,y){ctx.save();ctx.fillStyle='#fff';ctx.strokeStyle='#1a141
 const conf=[];
 function confetti(n=120){if(PSET.calm)n=Math.round(n*.15);for(let i=0;i<n;i++)conf.push({x:W/2+(Math.random()-.5)*300,y:H*.35,vx:(Math.random()-.5)*600,vy:-Math.random()*500-150,r:Math.random()*6,vr:(Math.random()-.5)*10,c:rnd(['#ffc93c','#e2475e','#2f80ed','#3fa34d','#7a4fc9','#fff']),life:2.6});}
 let toastT=null;
-function celebrate(text,n=120,big=false){clearTimeout(toastT);toastT=setTimeout(()=>{toastEl.textContent='';},1700);toastEl.textContent=CLEAN?cleanTxt(text):text;toastEl.classList.remove('pop');void toastEl.offsetWidth;toastEl.classList.add('pop');confetti(n);big?sfx.big():sfx.win();try{cheerAudio(text);}catch(e){}if(big||Math.random()<.35){const yt=++yesT;setTimeout(()=>{if(yt!==yesT)return;floater(W/2,H/2+40,rnd(['יֶעס! 💪','יֶעס! יֶעס! 🙌','יֶעס! 👑 יְחִי הַמֶּלֶךְ!']),'#ffd400');[880,1175,1568].forEach((f,i)=>beep(f,.09,'triangle',.05,i*.07));},650);}}
+const KHT={"street": "<span class=\"kc\">←</span><span class=\"kc\">→</span> הוֹלְכִים · <span class=\"kc\">רֶוַח</span> מְדַבְּרִים", "catch": "<span class=\"kc\">←</span><span class=\"kc\">→</span> זָזִים", "route": "<span class=\"kc\">←</span><span class=\"kc\">→</span> הוֹלְכִים · <span class=\"kc\">רֶוַח</span> מְדַבְּרִים", "runner": "<span class=\"kc\">↑</span><span class=\"kc\">↓</span> נָתִיב · <span class=\"kc\">רֶוַח</span> קְפִיצָה", "hero": "<span class=\"kc\">←</span><span class=\"kc\">→</span> הוֹלְכִים · <span class=\"kc\">↑</span> קְפִיצָה · <span class=\"kc\">X</span> אוֹר", "city": "<span class=\"kc\">←</span><span class=\"kc\">↑</span><span class=\"kc\">↓</span><span class=\"kc\">→</span> נוֹסְעִים", "kart": "<span class=\"kc\">←</span><span class=\"kc\">→</span> הֶגֶה · <span class=\"kc\">↑</span> גַּז", "stack": "<span class=\"kc\">רֶוַח</span> מְשַׁחְרְרִים", "rhythm": "<span class=\"kc\">J</span><span class=\"kc\">K</span><span class=\"kc\">L</span> מְתוֹפְפִים", "drop": "<span class=\"kc\">←</span><span class=\"kc\">→</span> זָזִים", "sea": "<span class=\"kc\">←</span><span class=\"kc\">→</span> הוֹלְכִים · <span class=\"kc\">↑</span> קְפִיצָה"};let khScene=null,khT=0;
+function keyHint(pl){const el=$('keyhint');if(!el)return;if(!pl||cab.classList.contains('touch')){if(!el.hidden)el.hidden=true;khScene=pl?khScene:null;return;}if(khScene!==R.scene){khScene=R.scene;S.kh=S.kh||{};if(KHT[R.scene]&&(S.kh[R.scene]||0)<2){S.kh[R.scene]=(S.kh[R.scene]||0)+1;save();el.innerHTML=KHT[R.scene];el.hidden=false;el.style.opacity=1;khT=performance.now();}}if(!el.hidden&&performance.now()-khT>4500){el.style.opacity=0;if(performance.now()-khT>5000)el.hidden=true;}}
+function vib(p){try{if(PSET.vib!==false&&cab.classList.contains('touch')&&navigator.vibrate)navigator.vibrate(p);}catch(e){}}
+function celebrate(text,n=120,big=false){vib(big?[40,60,80]:35);clearTimeout(toastT);toastT=setTimeout(()=>{toastEl.textContent='';},1700);toastEl.textContent=CLEAN?cleanTxt(text):text;toastEl.classList.remove('pop');void toastEl.offsetWidth;toastEl.classList.add('pop');confetti(n);big?sfx.big():sfx.win();try{cheerAudio(text);}catch(e){}if(big||Math.random()<.35){const yt=++yesT;setTimeout(()=>{if(yt!==yesT)return;floater(W/2,H/2+40,rnd(['יֶעס! 💪','יֶעס! יֶעס! 🙌','יֶעס! 👑 יְחִי הַמֶּלֶךְ!']),'#ffd400');[880,1175,1568].forEach((f,i)=>beep(f,.09,'triangle',.05,i*.07));},650);}}
 let yesT=0;
 const fl=[];function cleanTxt(t){return String(t).replace(/[\u0590-\u05FFA-Za-z,.!?:;"'׳״–—\-()…]/g,'').replace(/\s+/g,' ').trim();}
 function floater(x,y,t,c='#ffc93c'){const tt=CLEAN?cleanTxt(t):t;if(tt)fl.push({x,y,t:tt,c,life:1.2});try{if(Date.now()-(floater.last||0)>1500&&clipsIn(t).length){floater.last=Date.now();cheerAudio(t);}}catch(e){}}
@@ -716,9 +757,9 @@ function rank(){let r=RANKS[0][1];for(const [n,t] of RANKS)if(stickerCount()>=n)
 
 /* ================= HUD ================= */
 let lastHud='';
-function updHud(){let s=`<span>דַּרְגָּה: <b>${rank()}</b></span><span>נְקֻדּוֹת: <b>${S.points}</b></span><span>מַטְבְּעוֹת: <b>${S.coins}</b></span>`;
- if(R.timerOn)s+=`<span>זְמַן: <b>${Math.ceil(R.timer)}</b></span>`;
- if(R.goal)s+=`<span>${R.goalLabel||'מִצְווֹת'}: <b>${R.count}/${R.goal}</b></span>`;
+function updHud(){let s=`<span title="דַּרְגָּה">🎖️ <b>${rank()}</b></span><span title="נְקֻדּוֹת">⭐ <b>${S.points}</b></span><span title="מַטְבְּעוֹת">🪙 <b>${S.coins}</b></span>`;
+ if(R.timerOn)s+=`<span>⏱️ <b>${Math.ceil(R.timer)}</b></span>`;
+ if(R.goal)s+=`<span>🎯 <b>${R.count}/${R.goal}</b></span>`;
  if(s!==lastHud){hud.innerHTML=s;lastHud=s;}}
 
 /* ================= KID TURNS ================= */
@@ -823,7 +864,7 @@ function updateStreet(dt){
  R.peds=R.peds.filter(p=>(p.x>-90&&p.x<W+90)||['toStand','wrapping','talking'].includes(p.state));
  R.shimBubT=Math.max(0,R.shimBubT-dt);if(R.mode==='walk'){R.shimT-=dt;if(R.shimT<=0){R.shimT=9+Math.random()*6;R.shimBub=chabad();R.shimBubT=2.4;}}}
 function drawStreetScene(){
- sky();ctx.drawImage(bg,0,0,W,H);drawDecor();drawParked();
+ sky();ctx.drawImage(bgT(),0,0,W,H);drawDecor();drawParked();
  for(const p of R.peds){const L=Object.assign({},p.look);drawP(ctx,p.x,GY,Object.assign(L,{face:p.state==='talking'?(R.player.x<p.x?-1:1):(p.state==='wrapping'?1:p.dir),phase:p.phase,moving:!['talking','wrapping'].includes(p.state),wrap:p.state==='wrapping'&&!p.female,hold:p.gotBox?'box':((p.state==='wrapping'&&p.female||(p.state==='leaving'&&p.female&&p.bubT>0&&R.sk==='tefillin'))?'candles':null)}));}
  R.trail.forEach(h=>h.look?drawP(ctx,h.x,GY+6,Object.assign({},h.look,{face:h.face||R.player.face,phase:h.phase,moving:h.moving,hold:'flag'})):drawP(ctx,h.x,GY+6,famLook(h.k,{face:h.face||R.player.face,phase:h.phase,moving:h.moving,hold:h.k==='noa'?'tzedaka':(h.k==='dvora'?'candles':null)})));
  drawP(ctx,R.player.x,GY+8,famLook('shimon',{face:R.player.face,phase:R.player.phase,moving:R.player.moving}));
@@ -894,7 +935,7 @@ function drawItem(it){ctx.save();ctx.translate(it.x,it.y);ctx.rotate(Math.sin(it
   case'dreidel':ctx.fillStyle='#2f80ed';ctx.beginPath();ctx.moveTo(-14,-14);ctx.lineTo(14,-14);ctx.lineTo(14,6);ctx.lineTo(0,22);ctx.lineTo(-14,6);ctx.fill();ctx.fillRect(-3,-26,6,12);break;
   case'umbrella':ctx.fillStyle='#7a4fc9';ctx.beginPath();ctx.arc(0,0,22,Math.PI,0);ctx.fill();ctx.strokeStyle='#333';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,24);ctx.arc(-5,24,5,0,Math.PI);ctx.stroke();break;}
  ctx.restore();}
-function drawCatchScene(){sky();ctx.drawImage(bg,0,0,W,H);drawDecor();drawParked();
+function drawCatchScene(){sky();ctx.drawImage(bgT(),0,0,W,H);drawDecor();drawParked();
  for(const it of R.items)drawItem(it);
  R.team.forEach((k,i)=>drawP(ctx,80+i*60,GY+6,famLook(k,{face:1})));
  drawP(ctx,R.player.x,GY+8,famLook('shimon',{face:R.player.face,phase:R.player.phase,moving:R.player.moving,armA:-2.6}));
@@ -939,7 +980,7 @@ function drawHome(){
  ctx.font='30px serif';(R.mess||[]).forEach(m=>ctx.fillText(m.ic,m.x,m.y));
 }
 function drawShowScene(){if(R.stage===5||R.stage===6){drawHome();drawP(ctx,870,GY+10,famLook('rebbetzin',{face:-1}));R.team.forEach((k,i)=>drawP(ctx,280+i*58,GY+12,famLook(k,{face:1,armA:R.brushing?-2.2+Math.sin(R.t*20)*.2:null})));drawP(ctx,200,GY+14,famLook('shimon',{face:1}));return;}
- sky();ctx.drawImage(bg,0,0,W,H);drawDecor();drawParked();
+ sky();ctx.drawImage(bgT(),0,0,W,H);drawDecor();drawParked();
  const st=R.stage;const cast=['racheli',...R.team];
  cast.forEach((k,i)=>drawP(ctx,470+i*62,GY+6,famLook(k,{face:-1,hold:k==='racheli'&&st===4?'basket':null})));
  let arm=null,yo=0;if(R.shake){R.shake.t-=1/60;const j=Math.sin(R.t*40)*.25;arm={R:-1.2,L:1.2,F:-1.5,U:-2.8,D:-.2,B:.6}[R.shake.k]+j;if(R.shake.k==='B')yo=0;if(R.shake.t<=0)R.shake=null;}
@@ -1209,7 +1250,7 @@ function drawDropItem(o){ctx.save();ctx.translate(o.x,o.y);ctx.rotate(Math.sin(o
  else if(k==='sock'){ctx.fillStyle='#7a4fc9';rr(ctx,-7,-18,14,26,4);ctx.fill();rr(ctx,-7,2,24,10,5);ctx.fill();}
  else if(k==='key'){ctx.strokeStyle='#c9a227';ctx.lineWidth=4;ctx.beginPath();ctx.arc(-8,0,7,0,7);ctx.moveTo(-1,0);ctx.lineTo(16,0);ctx.moveTo(12,0);ctx.lineTo(12,6);ctx.stroke();}
  ctx.restore();}
-function drawDropScene(){sky();ctx.drawImage(bg,0,0,W,H);drawDecor();drawParked();const D=R.drop;
+function drawDropScene(){sky();ctx.drawImage(bgT(),0,0,W,H);drawDecor();drawParked();const D=R.drop;
  if(D)for(const o of D.items)drawDropItem(o);
  R.team.forEach((k,i)=>drawP(ctx,60+i*52,GY+6,famLook(k,{face:1,armA:-2.4+Math.sin(R.t*8+i)*.3})));
  drawP(ctx,R.player.x,GY+8,famLook('shimon',{face:R.player.face,phase:R.player.phase,moving:R.player.moving,armA:-2.6}));
@@ -1233,7 +1274,7 @@ function routeStop(){const Ro=R.route;if(!Ro||!R.routeOn||Ro.pause>0)return;let 
   if(R.team.length){const hk=rnd(R.team);floater(hit.x,GY-230,FAM[hk].name+(FAM[hk].f?' דָּפְקָה בַּדֶּלֶת!':' דָּפַק בַּדֶּלֶת!'),'#ffc93c');}
   hit.kids=[];if(R.count>=R.goal)setTimeout(endRoute,900);}
  else{beep(250,.08,'sine',.04);floater(Ro.x,GY-220,'אֵין פֹּה יְלָדִים – מַמְשִׁיכִים לָלֶכֶת!','#fff');}}
-function drawRouteScene(){sky();ctx.drawImage(bg,0,0,W,H);drawDecor();const Ro=R.route;if(!Ro)return;
+function drawRouteScene(){sky();ctx.drawImage(bgT(),0,0,W,H);drawDecor();const Ro=R.route;if(!Ro)return;
  for(const s of Ro.stops){ctx.fillStyle='#7a4b2a';ctx.strokeStyle='#1a1410';ctx.lineWidth=3;rr(ctx,s.x-24,GY-150,48,90,6);ctx.fill();ctx.stroke();ctx.save();ctx.translate(s.x+32,GY-128);ctx.rotate(.25);ctx.fillStyle='#c9a227';ctx.fillRect(-3,-10,6,20);ctx.restore();
   s.kids.forEach((k,i)=>drawP(ctx,s.x+30+i*24,GY+4,Object.assign({},k.look,{face:1,armA:Math.sin(R.t*6+i)*.5-1.8})));
   if(s.kids.length&&Math.abs(Ro.x-s.x)<50){ctx.strokeStyle='#ffc93c';ctx.lineWidth=5;ctx.beginPath();ctx.arc(s.x,GY-80,62,0,7);ctx.stroke();}}
@@ -2114,9 +2155,9 @@ const HINTRO=[{art:'🏡☀️',k:'shimon',t:'בֹּקֶר טוֹב! אֵיזֶ�
  {art:'💛✨',ic:'💛',nm:'הַיֵּצֶר הַטּוֹב',t:'אַל דְּאָגָה! אֲנִי הַיֵּצֶר הַטּוֹב. כָּל מִצְוָה וְכָל מִדָּה טוֹבָה מוֹסִיפוֹת אוֹר. יַחַד נַחְזִיר הַכֹּל!'},
  {art:'📜📜📜 ➜ 🚪',k:'shimon',t:'בְּכָל שָׁלָב אוֹסְפִים 3 קְלָפִים וּמַגִּיעִים לַדֶּלֶת. יוֹצְאִים לַדֶּרֶךְ!'}];
 function hWorldIntro(w){const W=HW[w],k=W.kid,S_=HSTORY[w];hAlb().s[w]=1;
- return[{art:W.ic,ic:W.ic,nm:'עוֹלָם '+(w+1)+': '+W.n,t:FAM[k].name+' '+hNikud(k,'נִרְדַּם','נִרְדְּמָה')+' בְּתוֹךְ '+W.trap+'. בּוֹאוּ '+hNikud(k,'נָעִיר אוֹתוֹ','נָעִיר אוֹתָהּ')+'!',html:`<div class="storyart">${pimg(k)}🫧</div>`},
+ return[{art:W.ic,ic:W.ic,nm:'עוֹלָם '+(w+1)+': '+W.n,t:'הַיֵּצֶר הָרַע הִרְדִּים אֶת יַלְדֵי הַשְּׁכוּנָה בְּתוֹךְ '+W.trap+'! '+FAM[k].name+' '+hNikud(k,'יוֹצֵא','יוֹצֵאת')+' אִתָּנוּ לְהָעִיר אֶת כֻּלָּם.',html:`<div class="storyart">${pimg(k)} 💪 🫧😴</div>`},
   ...S_.p.map((t,i)=>({art:i?'':'📖',ic:'📖',nm:'סִפּוּר: '+S_.t,t})),{art:'💡',ic:'💛',nm:'מָה לוֹמְדִים?',t:S_.l},{art:W.mi,ic:'💛',nm:'הַיֵּצֶר הַטּוֹב',t:W.mt}];}
-function hWorldEnd(w){const W=HW[w];const pg=[{art:'🫧💥🎉',k:W.kid,t:'תּוֹדָה! הִתְעוֹרַרְתִּי! עַכְשָׁו אֲנִי '+hNikud(W.kid,'מִצְטָרֵף','מִצְטָרֶפֶת')+' לַגִּבּוֹרִים!'}];
+function hWorldEnd(w){const W=HW[w];const pg=[{art:'🫧💥🎉',k:W.kid,t:'הִצְלַחְנוּ! כָּל יַלְדֵי הַשְּׁכוּנָה הִתְעוֹרְרוּ! מֵעַכְשָׁו אֶפְשָׁר לְשַׂחֵק גַּם אִתִּי!'}];
  if(W.gift)pg.push({art:'🎁',ic:'🎁',nm:'מַתָּנָה!',t:W.gift});
  pg.push({art:'📜',ic:'📜',nm:'מִלָּה חֲדָשָׁה',t:'"'+W.word+'" חָזְרָה לַפָּסוּק! וְנִפְתְּחוּ עוֹד 2 פְּסוּקִים מִ-12 הַפְּסוּקִים.',html:hVerse(w+1)});
  if(w===5)pg.push({art:'✨👑✨',ic:'💛',nm:'הַיֵּצֶר הַטּוֹב',t:'הִתְגַּבַּרְתֶּם עַל הַיֵּצֶר הָרַע! כָּל הַיְּלָדִים הִתְעוֹרְרוּ וְכָל הַפָּסוּק חָזַר: שְׁמַע יִשְׂרָאֵל ה׳ אֱלֹקֵינוּ ה׳ אֶחָד!'},...HLAMP.p.map((t,i)=>({art:i?'🏮✨':'🏮',ic:'📖',nm:'סִפּוּר: '+HLAMP.t,t})));
@@ -2583,7 +2624,7 @@ function heroRespawn(pp){const h=R.hr;const list=pp?[pp]:h.P;for(const p of list
  if(!pp||!h.two)h.cam=Math.max(0,Math.min(h.M.w-W,list[0].x-W/2));}
 function hKill(e){const h=R.hr;if(e.inv>0)return;
  if(e.type==='boss'){if(e.shield){h.puffs.push({x:e.x+e.w/2,y:e.y,t:.6,txt:'🛡️'});beep(200,.08,'square',.04);return;}e.hp--;e.inv=.8;h.shake=.25;hVib(40);hPart(h,e.x+50,e.y+50,10,'#fff6c8',200);beep(300,.15,'square',.05);
-  if(e.hp>0){h.msg='עוֹד '+e.hp+'! ✨';h.msgT=1.2;}else if(e.B.mini){e.alive=false;h.slow=.6;h.proj=[];hPart(h,e.x+e.w/2,e.y+e.h/2,30,'#ffe680',220,4);{const k_=Object.keys(HEN).find(k=>HEN[k].col===e.B.col);h.puffs.push({x:e.x+e.w/2,y:e.y,t:1.4,txt:k_?HEN[k_].win:'✨ אוֹר!'});}h.msg='🚪 הַדֶּלֶת נִפְתְּחָה!';h.msgT=2;celebrate('נִצַּחְתֶּם אֶת שׁוֹמֵר הַדֶּלֶת! 💪',160);}else{e.alive=false;h.freed=true;h.freedAt=h.t;h.slow=1.3;hPart(h,e.x+50,e.y+50,40,'#ffe680',260,4);h.proj=[];h.puffs.push({x:e.x+50,y:e.y+20,t:1.6,txt:'✨ אוֹר! ✨'});h.msg=FAM[h.D.W.kid].name+' '+hNikud(h.D.W.kid,'הִתְעוֹרֵר','הִתְעוֹרְרָה')+'! 🎉 לַדֶּלֶת 🚪';h.msgT=3;celebrate('הִתְגַּבַּרְנוּ עַל '+e.B.n+'!',260,true);}return;}
+  if(e.hp>0){h.msg='עוֹד '+e.hp+'! ✨';h.msgT=1.2;}else if(e.B.mini){e.alive=false;h.slow=.6;h.proj=[];hPart(h,e.x+e.w/2,e.y+e.h/2,30,'#ffe680',220,4);{const k_=Object.keys(HEN).find(k=>HEN[k].col===e.B.col);h.puffs.push({x:e.x+e.w/2,y:e.y,t:1.4,txt:k_?HEN[k_].win:'✨ אוֹר!'});}h.msg='🚪 הַדֶּלֶת נִפְתְּחָה!';h.msgT=2;celebrate('נִצַּחְתֶּם אֶת שׁוֹמֵר הַדֶּלֶת! 💪',160);}else{e.alive=false;h.freed=true;h.freedAt=h.t;h.slow=1.3;hPart(h,e.x+50,e.y+50,40,'#ffe680',260,4);h.proj=[];h.puffs.push({x:e.x+50,y:e.y+20,t:1.6,txt:'✨ אוֹר! ✨'});h.msg='כֻּלָּם הִתְעוֹרְרוּ! 🎉 לַדֶּלֶת 🚪';h.msgT=3;celebrate('הִתְגַּבַּרְנוּ עַל '+e.B.n+'!',260,true);}return;}
  e.hp--;if(e.hp>0){e.inv=.5;beep(500,.06,'square',.04);return;}
  e.alive=false;h.lp+=2;if(Math.random()<.5)h.M.items.push({type:'ammo',x:e.x+e.w/2,y:e.y+e.h/2-10});h.combo=h.comboT>0?(h.combo||1)+1:1;h.comboT=2.2;if(h.combo>=2){h.lp+=h.combo;h.puffs.push({x:e.x+e.w/2,y:e.y-34,t:1.2,txt:'×'+h.combo+'! 🔥'});beep(700+h.combo*80,.08,'triangle',.05);}hPart(h,e.x+e.w/2,e.y+e.h/2,12,HEN[e.type].col,170);{const A_=hAlb();if(!A_.m[e.type]){A_.m[e.type]=1;floater(W/2,190,'🃏 קְלָף חָדָשׁ: '+HEN[e.type].n+' ➜ '+HEN[e.type].win,'#ffd400');}}h.puffs.push({x:e.x+e.w/2,y:e.y,t:1.1,txt:HEN[e.type].win});beep(660,.08,'triangle',.05);beep(990,.1,'triangle',.05,.08);}
 function bossTalk(){const h=R.hr;h.bossTalk=true;h.tipT=0;const B=h.M.ents.find(e=>e.type==='boss'&&e.alive);if(B){B.mh=B.hp;B.phase=1;}h.msg=B&&B.B.mini?'⚔️ '+B.B.n+'! – אוֹר אוֹ קְפִיצָה מִלְמַעְלָה':'⚔️ הַקְּרָב הַגָּדוֹל: '+(B?B.B.n:'');h.msgT=2.4;beep(220,.2,'square',.05);beep(330,.25,'square',.05,.2);}
@@ -2743,8 +2784,8 @@ function drawHero(){const h=R.hr;if(!h)return;const M=h.M,th=h.D.W.th,cam=h.cam,
   else if(it.type==='keeper'){drawP(ctx,it.x,it.y+20,Object.assign({},HNPC.sage,{face:-1}));if(M.gates.some(g=>!g.open))hBubble(it.x,it.y-64,'❓ שַׁעַר הַחָכְמָה');}
   else if(it.type==='sage'){drawP(ctx,it.x,it.y+20,Object.assign({},HNPC.sage,{face:-1,armA:it.used?null:-2.2}));if(!it.used){ctx.font='22px serif';ctx.fillText('❓',it.x,it.y-58+bob);}}
   else if(it.type==='food'){ctx.fillStyle='rgba(255,255,255,.7)';ctx.beginPath();ctx.arc(it.x,it.y+bob,20,0,7);ctx.fill();ctx.font='26px serif';ctx.fillText(it.f[0],it.x,it.y+bob+9);}
-  else if(it.type==='kid'){if(!h.popped){const k5=h.freed?Math.min(1,(h.t-h.freedAt)/1.4):0;if(k5>0){ctx.strokeStyle='#fff';ctx.lineWidth=2;for(let c5=0;c5<Math.floor(k5*7);c5++){const a5=c5*.9;ctx.beginPath();ctx.moveTo(it.x+Math.cos(a5)*14,it.y-6+Math.sin(a5)*14);ctx.lineTo(it.x+Math.cos(a5)*40,it.y-6+Math.sin(a5)*40);ctx.stroke();}}ctx.fillStyle='rgba(200,215,255,.45)';ctx.beginPath();ctx.arc(it.x,it.y-6,38,0,7);ctx.fill();ctx.strokeStyle='rgba(255,255,255,.9)';ctx.lineWidth=3;ctx.stroke();drawP(ctx,it.x,it.y+20,famLook(it.k,{s:.42,face:-1}));ctx.font='16px serif';ctx.fillText('💤',it.x+24,it.y-34+bob);}
-   else{drawP(ctx,it.x,it.y+20+Math.min(0,Math.sin(h.t*8)*10),famLook(it.k,{s:.5,face:-1,armA:-2.4}));ctx.font='20px serif';ctx.fillText('🎉',it.x,it.y-46);}}}
+  else if(it.type==='kid'){if(!h.popped){const k5=h.freed?Math.min(1,(h.t-h.freedAt)/1.4):0;if(k5>0){ctx.strokeStyle='#fff';ctx.lineWidth=2;for(let c5=0;c5<Math.floor(k5*7);c5++){const a5=c5*.9;ctx.beginPath();ctx.moveTo(it.x+Math.cos(a5)*14,it.y-6+Math.sin(a5)*14);ctx.lineTo(it.x+Math.cos(a5)*40,it.y-6+Math.sin(a5)*40);ctx.stroke();}}ctx.fillStyle='rgba(200,215,255,.45)';ctx.beginPath();ctx.arc(it.x,it.y-6,38,0,7);ctx.fill();ctx.strokeStyle='rgba(255,255,255,.9)';ctx.lineWidth=3;ctx.stroke();drawP(ctx,it.x,it.y+20,genLook(h.D.w,{s:.42,face:-1}));ctx.font='16px serif';ctx.fillText('💤',it.x+24,it.y-34+bob);}
+   else{drawP(ctx,it.x,it.y+20+Math.min(0,Math.sin(h.t*8)*10),genLook(h.D.w,{s:.5,face:-1,armA:-2.4}));ctx.font='20px serif';ctx.fillText('🎉',it.x,it.y-46);}}}
  for(const it of M.items)if(it.type==='lamp'&&it.got&&it.x>cam-80&&it.x<cam+W+80){const g=ctx.createRadialGradient(it.x,it.y-55,2,it.x,it.y-55,60);g.addColorStop(0,'rgba(255,230,120,.9)');g.addColorStop(1,'rgba(255,230,120,0)');ctx.fillStyle=g;ctx.beginPath();ctx.arc(it.x,it.y-55,60,0,7);ctx.fill();}
  for(const e of M.ents){if(!e.alive||e.x+e.w<cam-80||e.x>cam+W+80)continue;if(e.type==='boss')drawYBoss(e,h.t);else drawYetzer(e,h.t);}
  for(const q of h.proj){ctx.fillStyle='rgba(255,255,255,.6)';ctx.beginPath();ctx.arc(q.x,q.y,15,0,7);ctx.fill();ctx.font='22px serif';ctx.textAlign='center';ctx.fillText(q.ic,q.x,q.y+8);}
@@ -2784,22 +2825,22 @@ const CASES=[
     {l:'לְדַבֵּר עִם הָאוֹפֶה',t:'הָאוֹפֶה: "יֶלֶד קָטָן וּמָתוֹק קָנָה פֹּה רוּגָלָךְ לִפְנֵי שָׁעָה. הָיְתָה לוֹ שַׂקִּית שְׁחוֹרָה גְּדוֹלָה, וְהוּא אָמַר שֶׁהוּא מְמַהֵר לְבֵית הַכְּנֶסֶת!"',c:'יֶלֶד קָטָן עִם שַׂקִּית שְׁחוֹרָה מִהֵר לְבֵית הַכְּנֶסֶת'},
     {l:'לִבְדֹּק אֶת הֶחָתוּל',t:'הֶחָתוּל אוֹכֵל רוּגָלָךְ שֶׁנָּפַל. "מִיאוּ" – הוּא לֹא נִרְאֶה כְּמוֹ גַּנָּב תְּפִלִּין...',c:'הֶחָתוּל רַק אָכַל פֵּרוּרִים'}]},
    shul:{n:'בֵּית הַכְּנֶסֶת',sc:'shul',a:[
-    {l:'לְדַבֵּר עִם סַבָּא מֹשֶׁה',r:['מָה אוֹמְרִים כְּשֶׁמַּנִּיחִים תְּפִלִּין?','"שְׁמַע יִשְׂרָאֵל"','שִׁיר יוֹם הֻלֶּדֶת','כְּלוּם'],t:'סַבָּא מֹשֶׁה: "שָׁכַחְתִּי אֶת הַתְּפִלִּין שֶׁלִּי בַּבַּיִת... וּפִתְאוֹם בָּא נֶכֶד מָתוֹק עִם שַׂקִּית – וְאָמַר שֶׁשִּׁמְעוֹן תָּמִיד עוֹזֵר לְכָל יְהוּדִי!"',c:'סַבָּא מֹשֶׁה קִבֵּל תְּפִלִּין מִנֶּכֶד קָטָן'},
-    {l:'לִבְדֹּק אֶת הַסַּפְסָל',t:'עַל הַסַּפְסָל – שַׂקִּית תְּפִלִּין שְׁחוֹרָה, וּפֶתֶק בִּכְתַב יָד שֶׁל יֶלֶד: "לְסַבָּא – מִבֶּנִי" ❤️',c:'פֶּתֶק: "לְסַבָּא – מִבֶּנִי"'}]}},
-  q:'מִי לָקַח אֶת הַתְּפִלִּין – וְלָמָּה?',opts:['הֶחָתוּל – כִּי אָהַב אֶת הָרֵיחַ','בֶּנִי – כְּדֵי שֶׁסַּבָּא מֹשֶׁה יוּכַל לְהָנִיחַ תְּפִלִּין','גַּנָּב מֵהַשּׁוּק – כְּדֵי לִמְכֹּר אוֹתָן'],ans:1,
-  end:[['benny','רָאִיתִי שֶׁסַּבָּא מֹשֶׁה עָצוּב שֶׁשָּׁכַח תְּפִלִּין... רָצִיתִי לַעֲשׂוֹת מִצְוָה!'],['shimon','אַחְלָה בֶּנִי! רַעְיוֹן נֶהְדָּר – אֲבָל בַּפַּעַם הַבָּאָה שׁוֹאֲלִים קֹדֶם.']],lesson:'לֹא לוֹקְחִים בְּלִי רְשׁוּת – גַּם כְּשֶׁרוֹצִים לַעֲשׂוֹת מִצְוָה. שׁוֹאֲלִים, וְאָז עוֹשִׂים בְּיַחַד!'},
+    {l:'לְדַבֵּר עִם סַבָּא מֹשֶׁה',r:['מָה אוֹמְרִים כְּשֶׁמַּנִּיחִים תְּפִלִּין?','"שְׁמַע יִשְׂרָאֵל"','שִׁיר יוֹם הֻלֶּדֶת','כְּלוּם'],t:'סַבָּא מֹשֶׁה: "שָׁכַחְתִּי אֶת הַתְּפִלִּין שֶׁלִּי בַּבַּיִת... וּפִתְאוֹם בָּא הַנֶּכֶד שֶׁלִּי, יוֹסִי, עִם שַׂקִּית – וְאָמַר שֶׁשִּׁמְעוֹן תָּמִיד עוֹזֵר לְכָל יְהוּדִי!"',c:'סַבָּא מֹשֶׁה קִבֵּל תְּפִלִּין מִנֶּכֶד קָטָן'},
+    {l:'לִבְדֹּק אֶת הַסַּפְסָל',t:'עַל הַסַּפְסָל – שַׂקִּית תְּפִלִּין שְׁחוֹרָה, וּפֶתֶק בִּכְתַב יָד שֶׁל יֶלֶד: "לְסַבָּא – מִיּוֹסִי" ❤️',c:'פֶּתֶק: "לְסַבָּא – מִיּוֹסִי"'}]}},
+  q:'מִי לָקַח אֶת הַתְּפִלִּין – וְלָמָּה?',opts:['הֶחָתוּל – כִּי אָהַב אֶת הָרֵיחַ','יוֹסִי הַנֶּכֶד – כְּדֵי שֶׁסַּבָּא מֹשֶׁה יוּכַל לְהָנִיחַ תְּפִלִּין','גַּנָּב מֵהַשּׁוּק – כְּדֵי לִמְכֹּר אוֹתָן'],ans:1,
+  end:[['shimon','יוֹסִי רָאָה שֶׁסַּבָּא מֹשֶׁה עָצוּב, וְרָצָה לַעֲשׂוֹת מִצְוָה. רַעְיוֹן נֶהְדָּר – רַק בַּפַּעַם הַבָּאָה שׁוֹאֲלִים קֹדֶם!'],['rabbi','וּבֶאֱמֶת, עַכְשָׁו סַבָּא מֹשֶׁה מֵנִיחַ תְּפִלִּין בְּשִׂמְחָה! 💛']],lesson:'לֹא לוֹקְחִים בְּלִי רְשׁוּת – גַּם כְּשֶׁרוֹצִים לַעֲשׂוֹת מִצְוָה. שׁוֹאֲלִים, וְאָז עוֹשִׂים בְּיַחַד!'},
  {t:'הַסְּבִיבוֹן הַזָּהֹב',ic:'🌀',intro:'בִּמְסִבַּת חֲנֻכָּה נֶעֱלַם הַסְּבִיבוֹן הַזָּהֹב שֶׁל סַבָּא – בְּדִיּוּק לִפְנֵי הַתַּחֲרוּת! 🔍',start:'living',need:4,
   locs:{living:{n:'הַסָּלוֹן',sc:'party',a:[
     {l:'לִבְדֹּק אֶת שֻׁלְחַן הַמִּשְׂחָק',t:'עַל הַשֻּׁלְחָן – מַטְבְּעוֹת שׁוֹקוֹלָד, וְאַבְקַת סֻכָּר לְבָנָה...',c:'אַבְקַת סֻכָּר עַל שֻׁלְחַן הַמִּשְׂחָק'},
     {l:'לְדַבֵּר עִם דְּבוֹרָה',w:'dvora',t:'סִבַּבְתִּי אֶת הַסְּבִיבוֹן אַחֲרוֹנָה! הוּא נָפַל עַל "ג" וְקָפַץ לְכִוּוּן הַמִּטְבָּח!',c:'הַסְּבִיבוֹן קָפַץ לְכִוּוּן הַמִּטְבָּח'},
     {l:'לִבְדֹּק אֶת הָעֲקֵבוֹת',r:['מָה כָּתוּב עַל סְבִיבוֹן בָּאָרֶץ?','נֵס גָּדוֹל הָיָה פֹּה','חַג שָׂמֵחַ לְכֻלָּם','שַׁבָּת שָׁלוֹם'],t:'עֲקֵבוֹת חָתוּל לְיַד הַסַּפָּה... אֲבָל הֵן הוֹלְכוֹת לַחַלּוֹן, לֹא לַמִּטְבָּח.',c:'עֲקֵבוֹת הֶחָתוּל הוֹלְכוֹת לַחַלּוֹן'}]},
    kitchen:{n:'הַמִּטְבָּח',sc:'home',a:[
-    {l:'לְדַבֵּר עִם הָרַבָּנִית',w:'rebbetzin',t:'אֲנִי מְטַגֶּנֶת סֻפְגָּנִיּוֹת כָּל הָעֶרֶב! נוֹעָה עָזְרָה לִי לְפַזֵּר אַבְקַת סֻכָּר עַל הַמַּגָּשׁ.',c:'נוֹעָה פִּזְּרָה אַבְקַת סֻכָּר עַל מַגַּשׁ הַסֻּפְגָּנִיּוֹת'},
+    {l:'לְדַבֵּר עִם הָרַבָּנִית',w:'rebbetzin',t:'אֲנִי מְטַגֶּנֶת סֻפְגָּנִיּוֹת כָּל הָעֶרֶב! שָׂרָה, הַבַּת שֶׁל הַשְּׁכֵנִים, עָזְרָה לִי לְפַזֵּר אַבְקַת סֻכָּר עַל הַמַּגָּשׁ.',c:'שָׂרָה פִּזְּרָה אַבְקַת סֻכָּר עַל מַגַּשׁ הַסֻּפְגָּנִיּוֹת'},
     {l:'לִבְדֹּק אֶת הַמַּגָּשׁ',r:['כַּמָּה לֵילוֹת חוֹגְגִים חֲנֻכָּה?','שְׁמוֹנָה','שִׁבְעָה','עֶשֶׂר'],t:'בְּתוֹךְ הַמַּגָּשׁ, בֵּין הַסֻּפְגָּנִיּוֹת – מַשֶּׁהוּ זָהֹב וְנוֹצֵץ! 🌟',c:'מַשֶּׁהוּ זָהֹב בְּתוֹךְ מַגַּשׁ הַסֻּפְגָּנִיּוֹת'}]},
    yard:{n:'הֶחָצֵר',sc:'yard',a:[
     {l:'לִבְדֹּק אֶת הֶחָתוּל',t:'הֶחָתוּל יָשֵׁן עַל אֶדֶן הַחַלּוֹן, מְחַבֵּק... גֶּרֶב. אֵין לוֹ סְבִיבוֹן.',c:'לַחָתוּל אֵין סְבִיבוֹן – רַק גֶּרֶב'}]}},
-  q:'אֵיפֹה הַסְּבִיבוֹן הַזָּהֹב?',opts:['הֶחָתוּל הֶחְבִּיא אוֹתוֹ בֶּחָצֵר','הוּא קָפַץ לְתוֹךְ מַגַּשׁ הַסֻּפְגָּנִיּוֹת','דְּבוֹרָה לָקְחָה אוֹתוֹ הַבַּיְתָה'],ans:1,
-  end:[['noa','אוּפְּס! לֹא רָאִיתִי שֶׁהוּא נָפַל לַמַּגָּשׁ כְּשֶׁפִּזַּרְתִּי סֻכָּר!'],['rebbetzin','נֵס גָּדוֹל הָיָה פֹּה – הַסְּבִיבוֹן נִמְצָא, וְהַסֻּפְגָּנִיּוֹת טְעִימוֹת!']],lesson:'לֹא מַאֲשִׁימִים מַהֵר – אֲפִלּוּ לֹא אֶת הֶחָתוּל! בּוֹדְקִים אֶת כָּל הָרְאָיוֹת: "הֱוֵי דָן אֶת כָּל הָאָדָם לְכַף זְכוּת".'},
+  q:'אֵיפֹה הַסְּבִיבוֹן הַזָּהֹב?',opts:['הֶחָתוּל הֶחְבִּיא אוֹתוֹ בֶּחָצֵר','הוּא קָפַץ לְתוֹךְ מַגַּשׁ הַסֻּפְגָּנִיּוֹת','מִישֶׁהוּ מֵהָאוֹרְחִים לָקַח אוֹתוֹ הַבַּיְתָה'],ans:1,
+  end:[['dvora','שָׂרָה לֹא רָאֲתָה שֶׁהוּא נָפַל לַמַּגָּשׁ כְּשֶׁפִּזְּרָה סֻכָּר – זֶה יָכוֹל לִקְרוֹת לְכֻלָּם!'],['rebbetzin','נֵס גָּדוֹל הָיָה פֹּה – הַסְּבִיבוֹן נִמְצָא, וְהַסֻּפְגָּנִיּוֹת טְעִימוֹת!']],lesson:'לֹא מַאֲשִׁימִים מַהֵר – אֲפִלּוּ לֹא אֶת הֶחָתוּל! בּוֹדְקִים אֶת כָּל הָרְאָיוֹת: "הֱוֵי דָן אֶת כָּל הָאָדָם לְכַף זְכוּת".'},
  {t:'הַנַּיֶּדֶת שֶׁל יְחִיאֵל',ic:'🚓',intro:'הַפַּעַם הַתַּעֲלוּמָה אִישִׁית: הַנַּיֶּדֶת הָאֲהוּבָה שֶׁל יְחִיאֵל נֶעֶלְמָה! 🔍',start:'room',need:4,
   locs:{room:{n:'הַחֶדֶר שֶׁל הַיְּלָדִים',sc:'home',a:[
     {l:'לִבְדֹּק אֶת אַרְגַּז הַצַּעֲצוּעִים',t:'בָּאַרְגַּז: קֻבִּיּוֹת, דֻּבִּי, מְכוֹנִית מֵרוֹץ... אֲבָל אֵין נַיֶּדֶת.',c:'הַנַּיֶּדֶת לֹא בָּאַרְגַּז'},
@@ -2808,19 +2849,19 @@ const CASES=[
     {l:'לִבְדֹּק אֶת דּוּכַן הַגְּלִידָה',r:['מָה מְבָרְכִים עַל גְּלִידָה?','שֶׁהַכֹּל','הָעֵץ','הַמּוֹצִיא'],t:'עַל הַדֶּלְפֵּק – כֶּתֶם גְּלִידַת תּוּת... וְסִימָנִים שֶׁל גַּלְגַּלִּים קְטַנִּים!',c:'סִימָנֵי גַּלְגַּלִּים קְטַנִּים בְּדוּכַן הַגְּלִידָה'},
     {l:'לְדַבֵּר עִם הַמַּדְרִיךְ מֶנְדִּי',w:'mendy',t:'מִישֶׁהוּ מָצָא צַעֲצוּעַ וְהֵבִיא לְ"פִּנַּת הָאֲבֵדוֹת" – כִּי זוֹ מִצְוַת הֲשָׁבַת אֲבֵדָה!',c:'מִישֶׁהוּ הֵבִיא צַעֲצוּעַ לְפִנַּת הָאֲבֵדוֹת'},
     {l:'לִבְדֹּק אֶת פִּנַּת הָאֲבֵדוֹת',r:['אֵיךְ קוֹרְאִים לַמִּצְוָה לְהַחְזִיר חֵפֶץ שֶׁאָבַד?','הֲשָׁבַת אֲבֵדָה','הַכְנָסַת אוֹרְחִים','בִּקּוּר חוֹלִים'],t:'בְּפִנַּת הָאֲבֵדוֹת: כּוֹבַע, בַּקְבּוּק מַיִם... וְנַיֶּדֶת כְּחֻלָּה־לְבָנָה עִם פֶּתֶק: "מָצָאתִי לְיַד הַגְּלִידָה – מִירִי" 🚓',c:'הַנַּיֶּדֶת בְּפִנַּת הָאֲבֵדוֹת – מִירִי מָצְאָה אוֹתָהּ'}]}},
-  q:'מָה קָרָה לַנַּיֶּדֶת?',opts:['דּוּבִי הִסְתִּיר אוֹתָהּ בַּתִּיק','יְחִיאֵל שָׁכַח אוֹתָהּ בְּדוּכַן הַגְּלִידָה, וּמִירִי הֶחְזִירָה אוֹתָהּ לְפִנַּת הָאֲבֵדוֹת','הַנַּיֶּדֶת נָסְעָה לְבַד לַתַּחֲנָה'],ans:1,
+  q:'מָה קָרָה לַנַּיֶּדֶת?',opts:['רוּחַ חֲזָקָה הֵעִיפָה אוֹתָהּ לַגַּג','הִיא נָפְלָה מֵהַתִּיק לְיַד דּוּכַן הַגְּלִידָה, וּמִירִי הֶחֱזִירָה אוֹתָהּ לְפִנַּת הָאֲבֵדוֹת','הַנַּיֶּדֶת נָסְעָה לְבַד לַתַּחֲנָה'],ans:1,
   end:[['yechiel','מִירִי עָשְׂתָה הֲשָׁבַת אֲבֵדָה! אֲנִי אֶקְנֶה לָהּ גְּלִידָה לְתוֹדָה.'],['shimon','אַחְלָה יְחִיאֵל – בַּלָּשׁ אֲמִתִּי!']],lesson:'כְּשֶׁמּוֹצְאִים מַשֶּׁהוּ – מַחְזִירִים לַבְּעָלִים. זוֹ מִצְוָה מֵהַתּוֹרָה: "הָשֵׁב תְּשִׁיבֵם".'},
  {t:'הַמַּפְתֵּחַ שֶׁל הַמִּינִיבּוּס',ic:'🔑',intro:'הַבֹּקֶר יוֹצְאִים לְמִבְצָעִים – אֲבָל הָרַב כֹּהֵן לֹא מוֹצֵא אֶת הַמַּפְתֵּחַ שֶׁל הַמִּינִיבּוּס! 🚐 הַבַּלָּשׁ יְחִיאֵל לְעֶזְרָה! 🔍',start:'bus',need:4,
   locs:{bus:{n:'הַמִּינִיבּוּס',sc:'bus',a:[
     {l:'לְדַבֵּר עִם הָרַב כֹּהֵן',w:'rabbi',t:'אֲנִי תָּמִיד תּוֹלֶה אֶת הַמַּפְתֵּחַ עַל הַוָּו לְיַד הַדֶּלֶת. אֶתְמוֹל בָּעֶרֶב חָזַרְנוּ מִמִּבְצָעִים, רוֹקַנְתִּי אֶת הַכִּיסִים... וְנָתַתִּי מַטְבְּעוֹת לִצְדָקָה.',c:'סַבָּא רוֹקֵן אֶת הַכִּיסִים וְנָתַן מַטְבְּעוֹת לִצְדָקָה'},
-    {l:'לִבְדֹּק אֶת הַמּוֹשָׁבִים',r:['מָה אוֹמְרִים כְּשֶׁיּוֹצְאִים לִנְסִיעָה מִחוּץ לָעִיר?','תְּפִלַּת הַדֶּרֶךְ','הַבְדָּלָה','קִדּוּשׁ'],t:'עַל הַמּוֹשָׁב – רַק עֲטִיפַת סֻכָּרִיָּה שֶׁל דּוּבִי וּ"תְּפִלַּת הַדֶּרֶךְ" מְנֻיֶּלֶת. אֵין מַפְתֵּחַ.',c:'הַמַּפְתֵּחַ לֹא בַּמִּינִיבּוּס'}]},
+    {l:'לִבְדֹּק אֶת הַמּוֹשָׁבִים',r:['מָה אוֹמְרִים כְּשֶׁיּוֹצְאִים לִנְסִיעָה מִחוּץ לָעִיר?','תְּפִלַּת הַדֶּרֶךְ','הַבְדָּלָה','קִדּוּשׁ'],t:'עַל הַמּוֹשָׁב – רַק עֲטִיפַת סֻכָּרִיָּה וְ"תְּפִלַּת הַדֶּרֶךְ" מְנֻיֶּלֶת. אֵין מַפְתֵּחַ.',c:'הַמַּפְתֵּחַ לֹא בַּמִּינִיבּוּס'}]},
    home:{n:'הַבַּיִת – לְיַד הַדֶּלֶת',sc:'home',a:[
     {l:'לִבְדֹּק אֶת הַוָּו',t:'הַוָּו רֵיק. מִתַּחְתָּיו עוֹמֶדֶת קֻפַּת הַצְּדָקָה הַכְּחֻלָּה – וְהִיא כְּבֵדָה מֵהָרָגִיל!',c:'קֻפַּת הַצְּדָקָה כְּבֵדָה מֵהָרָגִיל'},
     {l:'לְדַבֵּר עִם נוֹעָה',w:'noa',t:'אֲנִי אוֹסֶפֶת צְדָקָה כָּל יוֹם! אֶתְמוֹל סַבָּא נָתַן לִי יָד מְלֵאָה מַטְבְּעוֹת, שַׂמְתִּי הַכֹּל בַּקֻּפָּה – וּמַשֶּׁהוּ עָשָׂה "קְלִינְג" גָּדוֹל!',c:'מַשֶּׁהוּ גָּדוֹל עָשָׂה "קְלִינְג" בַּקֻּפָּה'}]},
    shul:{n:'בֵּית הַכְּנֶסֶת',sc:'shul',a:[
     {l:'לְדַבֵּר עִם הַגַּבַּאי',r:['כַּמָּה פְּעָמִים בַּיּוֹם מִתְפַּלְּלִים?','שָׁלוֹשׁ','פַּעַם אַחַת','עֶשֶׂר'],t:'הַגַּבַּאי: "הָרַב כֹּהֵן הָיָה פֹּה בְּשַׁחֲרִית. הוּא לֹא שָׁכַח כְּלוּם – בָּדַקְתִּי אֶת כָּל הַסַּפְסָלִים!"',c:'בְּבֵית הַכְּנֶסֶת לֹא נִשְׁאַר כְּלוּם'}]}},
-  q:'אֵיפֹה הַמַּפְתֵּחַ שֶׁל הַמִּינִיבּוּס?',opts:['נִשְׁאַר בְּבֵית הַכְּנֶסֶת','בְּתוֹךְ קֻפַּת הַצְּדָקָה – נָפַל יַחַד עִם הַמַּטְבְּעוֹת','דּוּבִי הֶחְבִּיא אוֹתוֹ בַּסֻּכָּרִיּוֹת'],ans:1,
-  end:[['noa','אוּפְּס! הַמַּפְתֵּחַ הִתְחַבֵּא בֵּין הַמַּטְבְּעוֹת שֶׁסַּבָּא נָתַן לִי! 😳'],['rabbi','מָצָאנוּ! וְהַמַּטְבְּעוֹת נִשְׁאָרוֹת לִצְדָקָה. כֻּלָּם לַמִּינִיבּוּס – יוֹצְאִים לְמִבְצָעִים! 🚐']],lesson:'לְכָל חֵפֶץ – מָקוֹם קָבוּעַ, וְכָךְ לֹא מְאַבְּדִים. וְהַצְּדָקָה? הִיא תָּמִיד מְבִיאָה בְּרָכָה – אֲפִלּוּ מַפְתֵּחַ אָבוּד! 😉'}];
+  q:'אֵיפֹה הַמַּפְתֵּחַ שֶׁל הַמִּינִיבּוּס?',opts:['נִשְׁאַר בְּבֵית הַכְּנֶסֶת','בְּתוֹךְ קֻפַּת הַצְּדָקָה – נָפַל יַחַד עִם הַמַּטְבְּעוֹת','נָפַל מִתַּחַת לַמּוֹשָׁב בַּמִּינִיבּוּס'],ans:1,
+  end:[['noa','וָואוּ! הַמַּפְתֵּחַ הִתְחַבֵּא בֵּין מַטְבְּעוֹת הַצְּדָקָה שֶׁסַּבָּא נָתַן לִי! 😄'],['rabbi','מָצָאנוּ! וְהַמַּטְבְּעוֹת נִשְׁאָרוֹת לִצְדָקָה. כֻּלָּם לַמִּינִיבּוּס – יוֹצְאִים לְמִבְצָעִים! 🚐']],lesson:'לְכָל חֵפֶץ – מָקוֹם קָבוּעַ, וְכָךְ לֹא מְאַבְּדִים. וְהַצְּדָקָה? הִיא תָּמִיד מְבִיאָה בְּרָכָה – אֲפִלּוּ מַפְתֵּחַ אָבוּד! 😉'}];
 function detMenu(){confirmLeave();R.scene='det';cab.classList.add('isMP');R.det={sc:'stand',npc:null};R.stage=0;const sv=S.det||{};
  bind({c:v=>detStart(+v),back:()=>arcadeScreen()});
  show(`<h2>🕵️ הַבַּלָּשׁ יְחִיאֵל</h2>${say('yechiel','שָׁלוֹם! אֲנִי יְחִיאֵל, בַּלָּשׁ פְּרָטִי (וּבַר מִצְוָה!). יֵשׁ לִי זְכוּכִית מַגְדֶּלֶת, מַחְבֶּרֶת – וְהַרְבֵּה סַבְלָנוּת. בּוֹאוּ נִפְתֹּר תַּעֲלוּמוֹת!')}
@@ -2848,7 +2889,7 @@ function detSolve(){const D=R.det,C=D.C;bind({s:v=>{D.tries++;if(+v===C.ans){con
 function drawDet(){const D=R.det||{sc:'stand'};const sc=D.sc;R.tod=null;
  if(sc==='home'||sc==='party'){drawHome();if(sc==='party'){drawBigMenorah(820,GY-130,5);for(const [x,c] of[[60,'#e2475e'],[95,'#2f80ed'],[880,'#ffc93c']]){ctx.fillStyle=c;ctx.beginPath();ctx.ellipse(x,120+Math.sin(R.t*2+x)*6,18,24,0,0,7);ctx.fill();}}}
  else if(sc==='camp')drawCampYard();
- else{const st=R.stage;R.stage=sc==='yard'?3:0;sky();R.stage=st;ctx.drawImage(bg,0,0,W,H);
+ else{const st=R.stage;R.stage=sc==='yard'?3:0;sky();R.stage=st;ctx.drawImage(bgT(),0,0,W,H);
   if(sc==='stand')drawStand(150);
   if(sc==='bus'){drawBus(560,H-6,[],1);}
   if(sc==='bakery'){drawStand(480,'מַאֲפִיָּה');ctx.font='26px serif';ctx.textAlign='center';ctx.fillText('🥐🥐',480,GY-64);ctx.save();ctx.translate(620,GY+10);drawObst({k:'cat',x:0},0);ctx.restore();}
@@ -3381,17 +3422,18 @@ function parentGate(ok){const a=6+Math.floor(Math.random()*4),b=6+Math.floor(Mat
  show(`<h2>🔐 כְּנִיסַת הוֹרִים</h2><p>כַּמָּה זֶה ${a} × ${b}?</p><p><input id="pgIn" type="number" inputmode="numeric" style="font-size:22px;width:120px;padding:6px;border:3px solid var(--ink);border-radius:10px"></p><div class="btns row"><button data-act="chk">כְּנִיסָה</button><button class="alt" data-act="back">בִּטּוּל</button></div>`);
  const i=$('pgIn');if(i){i.addEventListener('keydown',e=>{e.stopPropagation();if(e.key==='Enter')ACT.chk();});setTimeout(()=>i.focus(),50);}}
 function parentScreen(){confirmLeave();R.screen='parents';R.scene='show';R.stage=0;const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-i);return todayKey(d);});
- bind({rec:()=>recStudio(),exp:()=>exportSave(),imp:()=>importSave(),cf:v=>{PSET[v]=!PSET[v];savePSet();parentScreen();},hd:v=>{PSET.hand=v;savePSet();parentScreen();},lim:v=>{PSET.limit=+v;savePSet();parentScreen();},sh:()=>{PSET.shabbat=!PSET.shabbat;PSET.unlockS=false;savePSet();parentScreen();},back:()=>mapScreen()});
+ bind({rec:()=>recStudio(),exp:()=>exportSave(),imp:()=>importSave(),cf:v=>{PSET[v]=!PSET[v];savePSet();parentScreen();},vb:()=>{PSET.vib=PSET.vib===false;savePSet();parentScreen();},hd:v=>{PSET.hand=v;savePSet();parentScreen();},lim:v=>{PSET.limit=+v;savePSet();parentScreen();},sh:()=>{PSET.shabbat=!PSET.shabbat;PSET.unlockS=false;savePSet();parentScreen();},back:()=>mapScreen()});
  const rows=P.list.map(p=>{const st=p.id===P.cur?S:(lsGet2(KEY+'-'+p.id)||{});const t=Math.round(playSecs(st)/60),wk=Math.round(days.reduce((a,k)=>a+playSecs(st,k),0)/60);const rd=(st.read||{}).done||{};
   const weak=Object.keys((st.read||{}).err||{}).map(k=>[k,((st.read.err[k]||0)-((st.read.ok||{})[k]||0)*.5)]).filter(x=>x[1]>0&&/^[LVW]/.test(x[0])).sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0][0]==='V'&&VOW[x[0].slice(2)]?VOW[x[0].slice(2)].n[0]:x[0].slice(2));
   return `<div class="tile" style="align-items:stretch;text-align:right"><b>${p.name} ${p.level==='easy'?'(6–8)':'(9–12)'}</b><small>⏱️ הַיּוֹם: ${t} דַּק׳ · הַשָּׁבוּעַ: ${wk} דַּק׳<br>🗺️ מִבְצָעִים: ${Object.keys(st.done||{}).length}/13 · 🏅 מֶדַלְיוֹת: ${Object.keys(st.medals||{}).length} · 🔥 רֶצֶף: ${(st.streak||{}).n||0} · 🪙 ${st.coins||0}<br>📚 שִׁעוּרֵי קְרִיאָה: ${Object.keys(rd).length}/${RLES.length}${weak.length?` · עוֹד קָשֶׁה: <b class="rfont">${weak.join(' · ')}</b>`:''}</small></div>`;}).join('');
  show(`<h2>👨‍👩‍👧 מָסָךְ הוֹרִים</h2>${rows||'<p>עוֹד אֵין שַׂחְקָנִים.</p>'}
  <p><b>⏰ הַגְבָּלַת זְמַן מִשְׂחָק לְכָל יֶלֶד בְּיוֹם:</b></p><div class="btns row">${[0,20,30,45,60].map(m=>`<button class="small ${(PSET.limit||0)===m?'':'alt'}" data-act="lim" data-v="${m}">${m?m+' דַּק׳':'בְּלִי הַגְבָּלָה'}</button>`).join('')}</div>
  <p><b>🧸 נוֹחוּת לַיְּלָדִים:</b></p>
- <div class="btns row"><button class="small ${PSET.calm?'green':'alt'}" data-act="cf" data-v="calm">😌 מַצָּב רָגוּעַ${PSET.calm?' ✓':''}</button><button class="small ${PSET.slow?'green':'alt'}" data-act="cf" data-v="slow">🐢 מִשְׂחָקִים אִטִּיִּים${PSET.slow?' ✓':''}</button><button class="small ${PSET.big?'green':'alt'}" data-act="cf" data-v="big">🔘 כַּפְתּוֹרִים גְּדוֹלִים${PSET.big?' ✓':''}</button></div>
+ <div class="btns row"><button class="small ${PSET.calm?'green':'alt'}" data-act="cf" data-v="calm">😌 מַצָּב רָגוּעַ${PSET.calm?' ✓':''}</button><button class="small ${PSET.slow?'green':'alt'}" data-act="cf" data-v="slow">🐢 מִשְׂחָקִים אִטִּיִּים${PSET.slow?' ✓':''}</button><button class="small ${PSET.big?'green':'alt'}" data-act="cf" data-v="big">🔘 כַּפְתּוֹרִים גְּדוֹלִים${PSET.big?' ✓':''}</button><button class="small ${PSET.vib!==false?'green':'alt'}" data-act="vb">📳 רֶטֶט בַּטֶּלֶפוֹן${PSET.vib!==false?' ✓':''}</button></div>
  <div class="btns row">✋ יָד אַחַת: ${[['','כָּבוּי'],['r','יָמִין'],['l','שְׂמֹאל']].map(([v,l])=>`<button class="small ${(PSET.hand||'')===v?'':'alt'}" data-act="hd" data-v="${v}">${l}</button>`).join('')}</div>
  <p class="fact">💡 לִילָדִים עַד גִּיל 6 הַכַּפְתּוֹרִים גְּדוֹלִים אוֹטוֹמָטִית. כַּפְתּוֹר 🐢 לְמַעְלָה בִּזְמַן מִשְׂחָק מְאַט אֶת הַמִּשְׂחָק לְכָל יֶלֶד.</p>
  <p><b>🕯️ מַצַּב שַׁבָּת:</b> הַמִּשְׂחָק נִנְעָל מִיּוֹם שִׁשִּׁי בְּ־14:00 וְעַד מוֹצָאֵי שַׁבָּת בְּ־21:00 (לְפִי הַשָּׁעוֹן בַּמַּכְשִׁיר). <button class="small ${PSET.shabbat?'green':'alt'}" data-act="sh">${PSET.shabbat?'פּוֹעֵל ✓':'כָּבוּי'}</button></p>
+ <p class="fact" style="background:#fff3c4">🎙️ <b>הַקְלִיטוּ אֶת הַקּוֹלוֹת שֶׁל הַמִּשְׁפָּחָה!</b> בְּ"אוּלְפַּן הַהַקְלָטוֹת" אֶפְשָׁר לְהַקְלִיט מִשְׁפְּטֵי עִדּוּד וּשְׁמוֹת – וְהַמִּשְׂחָק יַשְׁמִיעַ אוֹתָם בִּמְקוֹם הַקּוֹל הַמְּמֻחְשָׁב. יְלָדִים מְאוֹד אוֹהֲבִים לִשְׁמֹעַ קוֹל מֻכָּר.</p>
  <p><b>💾 גִּבּוּי הַהִתְקַדְּמוּת</b> (לְהַעֲבָרָה לְמַחְשֵׁב אוֹ טֶלֶפוֹן אַחֵר):</p><div class="btns row"><button class="small" data-act="exp">💾 שְׁמִירַת גִּבּוּי</button><button class="small alt" data-act="imp">📂 טְעִינַת גִּבּוּי</button><button class="small alt" data-act="rec">🎙️ אוּלְפַּן הַקְלָטוֹת</button></div>
  <p class="fact">🔒 <b>פְּרָטִיּוּת:</b> הַמִּשְׂחָק לֹא אוֹסֵף וְלֹא שׁוֹלֵחַ שׁוּם מֵידָע. כָּל הַהִתְקַדְּמוּת, הַשֵּׁמוֹת וְהַהַקְלָטוֹת נִשְׁמָרִים רַק בַּמַּכְשִׁיר הַזֶּה. אֵין פִּרְסוֹמוֹת וְאֵין רְכִישׁוֹת.</p><div class="btns row"><button class="alt" data-act="back">חֲזָרָה לַמִּשְׂחָק</button></div>`);}
 /* ================= SHABBAT MODE ================= */
@@ -3920,7 +3962,7 @@ function appHome(){confirmLeave();cab.classList.add('isMP');R.scene='home';R.scr
  <div class="homeg homeg4">${HOME_BTN.map((b,i)=>`<button class="hbtn ${i===0&&!S.seenHome?'firstHint':''}" data-act="${b[0]}" style="--c:${b[3]}"><span>${b[1]}</span><b>${b[2]}</b>${i===0&&!S.seenHome?'<em class="hand" aria-hidden="true">👆</em>':''}</button>`).join('')}</div>
  <div class="btns row homesub"><button class="alt" data-act="arc">🎮 עוֹד מִשְׂחָקִים</button><button class="alt" data-act="daily">🌟 אֶתְגָּר הַיּוֹם${d&&d.done?' ✅':''}</button><button class="alt" data-act="say" aria-label="הַקְרָאָה">🔊</button></div>
  <button class="small alt calchip ttsSkip" data-act="cal">📅 ${hebStr(new Date(),true)}${n?' · '+n.H.ic+' '+n.H.n+' '+daysTxt(n.days):''}</button>`);if(!S.seenHome&&!appHome.said){appHome.said=1;setTimeout(()=>{try{if(R.screen==='home')speak([['לוֹחֲצִים עַל הַשָּׁלִיחַ הַגִּבּוֹר כְּדֵי לְהַתְחִיל!','shimon']]);}catch(e){}},700);}}
-function drawHomeScene(){const st=R.stage;R.stage=0;sky();R.stage=st;ctx.drawImage(bg,0,0,W,H);drawDecor&&0;
+function drawHomeScene(){const st=R.stage;R.stage=0;sky();R.stage=st;ctx.drawImage(bgT(),0,0,W,H);drawDecor&&0;
  const b=drawBus(W-260+Math.sin(R.t*2)*4,H-6,HELPERS.slice(0,4),1);const fam=['shimon','racheli',...HELPERS];fam.slice(0,7).forEach((k,i)=>{if(FAM[k])drawP(ctx,70+i*70,GY+8,famLook(k,{face:1,armA:i%2?-2.2+Math.sin(R.t*3+i)*.3:null}));});}
 /* ---- 770 hub (standalone game) ---- */
 function shlMenu(){confirmLeave();cab.classList.add('isMP');R.scene='shl';R.screen='shl';R.stage=0;R.sh={hub:1};const done=SH().c,n=shlCnt();const lv1=CITIES.filter(c=>c.lv===0).every(c=>done[c.id]);
@@ -3966,7 +4008,20 @@ function applyProfile(){const pr=curProfile();const i=HELPERS.indexOf('me');if(i
  try{makePortraits();}catch(e){}updMeBtn();applyComfort();}
 function updMeBtn(){const b=$('btnMe');if(b)b.textContent=FAM.me?'👤 '+FAM.me.name:'👤 שַׂחְקָנִים';}
 function useProfile(id){confirmLeave();ttsStop();P.cur=id;saveP();S=Object.assign(SDEF(),load()||{});applyProfile();updHud();}
-function startApp(){if(S.lvlBackup){S.level=S.lvlBackup;delete S.lvlBackup;save();}if(shabbatNow()&&!PSET.unlockS){shabbatScreen();return;}if(!P.list.length){welcomeScreen();return;}if(P.list.length>1||!curProfile()){whoScreen();return;}useProfile(P.cur);appHome();}
+let OPENED=false;
+function openingStart(){OPENED=true;confirmLeave();R.scene='opening';R.screen='opening';R.stage=0;R.op={t:0,go:-1};cab.classList.add('opening','isMP');
+ bind({go:()=>{if(!R.op||R.op.go>=0)return;R.op.go=0;hide();try{sfx.big();}catch(e){}beep(392,.15,'square',.05);beep(392,.2,'square',.05,.22);confetti(160);}});
+ setTimeout(()=>{if(R.scene==='opening'&&R.op&&R.op.go<0)show('<div class="btns" style="justify-content:center"><button class="openbtn" data-act="go">🚐 יוֹצְאִים לְמִבְצָעִים!</button></div>',true);},900);}
+function drawOpening(){const o=R.op;if(!o)return;o.t+=1/60;if(o.go>=0)o.go+=1/60;const t=o.t;
+ const g=ctx.createLinearGradient(0,0,0,GY);const k=Math.min(1,t/2.5);g.addColorStop(0,`rgb(${Math.round(255-145*k)},${Math.round(170+15*k)},${Math.round(120+120*k)})`);g.addColorStop(1,`rgb(255,${Math.round(220+12*k)},${Math.round(180+70*k)})`);ctx.fillStyle=g;ctx.fillRect(0,0,W,GY);
+ ctx.fillStyle='#ffe07a';ctx.beginPath();ctx.arc(840,140-k*70,40,0,7);ctx.fill();ctx.drawImage(bg,0,0,W,H);
+ const ease=x=>1-Math.pow(1-Math.max(0,Math.min(1,x)),3);let bx=W+420-ease(t/2.4)*(W/2+420);if(o.go>=0)bx-=o.go*o.go*900;
+ const L=drawBus(bx,H-6,['dobi','rivkush','dvora','benny','noa'],1.08);drawPolice(bx+L/2+100,H-6);
+ if(t<2.4||o.go>=0){for(let i=0;i<3;i++){ctx.fillStyle='rgba(200,190,170,.5)';ctx.beginPath();ctx.arc(bx+L/2+20+i*22,H-20-i*4,10+i*4,0,7);ctx.fill();}}
+ const ty=ease((t-1)/0.9);ctx.save();ctx.translate(W/2,-90+ty*190);ctx.rotate(Math.sin(t*2)*.012);ctx.fillStyle='#1e3a5f';ctx.strokeStyle='#ffc93c';ctx.lineWidth=6;rr(ctx,-300,-60,600,110,28);ctx.fill();ctx.stroke();
+ ctx.fillStyle='#ffc93c';ctx.font='900 54px '+FONT;ctx.textAlign='center';ctx.direction='rtl';ctx.fillText('🦸 גִּבּוֹר הַמִּבְצָעִים',0,10);ctx.fillStyle='#fff';ctx.font='800 19px '+FONT;ctx.fillText('יוֹצְאִים לְמִבְצָעִים עִם כָּל הַמִּשְׁפָּחָה!',0,40);ctx.restore();
+ if(o.go>1.7){R.op=null;cab.classList.remove('opening');startApp();}}
+function startApp(){if(!OPENED){openingStart();return;}if(S.lvlBackup){S.level=S.lvlBackup;delete S.lvlBackup;save();}if(shabbatNow()&&!PSET.unlockS){shabbatScreen();return;}if(!P.list.length){welcomeScreen();return;}if(P.list.length>1||!curProfile()){whoScreen();return;}useProfile(P.cur);appHome();}
 function welcomeScreen(){confirmLeave();R.screen='who';R.scene='show';R.stage=0;const old=lsGet2(KEY);
  bind({reg:()=>ccScreen()});
  show(`<div class="yechi ttsSkip">👑 יְחִי הַמֶּלֶךְ הַמָּשִׁיחַ! 👑</div><h2>👋 בְּרוּכִים הַבָּאִים!</h2>${say('shimon',hi()+' '+'שָׁלוֹם! לִפְנֵי שֶׁיּוֹצְאִים לְמִבְצָעִים – בּוֹאוּ נִרְשֹׁם וְנִבְנֶה לָכֶם דְּמוּת מִשֶּׁלָּכֶם. הִיא תִּצְטָרֵף לַמִּשְׁפָּחָה בְּכָל הַמִּשְׂחָקִים!')}
@@ -4152,6 +4207,7 @@ $('btnMe').onclick=()=>{sfx.click();P.list.length?whoScreen():welcomeScreen();};
 $('btnCal').onclick=()=>{sfx.click();calScreen();};
 $('btnMedal').onclick=()=>{sfx.click();P.cur?medalScreen():welcomeScreen();};
 $('btnPar').onclick=()=>{sfx.click();parentGate(parentScreen);};
+card.addEventListener('click',e=>{const f=e.target.closest&&e.target.closest('.fact');if(f&&cab.classList.contains('compact'))f.classList.toggle('open');});
 $('slowBtn').onclick=()=>{R.slowLive=!R.slowLive;beep(R.slowLive?300:600,.12,'sine',.05);applyComfort();};
 document.addEventListener('visibilitychange',()=>{if(document.hidden){try{pauseGame();}catch(e){}}last=performance.now();});
 (()=>{let sx=0,sy=0;const g=$('game');g.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;});g.addEventListener('pointerup',e=>{if(R.scene!=='runner'||!R.run||R.run.over||!panel.hidden)return;const dy=e.clientY-sy,dx=e.clientX-sx;if(Math.abs(dy)>30&&Math.abs(dy)>Math.abs(dx))runnerLane(dy<0?0:1);});})();
@@ -4195,7 +4251,7 @@ $('ru').addEventListener('pointerdown',e=>{e.preventDefault();runnerLane(0);});$
 
 /* ================= LOOP ================= */
 let last=performance.now();
-function frame(now){const dt0=Math.min(.05,(now-last)/1000);const dt=dt0*((PSET.slow||R.slowLive)&&cab.classList.contains('playing')?.65:1);last=now;R.t+=dt;if(PAD_SCENES.includes(R.scene)&&cab.classList.contains('isMP'))cab.classList.remove('isMP');{const pl=CLEAN&&panel.hidden&&!R.paused&&(PAD_SCENES.includes(R.scene)||PAUSE_SCENES.includes(R.scene));if(pl!==cab.classList.contains('playing'))cab.classList.toggle('playing',pl);}
+function frame(now){const dt0=Math.min(.05,(now-last)/1000);const dt=dt0*((PSET.slow||R.slowLive)&&cab.classList.contains('playing')?.65:1);last=now;R.t+=dt;if(PAD_SCENES.includes(R.scene)&&cab.classList.contains('isMP'))cab.classList.remove('isMP');{const pl=CLEAN&&panel.hidden&&!R.paused&&(PAD_SCENES.includes(R.scene)||PAUSE_SCENES.includes(R.scene));if(pl!==cab.classList.contains('playing'))cab.classList.toggle('playing',pl);keyHint(pl);}
  cab.classList.toggle('canPause',PAUSE_SCENES.includes(R.scene)&&panel.hidden&&!R.paused);
  if(!R.paused){
  if(R.scene==='street')updateStreet(dt);
@@ -4223,7 +4279,7 @@ function frame(now){const dt0=Math.min(.05,(now-last)/1000);const dt=dt0*((PSET.
  ctx.clearRect(0,0,W,H);
  if(R.scene==='street')drawStreetScene();
  else if(R.scene==='catch')drawCatchScene();
- else if(R.scene==='bus'){sky();ctx.drawImage(bg,0,0,W,H);if(R.stage!==7)drawDecor();const L=drawBus(R.busX,H-6,R.team,1.12);if(has('yechiel')||R.stage===13)drawPolice(R.busX+L/2+95,H-6);
+ else if(R.scene==='bus'){sky();ctx.drawImage(bgT(),0,0,W,H);if(R.stage!==7)drawDecor();const L=drawBus(R.busX,H-6,R.team,1.12);if(has('yechiel')||R.stage===13)drawPolice(R.busX+L/2+95,H-6);
   if(Math.abs(R.busX-W/2)>20){for(let i=0;i<3;i++){ctx.fillStyle='rgba(200,190,170,.5)';ctx.beginPath();ctx.arc(R.busX+L/2+20+i*22,H-20-i*4,10+i*4,0,7);ctx.fill();}}}
  else if(R.scene==='rhythm')drawRhythm();
  else if(R.scene==='drop')drawDropScene();
@@ -4239,6 +4295,7 @@ function frame(now){const dt0=Math.min(.05,(now-last)/1000);const dt=dt0*((PSET.
  else if(R.scene==='bounce')drawBounce();
  else if(R.scene==='camp')drawCampYard();
  else if(R.scene==='route')drawRouteScene();
+ else if(R.scene==='opening')drawOpening();
  else drawShowScene();
  for(const f of fl){f.life-=dt;f.y-=30*dt;ctx.globalAlpha=Math.min(1,f.life);ctx.font='800 20px '+FONT;ctx.textAlign='center';ctx.direction='rtl';ctx.lineWidth=5;ctx.strokeStyle='#111';ctx.strokeText(f.t,f.x,f.y);ctx.fillStyle=f.c;ctx.fillText(f.t,f.x,f.y);}
  ctx.globalAlpha=1;for(let i=fl.length-1;i>=0;i--)if(fl[i].life<=0)fl.splice(i,1);
