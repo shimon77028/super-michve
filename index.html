@@ -123,6 +123,43 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 #card p,#card .say{font-size:max(17px,1em)}
 #card small{font-size:max(14px,.82em)}
 #card button{min-height:48px}
+#card p,#card .say{font-weight:600;color:#1a1410}
+#card.wide{max-width:min(1180px,97%)!important;width:97%}
+#card.wide .grid,#card.wide .ggrid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))!important}
+#card.tight{gap:4px!important;padding:8px 10px!important}
+#card.tight .tile{padding:6px!important;gap:2px!important;line-height:1.4}
+#card.tight .tile .ic,#card.tight .gtile span{font-size:26px!important}
+#card.tight .say{padding:5px 10px!important}
+#card.tight button{min-height:40px}
+#card.tight h2{margin:0!important}
+#card.tight .gtile{padding:4px!important;min-height:0!important}
+#card.tight .ghead{margin:2px 0!important;font-size:1em}
+#card.tight2 .tile small,#card.tight2 .gtile small{display:none}
+#card.tight2.wide .say,#card.tight2.wide .who,#card.tight2.wide .yechi{display:none}
+#card.tight2 h2{font-size:1.15em!important}
+#card.tight2 .tile{flex-direction:row!important;align-items:center!important;justify-content:space-between}
+#card.tight2 .tile img{width:30px!important;height:30px!important}
+#card.tight2 .gtile{flex-direction:row!important;gap:8px!important;min-height:46px!important;padding:2px 8px!important}
+#card.tight2 .gtile span{font-size:22px!important}
+#card.tight2 .ggrid{gap:6px!important;grid-template-columns:repeat(auto-fill,minmax(130px,1fr))!important}
+#card.tight2 .ghead{font-size:15px!important;margin:0!important}
+#card.tight2 .tile{min-height:44px!important;padding:4px 8px!important}
+#card.tight2 .howgrid{gap:6px!important;margin:3px 0!important}
+#card.tight2 .howk{padding:4px 8px!important;gap:2px!important;min-height:0!important}
+#card.tight2 .howk .kc{min-width:34px!important;height:34px!important;font-size:18px!important;padding:0 4px!important}
+#card .grps{display:flex;flex-wrap:wrap;gap:4px 14px}
+#card .grp{flex-grow:1;min-width:150px}
+#card.tight2 .grid .tile{position:relative}
+#card.tight2 .grid .tile button[data-act="go"]{position:absolute!important;inset:0;width:100%;height:100%;opacity:0;margin:0!important}
+#card.tight2 .grid .tile.lock{opacity:.55}
+#card.tight2 .grid{gap:6px!important;grid-template-columns:repeat(auto-fill,minmax(145px,1fr))!important}
+#card.tight2 .hmb{flex-direction:row!important;min-height:46px!important;padding:4px 10px!important;gap:8px!important}
+#card.tight2 .hmb span{font-size:24px!important}
+#card.tight2 .hmain{gap:6px!important;margin:4px 0!important}
+#card.tight2 .tile button{min-height:36px!important;padding:2px 10px!important;font-size:.92em!important}
+#card.tight2 .hello{margin:0!important}
+#card.tight2 .big1{min-height:46px!important;padding:4px 16px!important}
+#card.tight2 .mlab{display:none}
 #card .btns button.alt,#card .qbtns button{min-height:54px;font-size:max(17px,1.05em)}
 .compact #card .fact{max-height:3.6em;overflow:hidden;position:relative;cursor:pointer}
 .compact #card .fact::after{content:'⬇ עוֹד';position:absolute;left:4px;bottom:0;background:#fff8e8;padding:0 6px;border-radius:8px;font-size:13px;font-weight:800}
@@ -596,7 +633,10 @@ function addPts(n){S.points+=n;R.stagePts+=n;save();}
 function mitzvaCoins(){let c=5;if(has('benny'))c+=2;if(has('noa'))c+=2;return c;}
 
 /* ================= UI HELPERS ================= */
-function show(html,low=false){card.innerHTML=html;panel.classList.toggle('low',low===true||low==='low');panel.classList.toggle('top',low==='top');panel.hidden=false;const b=card.querySelector('button');if(b)b.focus({preventScroll:true});ttsAfterShow();}
+function show(html,low=false){card.innerHTML=html;panel.classList.toggle('low',low===true||low==='low');panel.classList.toggle('top',low==='top');panel.hidden=false;const b=card.querySelector('button');if(b)b.focus({preventScroll:true});fitCard();requestAnimationFrame(fitCard);ttsAfterShow();}
+function fitCard(){try{const c=card;if(panel.hidden)return;c.classList.remove('wide','tight','tight2');c.style.fontSize='';const over=()=>c.scrollHeight>c.clientHeight+3;if(!over())return;
+ if(c.querySelector('.grid,.ggrid,.howgrid'))c.classList.add('wide');if(!over())return;let fs=parseFloat(getComputedStyle(c).fontSize)||18;while(over()&&fs>15){fs-=1;c.style.fontSize=fs+'px';}if(over())c.classList.add('tight');if(over()&&!/parentScreen|recStudio/.test(R.screen||'')){c.classList.add('tight2');while(over()&&fs>13){fs-=1;c.style.fontSize=fs+'px';}}}catch(e){}}
+addEventListener('resize',()=>requestAnimationFrame(fitCard));
 function hide(){panel.hidden=true;ttsStop();cab.classList.remove('ttsOn');}
 const say=(k,text)=>`<div class="who">${pimg(k)}<span>${FAM[k].name}</span></div><p class="say" data-k="${k}">${text}</p>`;
 let ACT={};
@@ -1386,7 +1426,7 @@ function arcadeScreen(msg=''){confirmLeave();R.screen='arcade';R.stage=0;R.scene
  const SHORT={shl:'שְׁלִיחוּת מִ־770',hero:'הַשָּׁלִיחַ הַגִּבּוֹר',kart:'קַרְטִינְג',sea:'יַם סוּף',det:'הַבַּלָּשׁ',runner:'מֵרוֹץ',stack:'מִגְדָּל',arena:'אֶחָד נֶגֶד הַשֵּׁנִי',camp:'הַקַּיְטָנָה',read:'קְרִיאָה',champ:'חִידוֹן',brachot:'בְּרָכוֹת',karaoke:'קָרִיּוֹקִי',challah:'חַלּוֹת',niggun:'נִגּוּנִים',dreidel:'סְבִיבוֹן',chametz:'חָמֵץ',shl:'770'};
  const HM=(()=>{try{return new Intl.DateTimeFormat('en-u-ca-hebrew',{month:'long'}).format(new Date());}catch(e){return'';}})();const SEAS=[];if(/Kislev|Tevet/.test(HM))SEAS.push('dreidel');if(/Adar|Nisan/.test(HM))SEAS.push('chametz');
  const GRP=[['🏃 עוֹד הַרְפַּתְקָאוֹת',['runner','sea','det','kart','shl']],['🏠 בַּיִת',['challah']],['👫 שְׁנַיִם עַל מָסָךְ אֶחָד',['arena']]].concat(SEAS.length?[['🕯️ לִכְבוֹד הֶחָג',SEAS]]:[]);
- show(`<h2 class="hello">🎮 עוֹד מִשְׂחָקִים</h2>${msg||''}${GRP.map(([h,ks])=>`<h3 class="ghead">${h}</h3><div class="ggrid">${ks.map(k=>{const g=G.find(x=>x.k===k);if(!g)return'';const pr=g.pr&&g.pr();return `<button class="gtile" data-act="play" data-v="${k}"><span>${g.ic}</span><b>${SHORT[k]||g.t}</b>${pr?`<small>${pr}</small>`:g.best&&bestOf(g.best)?`<small>🏆 ${bestOf(g.best)}</small>`:''}</button>`;}).join('')}</div>`).join('')}
+ show(`<h2 class="hello">🎮 עוֹד מִשְׂחָקִים</h2>${msg||''}<div class="grps">${GRP.map(([h,ks])=>`<div class="grp" style="flex-basis:${ks.length*175}px"><h3 class="ghead">${h}</h3><div class="ggrid">${ks.map(k=>{const g=G.find(x=>x.k===k);if(!g)return'';const pr=g.pr&&g.pr();return `<button class="gtile" data-act="play" data-v="${k}"><span>${g.ic}</span><b>${SHORT[k]||g.t}</b>${pr?`<small>${pr}</small>`:g.best&&bestOf(g.best)?`<small>🏆 ${bestOf(g.best)}</small>`:''}</button>`;}).join('')}</div></div>`).join('')}</div>
  <div class="btns row"><button class="alt" data-act="map">🏠 בַּיִת</button></div>`);}
 
 /* ---- champions quiz ---- */
