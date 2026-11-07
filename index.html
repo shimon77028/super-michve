@@ -159,6 +159,26 @@ html{overflow:hidden!important;height:100%}body{box-sizing:border-box;height:100
 ::-webkit-scrollbar{width:7px;height:0}::-webkit-scrollbar-button{display:none;width:0;height:0}::-webkit-scrollbar-thumb{background:rgba(201,162,39,.7);border-radius:8px}::-webkit-scrollbar-track,::-webkit-scrollbar-corner{background:transparent}
 #amb{position:fixed;inset:0;width:100%;height:100%;filter:blur(22px) brightness(.6) saturate(1.2);transform:scale(1.2);pointer-events:none;z-index:0;opacity:0;transition:opacity .4s}
 .cab{position:relative;z-index:1}
+.famcode{font:900 1.3em/1 ui-monospace,monospace;letter-spacing:2px;background:#fff6c8;border:3px dashed #c9a227;border-radius:12px;padding:4px 10px;display:inline-block}
+.famjoin input{font:800 18px ui-monospace,monospace;letter-spacing:2px;padding:8px 10px;border:3px solid var(--ink);border-radius:12px;width:min(260px,70vw);text-align:center;text-transform:uppercase}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:6px 0}
+.ptile{position:relative;display:flex}.ptile .pmain{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 6px!important;background:#fff!important;border:4px solid var(--pc,#c9a227)!important;border-radius:20px!important;min-height:150px}
+.ptile.on .pmain{background:#fff6c8!important;box-shadow:0 0 0 4px #ffd400,0 5px 0 var(--ink)!important}
+.ptile .pmain img{width:74px;height:74px;border-radius:50%;background:#eaf3ff;border:3px solid var(--pc,#c9a227)}
+.ptile .pmain b{font-size:1.1em}.ptile .pmain small{font-size:.78em;line-height:1.35;color:#5a4a2a}
+.ptile .pedit{position:absolute;top:6px;left:6px;min-height:36px!important;padding:2px 8px!important}
+.ptile.add .pmain{border-style:dashed!important;background:#f3fff1!important}.padd{font-size:42px}
+#card.tight2 .ptile .pmain{min-height:0;padding:4px!important}#card.tight2 .ptile .pmain img{width:44px;height:44px}#card.tight2 .ptile .pmain small{display:none}
+.pchips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:0 0 4px}
+.pchip{display:inline-flex;align-items:center;gap:6px;padding:2px 10px 2px 4px!important;min-height:40px!important;border-radius:999px!important;border:3px solid var(--pc,#c9a227)!important;background:#fff!important;font-size:16px!important;box-shadow:0 3px 0 var(--ink)!important}
+.pchip img{width:32px;height:32px;border-radius:50%;background:#eaf3ff}
+.pchip.on{background:#fff6c8!important;box-shadow:0 0 0 3px #ffd400,0 3px 0 var(--ink)!important}
+.pchip.padd2{padding:2px 12px!important}
+.agebig{font-size:1.4em;min-width:2.4em;text-align:center;display:inline-block}
+.ccrow select{font:800 17px var(--font,inherit);padding:6px 8px;border:3px solid var(--ink);border-radius:12px;background:#fff;color:#1a1410;min-height:44px}
+.ccrow input{background:#fff!important;color:#1a1410!important}
+.ccs1 #ccPrev{display:none}.ccs1 .ccopts{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:8px 16px;align-items:center}.compact .ccs1 .ccopts{gap:2px 12px}.compact .ccs1 .sw{width:30px;height:30px}
+.ccstep{align-self:center;font-weight:800;color:#7a5a20}
 #card .grps{display:flex;flex-wrap:wrap;gap:4px 14px}
 #card .grp{flex-grow:1;min-width:150px}
 #card.tight2 .grid .tile{position:relative}
@@ -3522,8 +3542,26 @@ function parentGate(ok){const a=6+Math.floor(Math.random()*4),b=6+Math.floor(Mat
  bind({chk:()=>{const v=+($('pgIn')||{}).value;if(v===a*b){sfx.win();ok();}else{sfx.oops();floater(W/2,140,'לֹא נָכוֹן','#fff');}},back:()=>{R.screen==='rest'?restScreen():mapScreen();}});
  show(`<h2>🔐 כְּנִיסַת הוֹרִים</h2><p>כַּמָּה זֶה ${a} × ${b}?</p><p><input id="pgIn" type="number" inputmode="numeric" style="font-size:22px;width:120px;padding:6px;border:3px solid var(--ink);border-radius:10px"></p><div class="btns row"><button data-act="chk">כְּנִיסָה</button><button class="alt" data-act="back">בִּטּוּל</button></div>`);
  const i=$('pgIn');if(i){i.addEventListener('keydown',e=>{e.stopPropagation();if(e.key==='Enter')ACT.chk();});setTimeout(()=>i.focus(),50);}}
+
+const GHURL='https://shimon77028.github.io/super-michve/';
+function famScreen(msg){confirmLeave();R.screen='parents';R.scene='show';const c=famCode();
+ const joinUrl=(/^https?:/.test(location.protocol)&&!/claude|usercontent|anthropic/.test(location.host)?location.href.split('#')[0]:GHURL)+'#fam='+c;
+ bind({share:async()=>{try{if(navigator.share){await navigator.share({title:'גִּבּוֹר הַמִּבְצָעִים',text:'קוֹד מִשְׁפָּחָה: '+famFmt(c),url:joinUrl});return;}}catch(e){if(e&&e.name==='AbortError')return;}try{await navigator.clipboard.writeText(joinUrl);famScreen('📋 הַקִּשּׁוּר הוּעְתַּק');}catch(e){prompt('',joinUrl);}},
+  join:async()=>{const v=($('famIn')||{}).value;if(!v||v.replace(/[^A-Za-z0-9]/g,'').length<12){sfx.oops();famScreen('⚠️ קוֹד שֶׁל 12 תָּוִים');return;}famScreen('⏳');const ok=await famJoin(v);if(ok){sfx.win();celebrate('☁️ ✓',150,true);}famScreen(ok?(SYNC.cloud?'✅ מְחֻבָּרִים! הַשַּׂחְקָנִים אוּחֲדוּ':'⚠️ אֵין אִינְטֶרְנֶט – נְנַסֶּה שׁוּב אַחַר כָּךְ'):'⚠️ קוֹד לֹא תָּקִין');},
+  now:async()=>{famScreen('⏳');await syncPull(true);await syncPush();famScreen(SYNC.cloud?'✅ סֻנְכְּרַן עַכְשָׁו':'⚠️ אֵין חִבּוּר לַעֲנָן כָּרֶגַע');},
+  link:()=>syncLink(),back:()=>parentScreen()});
+ const last=SYNC.last?new Date(SYNC.last).toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'}):'';
+ show(`<h2>☁️ סִנְכְּרוּן בֵּין מַכְשִׁירִים</h2>
+ <p>${SYNC.cloud?'✅ הַהִתְקַדְּמוּת נִשְׁמֶרֶת בָּעֲנָן'+(last?' · '+last:''):'⚠️ אֵין חִבּוּר לָעֲנָן כָּרֶגַע'}</p>
+ <p>קוֹד הַמִּשְׁפָּחָה: <b class="famcode" dir="ltr">${famFmt(c)}</b></p>
+ <p class="tip">אוֹתוֹ קוֹד בְּכָל הַמַּכְשִׁירִים = אוֹתָם שַׂחְקָנִים וְאוֹתָהּ הִתְקַדְּמוּת, בַּטֶּלֶפוֹן וּבַמַּחְשֵׁב.</p>
+ <div class="btns row"><button class="green" data-act="share">📲 שְׁלִיחַת קִשּׁוּר הִצְטָרְפוּת</button><button class="alt" data-act="now">🔄 לְסַנְכְּרֵן עַכְשָׁו</button></div>
+ <div class="btns row famjoin"><input id="famIn" dir="ltr" maxlength="16" placeholder="XXXX-XXXX-XXXX" autocomplete="off" aria-label="קוֹד מִשְׁפָּחָה"><button class="blue" data-act="join">🔑 לְהִצְטָרֵף לְקוֹד</button></div>
+ ${msg?`<p class="say">${msg}</p>`:''}
+ <div class="btns row"><button class="alt" data-act="back">חֲזָרָה</button></div>`);
+ const inp=$('famIn');if(inp)inp.addEventListener('keydown',e=>e.stopPropagation());}
 function parentScreen(){confirmLeave();R.screen='parents';R.scene='show';R.stage=0;const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-i);return todayKey(d);});
- bind({rec:()=>recStudio(),exp:()=>exportSave(),imp:()=>importSave(),slink:()=>syncLink(),cf:v=>{PSET[v]=!PSET[v];savePSet();parentScreen();},vb:()=>{PSET.vib=PSET.vib===false;savePSet();parentScreen();},hd:v=>{PSET.hand=v;savePSet();parentScreen();},lim:v=>{PSET.limit=+v;savePSet();parentScreen();},sh:()=>{PSET.shabbat=!PSET.shabbat;PSET.unlockS=false;savePSet();parentScreen();},back:()=>mapScreen()});
+ bind({rec:()=>recStudio(),exp:()=>exportSave(),imp:()=>importSave(),slink:()=>syncLink(),fam:()=>famScreen(),cf:v=>{PSET[v]=!PSET[v];savePSet();parentScreen();},vb:()=>{PSET.vib=PSET.vib===false;savePSet();parentScreen();},hd:v=>{PSET.hand=v;savePSet();parentScreen();},lim:v=>{PSET.limit=+v;savePSet();parentScreen();},sh:()=>{PSET.shabbat=!PSET.shabbat;PSET.unlockS=false;savePSet();parentScreen();},back:()=>mapScreen()});
  const rows=P.list.map(p=>{const st=p.id===P.cur?S:(lsGet2(KEY+'-'+p.id)||{});const t=Math.round(playSecs(st)/60),wk=Math.round(days.reduce((a,k)=>a+playSecs(st,k),0)/60);const rd=(st.read||{}).done||{};
   const weak=Object.keys((st.read||{}).err||{}).map(k=>[k,((st.read.err[k]||0)-((st.read.ok||{})[k]||0)*.5)]).filter(x=>x[1]>0&&/^[LVW]/.test(x[0])).sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0][0]==='V'&&VOW[x[0].slice(2)]?VOW[x[0].slice(2)].n[0]:x[0].slice(2));
   return `<div class="tile" style="align-items:stretch;text-align:right"><b>${p.name} ${p.level==='easy'?'(6–8)':'(9–12)'}</b><small>⏱️ הַיּוֹם: ${t} דַּק׳ · הַשָּׁבוּעַ: ${wk} דַּק׳<br>🗺️ מִבְצָעִים: ${Object.keys(st.done||{}).length}/13 · 🏅 מֶדַלְיוֹת: ${Object.keys(st.medals||{}).length} · 🔥 רֶצֶף: ${(st.streak||{}).n||0} · 🪙 ${st.coins||0}<br>📚 שִׁעוּרֵי קְרִיאָה: ${Object.keys(rd).length}/${RLES.length}${weak.length?` · עוֹד קָשֶׁה: <b class="rfont">${weak.join(' · ')}</b>`:''}</small></div>`;}).join('');
@@ -3535,7 +3573,7 @@ function parentScreen(){confirmLeave();R.screen='parents';R.scene='show';R.stage
  <p class="fact">💡 לִילָדִים עַד גִּיל 6 הַכַּפְתּוֹרִים גְּדוֹלִים אוֹטוֹמָטִית. כַּפְתּוֹר 🐢 לְמַעְלָה בִּזְמַן מִשְׂחָק מְאַט אֶת הַמִּשְׂחָק לְכָל יֶלֶד.</p>
  <p><b>🕯️ מַצַּב שַׁבָּת:</b> הַמִּשְׂחָק נִנְעָל מִיּוֹם שִׁשִּׁי בְּ־14:00 וְעַד מוֹצָאֵי שַׁבָּת בְּ־21:00 (לְפִי הַשָּׁעוֹן בַּמַּכְשִׁיר). <button class="small ${PSET.shabbat?'green':'alt'}" data-act="sh">${PSET.shabbat?'פּוֹעֵל ✓':'כָּבוּי'}</button></p>
  <p class="fact" style="background:#fff3c4">🎙️ <b>הַקְלִיטוּ אֶת הַקּוֹלוֹת שֶׁל הַמִּשְׁפָּחָה!</b> בְּ"אוּלְפַּן הַהַקְלָטוֹת" אֶפְשָׁר לְהַקְלִיט מִשְׁפְּטֵי עִדּוּד וּשְׁמוֹת – וְהַמִּשְׂחָק יַשְׁמִיעַ אוֹתָם בִּמְקוֹם הַקּוֹל הַמְּמֻחְשָׁב. יְלָדִים מְאוֹד אוֹהֲבִים לִשְׁמֹעַ קוֹל מֻכָּר.</p>
- <p><b>💾 גִּבּוּי הַהִתְקַדְּמוּת</b> (לְהַעֲבָרָה לְמַחְשֵׁב אוֹ טֶלֶפוֹן אַחֵר):</p><div class="btns row"><button class="small" data-act="exp">💾 שְׁמִירַת גִּבּוּי</button><button class="small alt" data-act="imp">📂 טְעִינַת גִּבּוּי</button>${SYNC.ok?'<span class="small">☁️ מְסֻנְכְּרָן אוֹטוֹמָטִית</span>':'<button class="small green" data-act="slink">📲 שְׁלִיחָה לְמַכְשִׁיר אַחֵר</button>'}<button class="small alt" data-act="rec">🎙️ אוּלְפַּן הַקְלָטוֹת</button></div>
+ <p><b>💾 גִּבּוּי הַהִתְקַדְּמוּת</b> (לְהַעֲבָרָה לְמַחְשֵׁב אוֹ טֶלֶפוֹן אַחֵר):</p><div class="btns row"><button class="small" data-act="exp">💾 שְׁמִירַת גִּבּוּי</button><button class="small alt" data-act="imp">📂 טְעִינַת גִּבּוּי</button><button class="small green" data-act="fam">☁️ סִנְכְּרוּן בֵּין מַכְשִׁירִים</button><button class="small alt" data-act="rec">🎙️ אוּלְפַּן הַקְלָטוֹת</button></div>
  <p class="fact">🔒 <b>פְּרָטִיּוּת:</b> הַמִּשְׂחָק לֹא אוֹסֵף וְלֹא שׁוֹלֵחַ שׁוּם מֵידָע. כָּל הַהִתְקַדְּמוּת, הַשֵּׁמוֹת וְהַהַקְלָטוֹת נִשְׁמָרִים רַק בַּמַּכְשִׁיר הַזֶּה. אֵין פִּרְסוֹמוֹת וְאֵין רְכִישׁוֹת.</p><div class="btns row"><button class="alt" data-act="back">חֲזָרָה לַמִּשְׂחָק</button></div>`);}
 /* ================= SHABBAT MODE ================= */
 function shabbatNow(){if(!PSET.shabbat)return false;const d=new Date(),day=d.getDay(),h=d.getHours()+d.getMinutes()/60;return(day===5&&h>=14)||(day===6&&h<21);}
@@ -4057,9 +4095,10 @@ function markHome(){if(!S.seenHome){S.seenHome=1;save();}}
 function appHome(){confirmLeave();cab.classList.add('isMP');R.scene='home';R.screen='home';R.stage=0;R.timerOn=false;R.goal=0;
  if(S.lvlBackup){S.level=S.lvlBackup;delete S.lvlBackup;save();}
  const d=P.cur?daily():null;const nm=FAM.me?FAM.me.name:'';
- bind({hero:()=>{markHome();heroMenu();},city:()=>{markHome();cityMenu();},learn:()=>{markHome();learnScreen();},map:()=>{markHome();mapScreen();},shl:()=>shlMenu(),arc:()=>{markHome();arcadeScreen();},read:readMenu,song:karaokeMenu,daily:()=>dailyScreen(),cal:calScreen,me:()=>P.list.length?whoScreen():welcomeScreen(),say:()=>speak([['שָׁלוֹם! לוֹחֲצִים עַל דֶּלֶת גְּדוֹלָה כְּדֵי לְשַׂחֵק. הַשָּׁלִיחַ הַגִּבּוֹר, הַמִּבְצָעִים, מְצוֹד הַמִּבְצָעִים, אוֹ לוֹמְדִים.','shimon']])});
+ bind({hero:()=>{markHome();heroMenu();},city:()=>{markHome();cityMenu();},learn:()=>{markHome();learnScreen();},map:()=>{markHome();mapScreen();},shl:()=>shlMenu(),arc:()=>{markHome();arcadeScreen();},read:readMenu,song:karaokeMenu,daily:()=>dailyScreen(),cal:calScreen,me:()=>P.list.length?whoScreen():welcomeScreen(),pp:id=>{if(id!==P.cur){useProfile(id);sfx.win();celebrate(cheerPre()+FAM.me.name+'!',80);}appHome();},reg:()=>ccScreen(),say:()=>speak([['שָׁלוֹם! לוֹחֲצִים עַל דֶּלֶת גְּדוֹלָה כְּדֵי לְשַׂחֵק. הַשָּׁלִיחַ הַגִּבּוֹר, הַמִּבְצָעִים, מְצוֹד הַמִּבְצָעִים, אוֹ לוֹמְדִים.','shimon']])});
+ try{const cp=curProfile();if(cp&&isBday(cp)){const y=(hd(new Date())||{}).y;if(S.bdGift!==y){S.bdGift=y;addCoins(30);save();setTimeout(()=>{celebrate('🎂🎁',260,true);},500);}}}catch(e){}
  const n=upcoming()[0];
- show(`<div class="yechi ttsSkip">👑 יְחִי הַמֶּלֶךְ! 👑</div><h2 class="hello">שָׁלוֹם${nm?' '+nm:''}! 👋</h2>
+ show(`<div class="yechi ttsSkip">👑 יְחִי הַמֶּלֶךְ! 👑</div>${P.list.length>1?`<div class="pchips">${P.list.map(p=>`<button class="pchip ${p.id===P.cur?'on':''}" data-act="pp" data-v="${p.id}" style="--pc:${p.col||'#c9a227'}" aria-label="${p.name}"><img src="${lookImg(p.look,64)}" alt=""><span>${isBday(p)?'🎂':''}${p.name}</span></button>`).join('')}<button class="pchip padd2" data-act="reg" aria-label="שַׂחְקָן חָדָשׁ">➕</button></div>`:''}<h2 class="hello">${FAM.me&&isBday(curProfile())?'🎂 יוֹם הֻלֶּדֶת שָׂמֵחַ, '+nm+'!':'שָׁלוֹם'+(nm?' '+nm:'')+'! 👋'}</h2>
  <div class="homeg homeg4">${HOME_BTN.map((b,i)=>`<button class="hbtn ${i===0&&!S.seenHome?'firstHint':''}" data-act="${b[0]}" style="--c:${b[3]}"><span>${b[1]}</span><b>${b[2]}</b>${i===0&&!S.seenHome?'<em class="hand" aria-hidden="true">👆</em>':''}</button>`).join('')}</div>
  <div class="btns row homesub"><button class="alt" data-act="arc">🎮 עוֹד מִשְׂחָקִים</button><button class="alt" data-act="daily">🌟 אֶתְגָּר הַיּוֹם${d&&d.done?' ✅':''}</button><button class="alt" data-act="say" aria-label="הַקְרָאָה">🔊</button></div>
  <button class="small alt calchip ttsSkip" data-act="cal">📅 ${hebStr(new Date(),true)}${n?' · '+n.H.ic+' '+n.H.n+' '+daysTxt(n.days):''}</button>`);if(!S.seenHome&&!appHome.said){appHome.said=1;setTimeout(()=>{try{if(R.screen==='home')speak([['לוֹחֲצִים עַל הַשָּׁלִיחַ הַגִּבּוֹר כְּדֵי לְהַתְחִיל!','shimon']]);}catch(e){}},700);}}
@@ -4130,34 +4169,44 @@ function welcomeScreen(){confirmLeave();R.screen='who';R.scene='show';R.stage=0;
  <div class="btns row"><button data-act="reg">➕ נִרְשָׁמִים וּבוֹנִים דְּמוּת!</button></div>`);}
 function whoScreen(){confirmLeave();ttsStop();R.screen='who';R.scene='show';R.stage=0;
  bind({use:id=>{useProfile(id);sfx.win();celebrate(cheerPre()+FAM.me.name+'!',120);appHome();},reg:()=>ccScreen(),edit:id=>ccScreen(id)});
- show(`<h2>👤 מִי מְשַׂחֵק עַכְשָׁו?</h2><div class="grid">${P.list.map(p=>{const st=lsGet2(KEY+'-'+p.id)||{};return`<div class="tile ${p.id===P.cur?'on':''}"><img src="${lookImg(p.look)}" alt="" style="width:72px;height:72px;border-radius:50%;background:#eaf3ff;border:3px solid var(--ink)"><b>${p.name}</b><small>${p.age?'גִּיל '+p.age:(st.level==='easy'?'6–8':'9–12')} · 🪙 ${st.coins||0}${st.streak&&st.streak.n?' · 🔥'+st.streak.n:''}</small><button class="small" data-act="use" data-v="${p.id}">${p.f?'זֹאת אֲנִי!':'זֶה אֲנִי!'}</button><span><button class="small alt" data-act="edit" data-v="${p.id}">✏️</button></span></div>`}).join('')}
- <div class="tile"><span class="ic">➕</span>שַׂחְקָן חָדָשׁ<small>נִרְשָׁמִים וּבוֹנִים דְּמוּת</small><button class="small green" data-act="reg">לְהִרָּשֵׁם</button></div></div>`);}
+ show(`<h2>👤 מִי מְשַׂחֵק עַכְשָׁו?</h2><div class="pgrid">${P.list.map(p=>{const st=lsGet2(KEY+'-'+p.id)||{};return`<div class="ptile ${p.id===P.cur?'on':''}" style="--pc:${p.col||'#c9a227'}"><button class="pmain" data-act="use" data-v="${p.id}" aria-label="${p.name}"><img src="${lookImg(p.look)}" alt=""><b>${isBday(p)?'🎂 ':''}${p.name}</b><small>${pInfo(p,st)}</small></button><button class="small alt pedit" data-act="edit" data-v="${p.id}" aria-label="עֲרִיכָה">✏️</button></div>`}).join('')}
+ <div class="ptile add"><button class="pmain" data-act="reg"><span class="padd">➕</span><b>שַׂחְקָן חָדָשׁ</b><small>נִרְשָׁמִים וּבוֹנִים דְּמוּת</small></button></div></div>`);}
 function delAsk(id){return whoScreen();const p=P.list.find(x=>x.id===id);if(!p)return;bind({yes:()=>{P.list=P.list.filter(x=>x.id!==id);try{localStorage.removeItem(KEY+'-'+id)}catch(e){}if(P.cur===id){P.cur=null;applyProfile();}saveP();P.list.length?whoScreen():welcomeScreen();},no:whoScreen});
  show(`<h2>🗑️ לִמְחֹק אֶת ${p.name}?</h2><p>כָּל הַמַּטְבְּעוֹת, הַמַּדְבֵּקוֹת וְהַהִתְקַדְּמוּת שֶׁל ${p.name} יִמָּחֲקוּ. אִי אֶפְשָׁר לְהַחְזִיר.</p><div class="btns row"><button class="alt" data-act="no">לֹא, חֲזָרָה</button><button class="red" data-act="yes">כֵּן, לִמְחֹק</button></div>`);}
+function isBday(p){try{if(!p||!p.bd||!p.bm)return false;const h=hd(new Date());if(!h||h.d!==p.bd)return false;return h.m===p.bm||(p.bm==='Adar'&&h.m==='Adar II')||(p.bm==='Adar II'&&h.m==='Adar');}catch(e){return false}}
+function pInfo(p,st){const bits=[];if(p.age)bits.push(p.age>=18?'🧑':'גִּיל '+p.age);if(p.fm!=null&&CC_MITZ[p.fm])bits.push(CC_MITZ[p.fm][0]);bits.push('🪙 '+(st.coins||0));if(st.streak&&st.streak.n)bits.push('🔥'+st.streak.n);if(p.bd&&p.bm)bits.push('🎂 '+gem(p.bd)+' '+HMON[p.bm]);return bits.join(' · ');}
 function ccScreen(editId){const ed=editId?P.list.find(x=>x.id===editId):null;
- if(!R.cc||R.cc._for!==(editId||'new'))R.cc=ed?Object.assign({_for:editId,age:ed.age||(ed.level==='easy'?6:10)},ed.cc):{_for:'new',name:'',f:0,skin:0,hair:0,style:0,kip:0,shirt:0,glasses:0,level:'easy',age:6};ccRender(ed);}
+ if(!R.cc||R.cc._for!==(editId||'new'))R.cc=ed?Object.assign({_for:editId,age:ed.age||(ed.level==='easy'?6:10),name:ed.name,f:ed.f?1:0},ed.cc,{step:1}):{_for:'new',name:'',f:0,skin:0,hair:0,style:0,kip:0,shirt:0,glasses:0,level:'easy',age:6};ccRender(ed);}
+const CC_MITZ=[['🕯️','נֵרוֹת שַׁבָּת'],['📦','תְּפִלִּין'],['📜','מְזוּזָה'],['🪙','צְדָקָה'],['📚','לִמּוּד תּוֹרָה'],['🍞','חַלָּה'],['🤝','אַהֲבַת יִשְׂרָאֵל'],['🙏','תְּפִלָּה']];
+const CC_COL=['#e2475e','#ff8c1a','#ffc93c','#3fa34d','#2f80ed','#7a4fc9','#ff7eb6','#14b8a6'];
 function ccRender(ed){const c=R.cc;if(c.age)c.level=c.age<=8?'easy':'normal';R.screen='cc';R.scene='show';
  const sw=(key,arr)=>arr.map((col,i)=>`<button class="sw ${c[key]===i?'sel':''}" data-act="cc" data-v="${key}:${i}" style="background:${col}" aria-label="${key} ${i+1}"></button>`).join('');
  bind({cc:v=>{const [k,i]=v.split(':');c[k]=+i;ccRender(ed);},
   done:()=>{const nm=(c.name||'').trim();if(!nm){floater(W/2,140,'צָרִיךְ לִכְתֹּב שֵׁם 😊','#fff');const el=$('ccName');el&&el.focus();return;}ccSave(ed);},
+  nx:()=>{const nm=(c.name||'').trim();if(!nm){floater(W/2,140,'✏️','#fff');const el=$('ccName');el&&el.focus();return;}c.step=2;ccRender(ed);},pv:()=>{c.step=1;ccRender(ed);},
   back:()=>{R.cc=null;P.list.length?whoScreen():welcomeScreen();}});
- show(`<h2>${ed?'✏️ עוֹרְכִים דְּמוּת':'🎨 בּוֹנִים דְּמוּת חֲדָשָׁה'}</h2><div class="ccwrap"><canvas id="ccPrev" width="150" height="190"></canvas><div class="ccopts">
+ show(`<h2>${ed?'✏️ עוֹרְכִים דְּמוּת':'🎨 בּוֹנִים דְּמוּת חֲדָשָׁה'}</h2><div class="ccwrap ${c.step!==2?'ccs1':''}"><canvas id="ccPrev" width="150" height="190"></canvas><div class="ccopts">${c.step!==2?`
  <label class="ccrow"><b>הַשֵּׁם שֶׁלִּי:</b> <input id="ccName" maxlength="14" autocomplete="off" value="${(c.name||'').replace(/"/g,'&quot;')}" placeholder="לְמָשָׁל: מֶנְדִּי"></label>
  <div class="ccrow"><b>אֲנִי:</b> <button class="small ${c.f?'alt':''}" data-act="cc" data-v="f:0">👦 בֵּן</button><button class="small ${c.f?'':'alt'}" data-act="cc" data-v="f:1">👧 בַּת</button></div>
- <div class="ccrow"><b>בֶּן/בַּת כַּמָּה?</b> ${[4,5,6,7,8,9,10,11,12].map(a=>`<button class="small ${c.age===a?'':'alt'}" data-act="cc" data-v="age:${a}" style="min-width:46px">${a}</button>`).join('')}</div>
+ <div class="ccrow"><b>${c.f?'בַּת':'בֶּן'} כַּמָּה?</b> <button class="small alt" data-act="cc" data-v="age:${Math.max(3,(c.age||6)-1)}" aria-label="פָּחוֹת" style="min-width:44px">−</button><b class="agebig">${(c.age||6)>=18?'🧑 '+(c.age||6):(c.age||6)}</b><button class="small alt" data-act="cc" data-v="age:${Math.min(99,(c.age||6)+1)}" aria-label="יוֹתֵר" style="min-width:44px">+</button><button class="small ${(c.age||0)>=18?'':'alt'}" data-act="cc" data-v="age:30">👨‍👩‍👧 ${c.f?'אִמָּא / גְּדוֹלָה':'אַבָּא / גָּדוֹל'}</button></div>
+ <div class="ccrow"><b>🎂 יוֹם הֻלֶּדֶת:</b> <select id="ccBD" aria-label="יוֹם">${['',...Array.from({length:30},(_,i)=>i+1)].map(d=>`<option value="${d}" ${String(c.bd||'')===String(d)?'selected':''}>${d?gem(d):'יוֹם'}</option>`).join('')}</select><select id="ccBM" aria-label="חֹדֶשׁ"><option value="">חֹדֶשׁ</option>${Object.keys(HMON).filter(m=>m!=='Adar I'&&m!=='Adar II').concat(['Adar I','Adar II']).map(m=>`<option value="${m}" ${c.bm===m?'selected':''}>${HMON[m]}</option>`).join('')}</select></div>
+ <div class="ccrow"><b>💛 הַמִּצְוָה הָאֲהוּבָה:</b> ${CC_MITZ.map((m,i)=>`<button class="small ${c.fm===i?'':'alt'}" data-act="cc" data-v="fm:${i}" aria-label="${m[1]}">${m[0]}</button>`).join('')}</div>
+ <div class="ccrow"><b>🎨 הַצֶּבַע שֶׁלִּי:</b> ${sw('col',CC_COL)}</div>`:`
  <div class="ccrow"><b>עוֹר:</b> ${sw('skin',CC_SKIN)}</div>
  <div class="ccrow"><b>שֵׂעָר:</b> ${sw('hair',CC_HAIR)}</div>
  ${c.f?`<div class="ccrow"><b>תִּסְרֹקֶת:</b> ${CC_STYLE.map((s,i)=>`<button class="small ${c.style===i?'':'alt'}" data-act="cc" data-v="style:${i}">${s[1]}</button>`).join('')}</div>`:`<div class="ccrow"><b>כִּפָּה:</b> ${sw('kip',CC_KIP)}</div>`}
  <div class="ccrow"><b>חֻלְצָה:</b> ${sw('shirt',CC_SHIRT)}</div>
- <div class="ccrow"><b>מִשְׁקָפַיִם:</b> <button class="small ${c.glasses?'alt':''}" data-act="cc" data-v="glasses:0">בְּלִי</button><button class="small ${c.glasses?'':'alt'}" data-act="cc" data-v="glasses:1">👓 עִם</button></div>
- </div></div><div class="btns row"><button class="green" data-act="done">${ed?'שׁוֹמְרִים ✓':'סִיַּמְתִּי – יוֹצְאִים לְמִבְצָעִים! 🚐'}</button><button class="alt" data-act="back">חֲזָרָה</button></div>`);
+ <div class="ccrow"><b>מִשְׁקָפַיִם:</b> <button class="small ${c.glasses?'alt':''}" data-act="cc" data-v="glasses:0">בְּלִי</button><button class="small ${c.glasses?'':'alt'}" data-act="cc" data-v="glasses:1">👓 עִם</button></div>`}
+ </div></div><div class="btns row">${c.step!==2?`<button class="green" data-act="nx">הָלְאָה – בּוֹנִים אֶת הַדְּמוּת ▶</button>${ed?'<button class="alt" data-act="done">שׁוֹמְרִים ✓</button>':''}<button class="alt" data-act="back">חֲזָרָה</button>`:`<button class="green" data-act="done">${ed?'שׁוֹמְרִים ✓':'סִיַּמְתִּי – יוֹצְאִים לְמִבְצָעִים! 🚐'}</button><button class="alt" data-act="pv">◀ הַקּוֹדֵם</button>`}<span class="ccstep">${c.step!==2?'1':'2'} / 2</span></div>`);
  if(ACT.cc){const o=ACT.cc;ACT.cc=v=>{if(v.startsWith('lv:')){c.level=v.endsWith('0')?'easy':'normal';ccRender(ed);return;}o(v);};}
+ {const bd=$('ccBD'),bm=$('ccBM');if(bd)bd.onchange=()=>{c.bd=bd.value?+bd.value:null;};if(bm)bm.onchange=()=>{c.bm=bm.value||null;};}
  const inp=$('ccName');if(inp){inp.addEventListener('input',()=>{c.name=inp.value;});inp.addEventListener('keydown',e=>e.stopPropagation());}
  const pc=$('ccPrev');if(pc){const x=pc.getContext('2d');x.clearRect(0,0,150,190);const g=x.createLinearGradient(0,0,0,190);g.addColorStop(0,'#cfe9ff');g.addColorStop(1,'#fff6dd');x.fillStyle=g;x.fillRect(0,0,150,190);x.fillStyle='#e8d9b0';x.fillRect(0,170,150,20);
   const L=ccLook(c);x.save();x.translate(75,172);x.scale(1.25/(L.s),1.25/(L.s));drawP(x,0,0,Object.assign({},L,{face:1,armA:-2.2}));x.restore();}}
-function ccSave(ed){const c=R.cc;const nm=c.name.trim().slice(0,14);const look=ccLook(c);const cc=Object.assign({},c);delete cc._for;
- if(ed){Object.assign(ed,{name:nm,f:c.f,look,level:c.level,age:c.age,cc});saveP();if(P.cur===ed.id){const st=lsGet2(KEY+'-'+ed.id)||{};S.level=c.level;save();applyProfile();}R.cc=null;sfx.win();whoScreen();return;}
- const id='p'+Date.now().toString(36);const old=lsGet2(KEY);P.list.push({id,name:nm,f:c.f,look,level:c.level,age:c.age,cc,created:Date.now()});
+function ccSave(ed){const c=R.cc;const nm=c.name.trim().slice(0,14);const look=ccLook(c);const cc=Object.assign({},c);delete cc._for;delete cc.step;
+ const ext={bd:c.bd||null,bm:c.bm||null,fm:(c.fm!=null?c.fm:null),col:c.col!=null?CC_COL[c.col]:null,upd:Date.now()};
+ if(ed){Object.assign(ed,{name:nm,f:c.f,look,level:c.level,age:c.age,cc},ext);saveP();if(P.cur===ed.id){const st=lsGet2(KEY+'-'+ed.id)||{};S.level=c.level;save();applyProfile();}R.cc=null;sfx.win();whoScreen();return;}
+ const id='p'+Date.now().toString(36);const old=lsGet2(KEY);P.list.push(Object.assign({id,name:nm,f:c.f,look,level:c.level,age:c.age,cc,created:Date.now()},ext));
  if(P.list.length===1&&old&&!P.migrated){lsSet2(KEY+'-'+id,old);}P.migrated=true;P.cur=id;saveP();
  S=Object.assign(SDEF(),load()||{});S.level=c.level;save();applyProfile();R.cc=null;updHud();
  sfx.big();celebrate((c.f?'בְּרוּכָה הַבָּאָה, ':'בָּרוּךְ הַבָּא, ')+nm+'!',260,true);
@@ -4442,15 +4491,25 @@ new MutationObserver(()=>fit()).observe(hud,{childList:true});
 fit();setTimeout(fit,300);
 startApp();
 requestAnimationFrame(frame);
-/* ---- sync between devices (auto via account; manual via link) ---- */
-const SYTS='mivtzaim-sync-ts';const SYNC={ts:{},db:null,uid:null,dirty:new Set(),applying:false,t:null,busy:false,ok:false};
+/* ---- sync between devices: family cloud code (works everywhere) + Claude account ---- */
+const SYTS='mivtzaim-sync-ts',FKEY='mivtzaim-family';const SYNC={ts:{},db:null,uid:null,dirty:new Set(),applying:false,t:null,busy:false,ok:false,cloud:false,last:0,err:0};
+const SB={u:'https://purzdjxhggbdqlrulepe.supabase.co/rest/v1/rpc/',k:'sb_publishable_a3zO0BSPFiH7mH-aH1wBhQ_3g6bBGFw'};
 try{SYNC.ts=JSON.parse(localStorage.getItem(SYTS))||{};}catch(e){}
-const syncable=k=>typeof k==='string'&&/^mivtzaim/.test(k)&&k!==SYTS;
+const syncable=k=>typeof k==='string'&&/^mivtzaim/.test(k)&&k!==SYTS&&k!==FKEY;
+const FCH='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+function famCode(){let c=null;try{c=localStorage.getItem(FKEY);}catch(e){}if(!c||c.length<12){const a=new Uint32Array(12);crypto.getRandomValues(a);c=[...a].map(x=>FCH[x%FCH.length]).join('');try{localStorage.setItem(FKEY,c);}catch(e){}}return c;}
+const famFmt=c=>c.replace(/(.{4})(?=.)/g,'$1-');
 (()=>{try{const o=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){o.call(this,k,v);try{if(this===localStorage&&syncable(k)&&!SYNC.applying){SYNC.ts[k]=Date.now();o.call(this,SYTS,JSON.stringify(SYNC.ts));SYNC.dirty.add(k);syncSoon();}}catch(e){}};}catch(e){}})();
-function syncSoon(){if(!SYNC.ok)return;clearTimeout(SYNC.t);SYNC.t=setTimeout(syncPush,3000);}
-async function syncPush(){if(!SYNC.ok||SYNC.busy)return;SYNC.busy=true;try{for(const k of [...SYNC.dirty]){SYNC.dirty.delete(k);const v=localStorage.getItem(k);if(v==null)continue;await SYNC.db.doc('data/users/'+SYNC.uid+'/kv/'+k).set({v,ts:SYNC.ts[k]||Date.now()});}}catch(e){}SYNC.busy=false;if(SYNC.dirty.size)syncSoon();}
-function mergeProfiles(a,b){try{const A=JSON.parse(a)||{list:[]},B=JSON.parse(b)||{list:[]};const out=Object.assign({},A);out.list=[...(A.list||[])];for(const q of (B.list||[]))if(!out.list.some(x=>x.id===q.id))out.list.push(q);if(!out.cur)out.cur=B.cur;return JSON.stringify(out);}catch(e){return a||b;}}
-function mergeIn(entries){let changed=false;SYNC.applying=true;try{for(const [k,e] of Object.entries(entries)){if(!syncable(k)||!e||typeof e.v!=='string')continue;const lv=localStorage.getItem(k),lt=SYNC.ts[k]||0,rt=e.ts||0;
+async function sbCall(fn,body){const r=await fetch(SB.u+fn,{method:'POST',headers:{apikey:SB.k,'Content-Type':'application/json'},body:JSON.stringify(body)});if(!r.ok)throw new Error('sb '+r.status);const t=await r.text();return t?JSON.parse(t):null;}
+function syncSoon(){if(!SYNC.ok&&!SYNC.cloud)return;clearTimeout(SYNC.t);SYNC.t=setTimeout(syncPush,2500);}
+async function syncPush(){if(SYNC.busy||(!SYNC.ok&&!SYNC.cloud))return;SYNC.busy=true;const code=famCode();
+ for(const k of [...SYNC.dirty]){const v=localStorage.getItem(k);if(v==null){SYNC.dirty.delete(k);continue;}const ts=SYNC.ts[k]||Date.now();let fail=false;
+  if(SYNC.cloud){try{await sbCall('sync_push',{p_code:code,p_k:k,p_v:v,p_ts:ts});}catch(e){fail=true;SYNC.err++;}}
+  if(SYNC.ok){try{await SYNC.db.doc('data/users/'+SYNC.uid+'/kv/'+k).set({v,ts});}catch(e){}}
+  if(!fail)SYNC.dirty.delete(k);else break;}
+ SYNC.busy=false;if(SYNC.dirty.size&&SYNC.err<20)setTimeout(syncSoon,8000);else{SYNC.last=Date.now();SYNC.err=0;}}
+function mergeProfiles(a,b){try{const A=JSON.parse(a)||{list:[]},B=JSON.parse(b)||{list:[]};const out=Object.assign({},A);out.list=[...(A.list||[])];for(const q of (B.list||[])){const i=out.list.findIndex(x=>x.id===q.id);if(i<0)out.list.push(q);else if((q.upd||0)>(out.list[i].upd||0))out.list[i]=q;}if(!out.cur)out.cur=B.cur;return JSON.stringify(out);}catch(e){return a||b;}}
+function mergeIn(entries){let changed=false;SYNC.applying=true;try{for(const [k,e] of Object.entries(entries)){if(!syncable(k)||!e||typeof e.v!=='string')continue;const lv=localStorage.getItem(k),lt=SYNC.ts[k]||0,rt=+e.ts||0;
   if(k===PKEY){const m=lv==null?e.v:mergeProfiles(lv,e.v);if(m!==lv){localStorage.setItem(k,m);changed=true;}if(m!==e.v)SYNC.dirty.add(k);SYNC.ts[k]=Math.max(lt,rt)||Date.now();continue;}
   if(lv==null){localStorage.setItem(k,e.v);SYNC.ts[k]=rt||Date.now();changed=true;continue;}
   if(lv===e.v){SYNC.ts[k]=Math.max(lt,rt);continue;}
@@ -4458,12 +4517,18 @@ function mergeIn(entries){let changed=false;SYNC.applying=true;try{for(const [k,
   if(takeRemote){localStorage.setItem(k,e.v);SYNC.ts[k]=rt||Date.now();changed=true;}else{SYNC.ts[k]=lt||Date.now();SYNC.dirty.add(k);}}
  localStorage.setItem(SYTS,JSON.stringify(SYNC.ts));}catch(e){}SYNC.applying=false;return changed;}
 function syncReload(){try{P=lsGet2(PKEY)||P;if(P.cur&&P.list.some(x=>x.id===P.cur)){S=Object.assign(SDEF(),load()||{});applyProfile();updHud();}if(R.screen==='who')whoScreen();else if(R.screen==='home')appHome();}catch(e){}}
-async function syncPull(){if(!SYNC.ok||R.screen==='play')return;try{const snap=await SYNC.db.collection('data/users/'+SYNC.uid+'/kv').limit(500).get();const ent={};for(const d of snap.docs){const x=d.data();if(x)ent[d.id]=x;}
- for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(syncable(k)&&!ent[k]){SYNC.dirty.add(k);if(!SYNC.ts[k])SYNC.ts[k]=Date.now();}}
- if(mergeIn(ent))syncReload();syncSoon();}catch(e){}}
-(async()=>{try{let n=0;while(!(window.claude&&window.claude.use)&&n<30){await new Promise(r=>setTimeout(r,100));n++;}if(!(window.claude&&window.claude.use))return;
- const db=await window.claude.use('db');const us=await window.claude.use('user');if(!db||!us)return;const uid=await us.id();if(!uid)return;
- SYNC.db=db;SYNC.uid=uid;SYNC.ok=true;await syncPull();document.addEventListener('visibilitychange',()=>{if(document.hidden)syncPush();else syncPull();});setInterval(syncPull,45000);}catch(e){}})();
+function markLocalOnly(ent){for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(syncable(k)&&!ent[k]){SYNC.dirty.add(k);if(!SYNC.ts[k])SYNC.ts[k]=Date.now();}}}
+async function syncPull(force){if(R.screen==='play'&&!force)return;let ch=false;
+ if(SYNC.cloud){try{const rows=await sbCall('sync_pull',{p_code:famCode()});const ent={};for(const r of rows||[])ent[r.k]={v:r.v,ts:+r.ts};markLocalOnly(ent);if(mergeIn(ent))ch=true;SYNC.last=Date.now();}catch(e){}}
+ if(SYNC.ok){try{const snap=await SYNC.db.collection('data/users/'+SYNC.uid+'/kv').limit(500).get();const ent={};for(const d of snap.docs){const x=d.data();if(x)ent[d.id]=x;}markLocalOnly(ent);if(mergeIn(ent))ch=true;}catch(e){}}
+ if(ch)syncReload();syncSoon();return ch;}
+async function famJoin(raw){const c=String(raw||'').toUpperCase().replace(/[^A-Z0-9]/g,'');if(c.length<12)return false;try{localStorage.setItem(FKEY,c);}catch(e){}markLocalOnly({});SYNC.cloud=true;await syncPull(true);await syncPush();return true;}
+(async()=>{try{famCode();try{await sbCall('sync_pull',{p_code:'probe-xxxxxx'});SYNC.cloud=true;}catch(e){SYNC.cloud=false;}
+ if(SYNC.cloud){await syncPull(true);}
+ let n=0;while(!(window.claude&&window.claude.use)&&n<30){await new Promise(r=>setTimeout(r,100));n++;}
+ if(window.claude&&window.claude.use){const db=await window.claude.use('db');const us=await window.claude.use('user');if(db&&us){const uid=await us.id();if(uid){SYNC.db=db;SYNC.uid=uid;SYNC.ok=true;await syncPull(true);}}}
+ if(SYNC.ok||SYNC.cloud){document.addEventListener('visibilitychange',()=>{if(document.hidden)syncPush();else syncPull();});setInterval(()=>syncPull(),40000);addEventListener('pagehide',()=>syncPush());}}catch(e){}})();
+(()=>{try{const h=location.hash;if(!h.startsWith('#fam='))return;const c=h.slice(5);history.replaceState(null,'',location.href.split('#')[0]);setTimeout(async()=>{if(await famJoin(c)){try{sfx.win();celebrate('☁️ ✓',150,true);}catch(e){}}},1200);}catch(e){}})();
 /* manual link: works anywhere (GitHub, offline copy) */
 const b64u={enc:u=>{let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');},dec:t=>{t=t.replace(/-/g,'+').replace(/_/g,'/');const s=atob(t);const u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u;}};
 async function zip(str,inv){const cs=inv?new DecompressionStream('deflate-raw'):new CompressionStream('deflate-raw');const st=new Blob([inv?str:new TextEncoder().encode(str)]).stream().pipeThrough(cs);const buf=new Uint8Array(await new Response(st).arrayBuffer());return inv?new TextDecoder().decode(buf):buf;}
