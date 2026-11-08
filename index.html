@@ -2252,7 +2252,7 @@ Object.assign(HCH,{flat:HC({7:'.....L......',9:'...CCCC.....',10:'..P....E....'}
  gate:HC({0:'......W.....',1:'......W.....',2:'......W.....',3:'......W.....',4:'......W.....',5:'......W.....',6:'......W.....',7:'......W.....',8:'......W.....',9:'......W.....',10:'...Y..W.....'}),
  shl:HC({8:'....CCC.....',10:'..O.......N.'}),
  wind:HC({0:'...wwwwww...',1:'...wwwwww...',2:'...wwwwww...',3:'...wwwwww...',4:'...wwwwww...',5:'...wwwwww...',6:'...wCCCCw...',7:'...wwwwww...',8:'...wwwwww...',9:'...wwwwww...',10:'...wwwwwwE..'})});
-const HEN={lazy:{n:'עַצְלוּת',col:'#aab3d6',v:45,eye:'sleepy',win:'זְרִיזוּת! ⚡'},angry:{n:'כַּעַס',col:'#ffa494',v:95,hop:1,eye:'pout',win:'שִׂמְחָה! 😊'},jealous:{n:'קִנְאָה',col:'#9fd69a',v:80,eye:'side',win:'פִּרְגּוּן! 🤝'},liar:{n:'שֶׁקֶר',col:'#c4c0ec',v:80,fly:1,eye:'side',win:'אֱמֶת! ✅'},proud:{n:'גַּאֲוָה',col:'#dcb8f0',v:55,hp:2,big:1,eye:'up',win:'עֲנָוָה! 🙏'}};
+const HEN={lazy:{n:'עַצְלוּת',col:'#aab3d6',v:45,eye:'sleepy',win:'זְרִיזוּת! ⚡'},angry:{n:'כַּעַס',col:'#ffa494',v:95,hop:1,eye:'pout',win:'שִׂמְחָה! 😊'},jealous:{n:'קִנְאָה',col:'#9fd69a',v:80,eye:'side',win:'פִּרְגּוּן! 🤝'},liar:{n:'שֶׁקֶר',col:'#c4c0ec',v:80,fly:1,eye:'side',win:'אֱמֶת! ✅'},proud:{n:'גַּאֲוָה',col:'#dcb8f0',v:55,hp:2,big:1,eye:'up',win:'עֲנָוָה! 🙏'},gossip:{n:'לָשׁוֹן הָרָע',col:'#ffb3c7',v:70,fly:1,eye:'side',win:'שְׁמִירַת הַלָּשׁוֹן! 🤐'},sad:{n:'עַצְבוּת',col:'#9db4d8',v:38,eye:'sleepy',win:'שִׂמְחָה! 🎶'}};
 const HW=[
  {n:'עוֹלַם הַבֹּקֶר',ic:'🌅',th:'home',word:'שְׁמַע',kid:'benny',trap:'בּוּעַת הָעַצְלוּת',mech:['spring1','spring2','spring3'],en:['lazy'],fly:0,
   lv:['קָמִים בִּזְרִיזוּת','הַמִּטּוֹת הַקּוֹפְצוֹת','מוֹדֶה אֲנִי','לַגָּג!','הָעַצְלוּת הַגְּדוֹלָה'],mi:'🛏️',mt:'קוֹפְצִים עַל הַמִּטָּה – וְעָפִים לְמַעְלָה! 🛏️',
@@ -2264,17 +2264,17 @@ const HW=[
   tips:['כּוֹעֲסִים? נוֹשְׁמִים עָמֹק וּמְחַיְּכִים 😊','שִׂמְחָה מְגָרֶשֶׁת אֶת הַכַּעַס!'],
   gift:'🧲 מַגְנֵט – הַנְּקֻדּוֹת ✨ עָפוֹת אֶל הַגִּבּוֹר!',
   boss:{n:'הַכַּעַס הַגָּדוֹל',col:'#ffa494',hp:5,spd:80,jump:1,rate:2.2,pr:'💢',face:'pout'}},
- {n:'עוֹלַם הַשּׁוּק',ic:'🛒',th:'market',word:'ה׳',kid:'dvora',trap:'בּוּעַת הַקִּנְאָה',mech:['fall1','fall2','lift'],en:['angry','jealous'],fly:0,
+ {n:'עוֹלַם הַשּׁוּק',ic:'🛒',th:'market',word:'ה׳',kid:'dvora',trap:'בּוּעַת הַקִּנְאָה',mech:['fall1','fall2','lift'],en:['angry','jealous','liar'],fly:0,
   lv:['בַּשּׁוּק','הַסְּכָכוֹת הַנּוֹפְלוֹת','תִּתְחַדֵּשׁ!','הַמַּעֲלִית','הַקִּנְאָה הַגְּדוֹלָה'],mi:'⚠️',mt:'הַסְּכָכוֹת נוֹפְלוֹת – עוֹבְרִים מַהֵר! 🏃',
   tips:['לְחָבֵר יֵשׁ מַשֶּׁהוּ חָדָשׁ? אוֹמְרִים "תִּתְחַדֵּשׁ!" 🤝','שְׂמֵחִים בְּמָה שֶׁיֵּשׁ לָנוּ!'],
   gift:'🛡️ מָגֵן – פְּגִיעָה אַחַת בְּכָל שָׁלָב לֹא מוֹרִידָה לֵב!',
   boss:{n:'הַקִּנְאָה הַגְּדוֹלָה',col:'#9fd69a',hp:5,spd:110,jump:0,rate:2.0,pr:'💚',face:'side'}},
- {n:'עוֹלַם הַלַּיְלָה',ic:'🌙',th:'night',word:'אֱלֹקֵינוּ',kid:'rivkush',trap:'בּוּעַת הַשֶּׁקֶר',mech:['lamp1','lamp2','roofs'],en:['jealous'],fly:1,
+ {n:'עוֹלַם הַלַּיְלָה',ic:'🌙',th:'night',word:'אֱלֹקֵינוּ',kid:'rivkush',trap:'בּוּעַת הַשֶּׁקֶר',mech:['lamp1','lamp2','roofs'],en:['jealous','gossip'],fly:1,
   lv:['מַדְלִיקִים פָּנָסִים','אוֹר שֶׁל אֱמֶת','הַגַּגּוֹת בַּלַּיְלָה','כּוֹכָבִים','הַשֶּׁקֶר הַגָּדוֹל'],mi:'🏮',mt:'נוֹגְעִים בַּפָּנָס – וְהוּא נִדְלָק! 🏮',
   tips:['"מְעַט אוֹר דּוֹחֶה הַרְבֵּה מִן הַחֹשֶׁךְ" ✨','אוֹמְרִים תָּמִיד אֶת הָאֱמֶת ✅'],
   gift:'🔦 פָּנָס גָּדוֹל – רוֹאִים יוֹתֵר בַּחֹשֶׁךְ!',
   boss:{n:'הַשֶּׁקֶר הַגָּדוֹל',col:'#c4c0ec',hp:6,spd:100,jump:0,fly:1,rate:1.9,pr:'❓',face:'side'}},
- {n:'עוֹלַם הֶהָרִים',ic:'🏔️',th:'snow',word:'ה׳',kid:'dobi',trap:'בּוּעַת הַגַּאֲוָה',mech:['ice1','ice2','icefall'],en:['proud','jealous'],fly:1,
+ {n:'עוֹלַם הֶהָרִים',ic:'🏔️',th:'snow',word:'ה׳',kid:'dobi',trap:'בּוּעַת הַגַּאֲוָה',mech:['ice1','ice2','icefall'],en:['proud','jealous','sad'],fly:1,
   lv:['שֶׁלֶג וְקֶרַח','מַחְלִיקִים בִּזְהִירוּת','עֲנָוָה','הַפִּסְגָּה','הַגַּאֲוָה הַגְּדוֹלָה'],mi:'🧊',mt:'קֶרַח! זֶה מַחְלִיק – הוֹלְכִים בִּזְהִירוּת 🧊',
   tips:['מִי שֶׁעָנָו – כֻּלָּם אוֹהֲבִים אוֹתוֹ 🙏','לֹא מִתְגָּאִים – עוֹזְרִים לְכֻלָּם!'],
   gift:'👟 נַעֲלֵי רִיצָה – רָצִים מַהֵר יוֹתֵר!',
@@ -2487,7 +2487,34 @@ const HQ=[
  [2,'עַל מָה מְבָרְכִים "שֶׁהֶחֱיָנוּ"?','עַל דָּבָר חָדָשׁ וּמְשַׂמֵּחַ','עַל כָּל אֲרוּחָה','עַל מַיִם','פְּרִי חָדָשׁ, בֶּגֶד חָדָשׁ, וּבִתְחִלַּת חַג.'],
  [2,'מָה עוֹשִׂים בְּמוֹצָאֵי שַׁבָּת?','הַבְדָּלָה','קִדּוּשׁ','סְפִירַת הָעֹמֶר','מַבְדִּילִים בֵּין קֹדֶשׁ לְחֹל – עִם נֵר, יַיִן וּבְשָׂמִים.'],
  [2,'בְּאֵיזֶה חֹדֶשׁ חוֹגְגִים אֶת חַג הַפֶּסַח?','נִיסָן','תִּשְׁרֵי','אֲדָר','נִיסָן – חֹדֶשׁ הַגְּאֻלָּה.'],
- [2,'מִי בָּנָה אֶת בֵּית הַמִּקְדָּשׁ הָרִאשׁוֹן?','שְׁלֹמֹה הַמֶּלֶךְ','דָּוִד הַמֶּלֶךְ','שָׁאוּל הַמֶּלֶךְ','דָּוִד הֵכִין – וּשְׁלֹמֹה בָּנָה.']];
+ [2,'מִי בָּנָה אֶת בֵּית הַמִּקְדָּשׁ הָרִאשׁוֹן?','שְׁלֹמֹה הַמֶּלֶךְ','דָּוִד הַמֶּלֶךְ','שָׁאוּל הַמֶּלֶךְ','דָּוִד הֵכִין – וּשְׁלֹמֹה בָּנָה.'],
+ [0,'מָה אוֹמְרִים כְּשֶׁנִּכְנָסִים לְבַיִת שֶׁל חָבֵר?','👋 שָׁלוֹם!','🙊 כְּלוּם','📢 צוֹעֲקִים','מְקַבְּלִים כָּל אֶחָד בְּסֵבֶר פָּנִים יָפוֹת.'],
+ [0,'מָה לוֹבְשִׁים בָּנִים כְּדֵי לִזְכֹּר אֶת הַמִּצְווֹת?','🧶 צִיצִית','🧥 מְעִיל','🧤 כְּפָפוֹת','הַצִּיצִית מַזְכִּירָה אֶת כָּל הַמִּצְווֹת.'],
+ [0,'מִי הָיָה בְּתוֹךְ דָּג גָּדוֹל?','🐟 יוֹנָה','👑 דָּוִד','🚢 נֹחַ','יוֹנָה הִתְפַּלֵּל – וְה׳ הוֹצִיא אוֹתוֹ.'],
+ [0,'מָה עוֹשִׂים כְּשֶׁאִמָּא קוֹרֵאת?','🏃 בָּאִים מַהֵר','🙉 לֹא שׁוֹמְעִים','😴 נִרְדָּמִים','כִּבּוּד אָב וָאֵם!'],
+ [0,'עַל מָה מְבָרְכִים "בּוֹרֵא פְּרִי הַגָּפֶן"?','🍇 מִיץ עֲנָבִים','🥛 חָלָב','🍊 מִיץ תַּפּוּזִים','עַל מִיץ עֲנָבִים וְיַיִן מְבָרְכִים "הַגָּפֶן".'],
+ [0,'מָה נוֹתְנִים לִפְנֵי שֶׁמַּדְלִיקִים נֵרוֹת שַׁבָּת?','🪙 צְדָקָה','🍬 סֻכָּרִיָּה','🧦 גֶּרֶב','נוֹתְנִים צְדָקָה – וְאָז מַדְלִיקִים.'],
+ [0,'בְּאֵיזֶה חַג שָׁרִים "מַה נִּשְׁתַּנָּה"?','🫓 פֶּסַח','🎭 פּוּרִים','🕎 חֲנֻכָּה','בְּלֵיל הַסֵּדֶר הַיְּלָדִים שׁוֹאֲלִים.'],
+ [0,'מָה הַצֶּבַע שֶׁל הַתְּפִלִּין?','⚫ שָׁחֹר','🔴 אָדֹם','🟢 יָרֹק','הַבָּתִּים וְהָרְצוּעוֹת שְׁחֹרִים.'],
+ [1,'בְּאֵיזֶה צַד שֶׁל הַפֶּתַח קוֹבְעִים מְזוּזָה?','בַּצַּד הַיָּמִין כְּשֶׁנִּכְנָסִים','בַּצַּד הַשְּׂמֹאל','בְּאֶמְצַע הַדֶּלֶת','בַּיָּמִין, בַּשְּׁלִישׁ הָעֶלְיוֹן שֶׁל הַפֶּתַח.'],
+ [1,'מָה רָאָה יַעֲקֹב בַּחֲלוֹם?','סֻלָּם עִם מַלְאָכִים','סְפִינָה גְּדוֹלָה','אַרְמוֹן זָהָב','מַלְאָכִים עוֹלִים וְיוֹרְדִים בַּסֻּלָּם.'],
+ [1,'מָה נָתַן יַעֲקֹב לְיוֹסֵף?','כְּתֹנֶת פַּסִּים','כֶּתֶר זָהָב','חֶרֶב','כְּתֹנֶת מְיֻחֶדֶת וְצִבְעוֹנִית.'],
+ [1,'אֵיפֹה נִמְצָא הַכֹּתֶל הַמַּעֲרָבִי?','בִּירוּשָׁלַיִם','בְּתֵל אָבִיב','בְּאֵילַת','שָׂרִיד מֵחוֹמַת הַר הַבַּיִת.'],
+ [1,'מִי קְבוּרִים בִּמְעָרַת הַמַּכְפֵּלָה?','הָאָבוֹת וְהָאִמָּהוֹת','הַמְּלָכִים','הַנְּבִיאִים','אַבְרָהָם וְשָׂרָה, יִצְחָק וְרִבְקָה, יַעֲקֹב וְלֵאָה – בְּחֶבְרוֹן.'],
+ [1,'מָה אוֹמְרִים בְּרֹאשׁ חֹדֶשׁ?','הַלֵּל','קִינוֹת','סְלִיחוֹת','חֹדֶשׁ חָדָשׁ – אוֹמְרִים הַלֵּל בְּשִׂמְחָה!'],
+ [1,'כַּמָּה חֳדָשִׁים יֵשׁ בְּשָׁנָה עִבְרִית רְגִילָה?','12','10','15','וּבְשָׁנָה מְעֻבֶּרֶת – 13!'],
+ [1,'מָה מְבָרְכִים כְּשֶׁרוֹאִים קֶשֶׁת בֶּעָנָן?','זוֹכֵר הַבְּרִית','שֶׁהֶחֱיָנוּ','הַמּוֹצִיא','ה׳ זוֹכֵר אֶת הַהַבְטָחָה לְנֹחַ.'],
+ [1,'מִי נִצַּח אֶת גָּלְיָת?','דָּוִד','שִׁמְשׁוֹן','יוֹנָה','עִם קֶלַע, אֶבֶן – וּבִטָּחוֹן בַּה׳!'],
+ [1,'מָה פֵּרוּשׁ "אַהֲבַת יִשְׂרָאֵל"?','לֶאֱהֹב כָּל יְהוּדִי','לֶאֱהֹב רַק חֲבֵרִים','לֶאֱהֹב מִשְׂחָקִים','"וְאָהַבְתָּ לְרֵעֲךָ כָּמוֹךָ" – כְּלָל גָּדוֹל בַּתּוֹרָה.'],
+ [1,'מָה הַבְּרָכָה עַל אֹרֶז?','בּוֹרֵא מִינֵי מְזוֹנוֹת','הַמּוֹצִיא','בּוֹרֵא פְּרִי הָאֲדָמָה','עַל אֹרֶז מְבָרְכִים מְזוֹנוֹת.'],
+ [2,'מִי הָיָה הָאַדְמוֹ"ר הָרִאשׁוֹן שֶׁל חַבַּ"ד?','אַדְמוֹ"ר הַזָּקֵן','הַצֶּמַח צֶדֶק','הָרַבִּי הָרַשַׁ"ב','רַבִּי שְׁנֵיאוֹר זַלְמָן – בַּעַל הַתַּנְיָא וְהַשֻּׁלְחָן עָרוּךְ.'],
+ [2,'מָה פֵּרוּשׁ הַמִּלָּה חַבַּ"ד?','חָכְמָה, בִּינָה, דַּעַת','חֶסֶד, בְּרָכָה, דִּין','חַג, בַּיִת, דֶּלֶת','שְׁלֹשָׁה כֹּחוֹת שֶׁל הַשֵּׂכֶל.'],
+ [2,'אֵיזֶה אַדְמוֹ"ר נִקְרָא "הַצֶּמַח צֶדֶק"?','הַשְּׁלִישִׁי','הָרִאשׁוֹן','הַשְּׁבִיעִי','עַל שֵׁם סִפְרוֹ "צֶמַח צֶדֶק".'],
+ [2,'מָה זוֹ "הִתְוַעֲדוּת"?','מִפְגָּשׁ חֲסִידִי עִם נִגּוּנִים וְהַחְלָטוֹת טוֹבוֹת','מִשְׂחַק כַּדּוּרֶגֶל','מְסִבַּת יוֹם הֻלֶּדֶת','יוֹשְׁבִים יַחַד, שָׁרִים וּמְחַזְּקִים זֶה אֶת זֶה.'],
+ [2,'מָה חוֹגְגִים בְּי"ב תַּמּוּז?','אֶת הַגְּאֻלָּה שֶׁל הָרַבִּי הָרַיַּי"ץ','אֶת רֹאשׁ הַשָּׁנָה','אֶת חֲנֻכָּה','הָרַבִּי הָרַיַּי"ץ שֻׁחְרַר מִמַּאֲסָר בְּרוּסְיָה.'],
+ [2,'מָה אוֹמְרִים בַּבְּרָכָה עַל תְּפִלִּין שֶׁל יָד?','לְהָנִיחַ תְּפִלִּין','עַל מִצְוַת צִיצִית','לֵישֵׁב בַּסֻּכָּה','"אֲשֶׁר קִדְּשָׁנוּ בְּמִצְוֹתָיו וְצִוָּנוּ לְהָנִיחַ תְּפִלִּין".'],
+ [2,'כַּמָּה פְּרָקִים יֵשׁ בְּפִרְקֵי אָבוֹת?','שִׁשָּׁה','עֲשָׂרָה','אַרְבָּעָה','לוֹמְדִים פֶּרֶק בְּכָל שַׁבָּת בַּקַּיִץ.'],
+ [2,'מָה פֵּרוּשׁ "שְׁלִיחוּת"?','לְהָפִיץ אוֹר וְיַהֲדוּת בְּכָל מָקוֹם','לִנְסֹעַ לְטִיּוּל','לִשְׁלֹחַ מִכְתָּב','שְׁלוּחִים בְּכָל הָעוֹלָם מְקָרְבִים כָּל יְהוּדִי.']];
 const HFOOD=[['🍎','תַּפּוּחַ',0],['🍊','תַּפּוּז',0],['🍇','עֲנָבִים',0],['🍌','בָּנָנָה',1],['🥒','מְלָפְפוֹן',1],['🍉','אֲבַטִּיחַ',1],['🍓','תּוּת',1],['🥨','בֵּייגֶלֶה',2],['🍪','עוּגִיָּה',2],['🍫','שׁוֹקוֹלָד',3],['🥛','חָלָב',3]];
 const HBR=['בּוֹרֵא פְּרִי הָעֵץ','בּוֹרֵא פְּרִי הָאֲדָמָה','בּוֹרֵא מִינֵי מְזוֹנוֹת','שֶׁהַכֹּל נִהְיָה בִּדְבָרוֹ'];
 const HMIS={tef:{ic:'📦',n:'תְּפִלִּין',npc:'man',m:1,ask:'עוֹד לֹא הִנַּחְתִּי תְּפִלִּין הַיּוֹם...',thx:'תּוֹדָה! הִנַּחְתִּי תְּפִלִּין! 💪',cnt:'t'},
@@ -2793,6 +2820,7 @@ function heroBuild(i){const D=hDef(i),W=D.W;const r=mulberry(1000+i*77);const pi
   else{clr=false;if(c==='D')doorX=cx;}
   if(clr)grid[y][x]='.';}
  const winds=[];for(let x=0;x<grid[0].length;x++){let f=false;for(const r_ of grid)if(r_[x]==='w'){r_[x]='.';f=true;}if(f)winds.push(x);}
+ if(!D.bonus&&!D.boss){const cs=items.filter(t=>t.type==='coin'&&t.x>500&&t.x<grid[0].length*HT-500);if(cs.length>6){const c=cs[Math.floor(r()*cs.length)];c.type='secret';}}
  return{grid,items,ents,plats,gates,winds,aw,w:grid[0].length*HT,ax:ax>=0?ax*HT:-1,fall:{},drops:[],sq:{},doorX,coins:items.filter(t=>t.type==='coin').length,mis};}
 function hSolid(c){return c==='#'||c==='?'||c==='u'||c==='I'||c==='S'||c==='W';}
 function hStand(c){return hSolid(c)||c==='='||c==='X'||c==='h'||c==='^';}
@@ -2847,7 +2875,7 @@ function updBoss(e,dt){const h=R.hr,p=h.p,M=h.M,B=e.B;e.inv=Math.max(0,e.inv-dt)
  e.shot-=dt;if(e.shot<=0){e.shot=B.rate*(h.md.kid?1.5:1)*(ph>=2?.75:1)*(.8+Math.random()*.4);const cx=e.x+e.w/2,dx=p.x-cx;const n_=ph===3&&!h.md.kid?3:1;
   for(let k=0;k<n_;k++)h.proj.push({x:cx,y:e.y+30,vx:Math.max(-250,Math.min(250,dx/1.3))+(k-(n_-1)/2)*90,vy:-420,t:3.2,ic:B.pr==='mix'?rnd(['💤','💢','💚','❓','👑']):B.pr,b:0});}}
 function hBossMinions(h,e){const W_=h.D.W;const ts=W_.en.filter(t=>!HEN[t].fly);if(!ts.length)return;for(let i=0;i<2;i++){const t=rnd(ts),E=HEN[t],w=E.big?44:34;h.M.ents.push({type:t,x:e.x+(i?e.w+12:-w-12),y:11*HT-w-40,y0:0,x0:0,w,h:w,vx:(i?1:-1)*E.v,vy:0,alive:true,hp:E.hp||1,ph:Math.random()*6,inv:0,onG:false});hPart(h,e.x+e.w/2,e.y+e.h/2,14,E.col,160);}}
-function updateHero(dt){const h=R.hr;if(!h||h.over||h.pause)return;dt=Math.min(dt,1/30);if(h.cmbT>0){h.cmbT-=dt;if(h.cmbT<=0)h.cmb=0;}if(h.cmbFx>0)h.cmbFx=Math.max(0,h.cmbFx-dt*1.5);{const p0=h.P?h.P[0]:h.p;if(p0&&p0.onG&&!p0.onPl&&p0.inv<=0&&!(h.M.ents||[]).some(e=>e.alive!==false&&Math.abs(e.x-p0.x)<140))h.safe={x:p0.x,y:p0.y};h.asT=(h.asT||0)+dt;if(h.asT>20){h.asT=0;hAutoSave(h);}}if(h.fly&&h.fly.length){h.slotPop=h.slotPop||[0,0,0];for(const f of h.fly){f.t+=dt;if(f.t>=.65){h.slotPop[f.i]=1;beep(1320,.08,'triangle',.05);}}h.fly=h.fly.filter(f=>f.t<.65);}if(h.slotPop)for(let i=0;i<3;i++)h.slotPop[i]=Math.max(0,h.slotPop[i]-dt*3);if(h.slow>0){h.slow-=dt;dt*=.35;}h.t+=dt;h.noAmmoT=Math.max(0,(h.noAmmoT||0)-dt);if(mkEdge('amq')){hAmmoQuiz();return;}if(h.waves){for(const w_ of h.waves){w_.x+=w_.dir*280*dt;w_.t-=dt;for(const q of h.P)if(w_.t>0&&Math.abs(w_.x-q.x)<20&&q.onG&&q.y>=11*HT-4)hHurt(q);}h.waves=h.waves.filter(w_=>w_.t>0);if(h.over)return;}h.pw=h.pw||{};for(const k_ in h.pw)h.pw[k_]=Math.max(0,h.pw[k_]-dt);h.helpCd=Math.max(0,(h.helpCd||0)-dt);h.helpT=Math.max(0,(h.helpT||0)-dt);h.comboT=Math.max(0,(h.comboT||0)-dt);if(h.beam)h.beam.t-=dt;hPartsUpd(h,dt);if(mkEdge('hlp'))hHelp();const p=h.p,M=h.M;hMusic(h,dt);
+function updateHero(dt){const h=R.hr;if(!h||h.over||h.pause)return;dt=Math.min(dt,1/30);if(h.cmbT>0){h.cmbT-=dt;if(h.cmbT<=0)h.cmb=0;}if(h.rain>0){h.rain-=dt;h.rainT-=dt;if(h.rainT<=0){h.rainT=.12;h.M.items.push({type:'coin',x:h.p.x+(Math.random()-.5)*620,y:-20,fall:1,vy:60});}}for(const it of h.M.items){if(!it.fall||it.got)continue;it.vy=Math.min(700,it.vy+900*dt);it.y+=it.vy*dt;const tl=hTile(h.M,it.x,it.y+12);if(hSolid(tl)||tl==='='){it.fall=0;it.y=Math.floor((it.y+12)/HT)*HT-16;}if(it.y>HROWS*HT+40){it.got=true;}}if(h.cmbFx>0)h.cmbFx=Math.max(0,h.cmbFx-dt*1.5);{const p0=h.P?h.P[0]:h.p;if(p0&&p0.onG&&!p0.onPl&&p0.inv<=0&&!(h.M.ents||[]).some(e=>e.alive!==false&&Math.abs(e.x-p0.x)<140))h.safe={x:p0.x,y:p0.y};h.asT=(h.asT||0)+dt;if(h.asT>20){h.asT=0;hAutoSave(h);}}if(h.fly&&h.fly.length){h.slotPop=h.slotPop||[0,0,0];for(const f of h.fly){f.t+=dt;if(f.t>=.65){h.slotPop[f.i]=1;beep(1320,.08,'triangle',.05);}}h.fly=h.fly.filter(f=>f.t<.65);}if(h.slotPop)for(let i=0;i<3;i++)h.slotPop[i]=Math.max(0,h.slotPop[i]-dt*3);if(h.slow>0){h.slow-=dt;dt*=.35;}h.t+=dt;h.noAmmoT=Math.max(0,(h.noAmmoT||0)-dt);if(mkEdge('amq')){hAmmoQuiz();return;}if(h.waves){for(const w_ of h.waves){w_.x+=w_.dir*280*dt;w_.t-=dt;for(const q of h.P)if(w_.t>0&&Math.abs(w_.x-q.x)<20&&q.onG&&q.y>=11*HT-4)hHurt(q);}h.waves=h.waves.filter(w_=>w_.t>0);if(h.over)return;}h.pw=h.pw||{};for(const k_ in h.pw)h.pw[k_]=Math.max(0,h.pw[k_]-dt);h.helpCd=Math.max(0,(h.helpCd||0)-dt);h.helpT=Math.max(0,(h.helpT||0)-dt);h.comboT=Math.max(0,(h.comboT||0)-dt);if(h.beam)h.beam.t-=dt;hPartsUpd(h,dt);if(mkEdge('hlp'))hHelp();const p=h.p,M=h.M;hMusic(h,dt);
  h.msgT=Math.max(0,h.msgT-dt);h.tipT=Math.max(0,h.tipT-dt);h.power=Math.max(0,h.power-dt);h.shake=Math.max(0,h.shake-dt);
  if(h.tl&&!h.tlMsg&&h.t>h.tl){h.tlMsg=1;h.msg='⏱️ הַזְּמַן עָבַר – מַמְשִׁיכִים בְּלִי כּוֹכַב זָהָב';h.msgT=2;}
  for(const pl of M.plats){pl.ph+=dt*.7;const o=pl.rng*(1-Math.cos(pl.ph))/2;const nx=pl.ax==='h'?pl.x0+o:pl.x0,ny=pl.ax==='v'?pl.y0-o:pl.y0;pl.dx=nx-pl.x;pl.dy=ny-pl.y;pl.x=nx;pl.y=ny;}
@@ -2864,11 +2892,12 @@ function updateHero(dt){const h=R.hr;if(!h||h.over||h.pause)return;dt=Math.min(d
   for(const q of h.P){if(it.got)break;
    if(it.type==='coin'&&(h.g>=2||q.k==='noa'||h.pw.mag>0)){const dx=q.x-it.x,dy=(q.y-30)-it.y,d=Math.hypot(dx,dy),rad=(q.k==='noa'||h.pw.mag>0)?200:130;if(d<rad&&d>1){it.x+=dx/d*420*dt;it.y+=dy/d*420*dt;}}
    if(Math.abs(it.x-q.x)<28&&Math.abs(it.y-(q.y-q.h/2))<42){
+    if(it.type==='secret'){it.got=true;h.rain=7;h.rainT=0;h.pearl=PEARLS[Math.floor(Math.random()*PEARLS.length)];h.secrets=(h.secrets||0)+1;sfx.big();vib([30,40,60]);hPart(h,it.x,it.y,40,'#ffd400',260,2.8);celebrate('🚪✨',150,true);}
     if(it.type==='coin'){it.got=true;h.lp++;h.cmb=(h.cmbT>0?(h.cmb||0)+1:1);h.cmbT=1.1;beep(900+Math.min(h.cmb,16)*55,.05,'square',.03);hPart(h,it.x,it.y,4,'#ffe680',90,2.2);if(h.cmb%10===0){h.lp+=3;h.cmbFx=1;hPart(h,it.x,it.y,22,'#ff9d00',220,2.6);beep(1320,.08,'triangle',.05);beep(1760,.12,'triangle',.05,.08);vib([20,30,20]);}}
     else if(it.type==='heart'){it.got=true;if(h.hearts<h.maxH)h.hearts++;else h.lp+=3;beep(800,.1,'triangle',.05);}
     else if(it.type==='mitz'){it.got=true;h.power=8;h.lp+=3;h.ammo=Math.min(h.amax,h.ammo+3);h.msg=it.ic+' מִצְוָה! הָאוֹר מִתְחַזֵּק ✨';h.msgT=1.6;sfx.win();}
     else if(it.type==='scroll'){it.got=true;h.scrolls++;(h.fly=h.fly||[]).push({x:it.x-h.cam,y:it.y+HY0,t:0,i:h.scrolls-1});hPart(h,it.x,it.y,16,'#ffe680',180);hVib(30);celebrate('📜 '+h.scrolls+'/3 '+cheerName(q.k),110);if(h.scrolls===3){h.msg='כָּל הַקְּלָפִים! לַדֶּלֶת 🚪';h.msgT=2.2;}}
-    else if(it.type==='gem'){it.got=true;h.gem=true;h.lp+=5;celebrate('💎 מְצָאתֶם אֶת הַסּוֹד!',150);}
+  else if(it.type==='gem'){it.got=true;h.gem=true;h.lp+=5;celebrate('💎 מְצָאתֶם אֶת הַסּוֹד!',150);}
     else if(it.type==='flag'){it.got=true;h.cp={x:it.x,y:it.y+20};h.msg='🚩 נְקֻדַּת שְׁמִירָה – שָׁמַרְנוּ!';h.msgT=1.4;beep(660,.1,'triangle',.05);hSaveCk(h);}
     else if(it.type==='lamp'){it.got=true;h.cp={x:it.x,y:it.y+20};h.lightR=Math.min(420,h.lightR+40);h.msg='🏮 הַפָּנָס נִדְלַק!';h.msgT=1.3;beep(880,.1,'triangle',.05);beep(1320,.12,'triangle',.04,.08);hSaveCk(h);}
     else if(it.type==='ammo'){it.got=true;h.ammo=Math.min(h.amax,h.ammo+3);h.msg='🔆 +3 אוֹר';h.msgT=1;beep(990,.06,'sine',.04);hPart(h,it.x,it.y,8,'#fff3a0',120);}
@@ -2902,7 +2931,27 @@ function updateHero(dt){const h=R.hr;if(!h||h.over||h.pause)return;dt=Math.min(d
  h.orb.x+=((p.x-p.face*44)-h.orb.x)*Math.min(1,dt*4);h.orb.y+=((p.y-96+Math.sin(h.t*3)*6)-h.orb.y)*Math.min(1,dt*4);
  if(h.P.some(q=>hTile(M,q.x,q.y-20)==='D')){if(M.ents.some(e=>e.type==='boss'&&e.alive)){h.msg='קֹדֶם מְנַצְּחִים בְּאוֹר! ✨';h.msgT=1;}else if(h.scrolls<h.need){h.msg='חֲסֵרִים קְלָפִים: '+(h.need-h.scrolls)+' 📜';h.msgT=1;}else{heroWin();return;}}
  const cx=h.two?(h.P[0].x+h.P[1].x)/2:p.x;h.look=h.two?0:(h.look||0)+((p.face*70)-(h.look||0))*Math.min(1,dt*2.5);h.cam+=((Math.max(0,Math.min(M.w-W,cx-W/2+h.look)))-h.cam)*Math.min(1,dt*7);}
-function hEndQuiz(h,done){if(h.D.bonus){h.good=0;h.qn=0;done();return;}const L=[];const q=hNextQ();L.push({q:q[1],opts:[q[2],q[3],q[4]],ex:q[5]});
+const PEARLS=[
+ ['מְעַט אוֹר דּוֹחֶה הַרְבֵּה חֹשֶׁךְ.','פִּתְגָּם חֲסִידִי','🕯️'],
+ ['תַּחְשְׁבוּ טוֹב – וְיִהְיֶה טוֹב.','הַצֶּמַח צֶדֶק','💭'],
+ ['עִבְדוּ אֶת ה׳ בְּשִׂמְחָה.','תְּהִלִּים','🎶'],
+ ['וְאָהַבְתָּ לְרֵעֲךָ כָּמוֹךָ – זֶה כְּלָל גָּדוֹל בַּתּוֹרָה.','רַבִּי עֲקִיבָא','💛'],
+ ['מִכָּל דָּבָר שֶׁרוֹאִים – אֶפְשָׁר לִלְמֹד מַשֶּׁהוּ טוֹב.','תּוֹרַת הַבַּעַל שֵׁם טוֹב','👀'],
+ ['אֵיזֶהוּ עָשִׁיר? הַשָּׂמֵחַ בְּחֶלְקוֹ.','פִּרְקֵי אָבוֹת','😊'],
+ ['הֱוֵי מְקַבֵּל אֶת כָּל הָאָדָם בְּסֵבֶר פָּנִים יָפוֹת.','פִּרְקֵי אָבוֹת','🙂'],
+ ['בְּמָקוֹם שֶׁאֵין אֲנָשִׁים – הִשְׁתַּדֵּל לִהְיוֹת אִישׁ.','פִּרְקֵי אָבוֹת','💪'],
+ ['כָּל יִשְׂרָאֵל עֲרֵבִים זֶה בָּזֶה.','חֲזַ"ל','🤝'],
+ ['מִצְוָה גּוֹרֶרֶת מִצְוָה.','פִּרְקֵי אָבוֹת','🔗'],
+ ['שִׂמְחָה פּוֹרֶצֶת גָּדֵר.','פִּתְגָּם חֲסִידִי','🎉'],
+ ['לֹא הַמִּדְרָשׁ הוּא הָעִקָּר – אֶלָּא הַמַּעֲשֶׂה.','פִּרְקֵי אָבוֹת','✋'],
+ ['זְרִיזִין מַקְדִּימִין לְמִצְווֹת.','חֲזַ"ל','⚡'],
+ ['אִם אֵין אֲנִי לִי – מִי לִי?','הִלֵּל הַזָּקֵן, פִּרְקֵי אָבוֹת','🙋'],
+ ['אַל תִּסְתַּכֵּל בַּקַּנְקַן – אֶלָּא בְּמַה שֶּׁיֵּשׁ בּוֹ.','פִּרְקֵי אָבוֹת','🏺'],
+ ['דַּע מָה לְמַעְלָה מִמְּךָ: עַיִן רוֹאָה וְאֹזֶן שׁוֹמַעַת.','פִּרְקֵי אָבוֹת','👁️'],
+ ['יְהוּדִי צָרִיךְ לִחְיוֹת עִם הַזְּמַן – עִם פָּרָשַׁת הַשָּׁבוּעַ.','אַדְמוֹ"ר הַזָּקֵן','📖'],
+ ['הַשְּׁכִינָה נִמְצֵאת בְּכָל מָקוֹם – גַּם בַּמָּקוֹם הֲכִי קָטָן.','תּוֹרַת הַחֲסִידוּת','✨']];
+function hEndQuiz(h,done){if(h.pearl&&!h.pearlShown){h.pearlShown=1;const pl=h.pearl;S.pearls=S.pearls||[];if(!S.pearls.includes(pl[0]))S.pearls.push(pl[0]);save();bind({n:()=>hEndQuiz(h,done)});show(`<div class="who"><span style="font-size:34px">🚪✨</span><span>מָצָאתָ חֶדֶר סוֹדִי! פְּנִינָה חֲסִידִית:</span></div><div class="storyart">${pl[2]}</div><p class="say" style="font-size:1.35em;text-align:center">"${pl[0]}"</p><p class="hex" style="text-align:center">— ${pl[1]}</p><p class="tip" style="text-align:center">📖 ${S.pearls.length}/${PEARLS.length}</p><div class="btns row"><button class="big1" data-act="n">▶</button></div>`);return;}
+if(h.D.bonus){h.good=0;h.qn=0;done();return;}const L=[];const q=hNextQ();L.push({q:q[1],opts:[q[2],q[3],q[4]],ex:q[5]});
  if(h.foods&&h.foods.length){const f=h.foods[0];L.push({big:`<div class="storyart">${f[0]}</div>`,q:`אָכַלְנוּ ${f[1]} – אֵיזוֹ בְּרָכָה מְבָרְכִים?`,opts:[HBR[f[2]],...HBR.filter((b,i)=>i!==f[2])],ex:['פְּרִי שֶׁגָּדֵל עַל עֵץ – הָעֵץ.','מַה שֶּׁגָּדֵל מִן הָאֲדָמָה – הָאֲדָמָה.','מַאֲפֶה מִקֶּמַח – מְזוֹנוֹת.','עַל כָּל הַשְּׁאָר – שֶׁהַכֹּל.'][f[2]]});}
  else if(hAge()&&hAge()<=8){const w=rnd(RW.filter(x=>x[1]));const o=shuffle(RW.filter(x=>x[1]&&x[1]!==w[1])).slice(0,2);L.push({big:`<div class="rword rfont">${w[0]}</div>`,q:'קִרְאוּ אֶת הַמִּלָּה – אֵיזוֹ תְּמוּנָה?',opts:[w[1],o[0][1],o[1][1]],emo:1,ex:'קוֹרְאִים לְאַט, אוֹת אַחֲרֵי אוֹת 💛'});}
  h.qn=L.length;h.good=0;let i=0;
@@ -2986,6 +3035,7 @@ function drawHero(){const h=R.hr;if(!h)return;const M=h.M,th=h.D.W.th,cam=h.cam,
    ctx.scale(pu,pu);ctx.rotate(Math.sin(h.t*2+it.x)*.12);ctx.fillStyle='#fff4cf';ctx.strokeStyle='#d99a00';ctx.lineWidth=4;rr(ctx,-19,-25,38,50,8);ctx.fill();ctx.stroke();ctx.strokeStyle='#f3c94a';ctx.lineWidth=2;rr(ctx,-14,-20,28,40,5);ctx.stroke();
    ctx.font='26px serif';ctx.textAlign='center';ctx.direction='ltr';ctx.fillText('📜',0,10);ctx.direction='rtl';ctx.restore();
    ctx.font='14px serif';ctx.textAlign='center';for(let k=0;k<3;k++){const a=h.t*2.2+k*2.1;ctx.globalAlpha=.6+.4*Math.sin(h.t*6+k);ctx.fillText('✨',it.x+Math.cos(a)*34,yy+Math.sin(a)*30);}ctx.globalAlpha=1;}
+  else if(it.type==='secret'){const yy=it.y-18+Math.sin(h.t*2)*3;const gl=ctx.createRadialGradient(it.x,yy,6,it.x,yy,60);gl.addColorStop(0,'rgba(255,230,120,.8)');gl.addColorStop(1,'rgba(255,200,40,0)');ctx.fillStyle=gl;ctx.beginPath();ctx.arc(it.x,yy,60,0,7);ctx.fill();ctx.fillStyle='#8b5a2b';ctx.strokeStyle='#ffd400';ctx.lineWidth=4;rr(ctx,it.x-22,yy-34,44,62,10);ctx.fill();ctx.stroke();ctx.fillStyle='#a87240';rr(ctx,it.x-15,yy-26,30,22,5);ctx.fill();rr(ctx,it.x-15,yy+0,30,22,5);ctx.fill();ctx.fillStyle='#ffd400';ctx.beginPath();ctx.arc(it.x+12,yy+4,3,0,7);ctx.fill();ctx.save();ctx.translate(it.x+20,yy-22);ctx.rotate(.25);ctx.fillStyle='#fff4cf';ctx.strokeStyle='#b8860b';ctx.lineWidth=1.5;rr(ctx,-3,-9,6,18,2);ctx.fill();ctx.stroke();ctx.restore();ctx.font='16px serif';ctx.textAlign='center';ctx.fillText('✨',it.x-26+Math.sin(h.t*4)*3,yy-36);ctx.fillText('✨',it.x+28,yy-30+Math.cos(h.t*4)*3);}
   else if(it.type==='gem'){ctx.fillStyle='rgba(150,220,255,.5)';ctx.beginPath();ctx.arc(it.x,it.y+bob,24,0,7);ctx.fill();ctx.font='28px serif';ctx.fillText('💎',it.x,it.y+bob+10);}
   else if(it.type==='heart'){ctx.font='24px serif';ctx.fillText('❤️',it.x,it.y+bob+8);}
   else if(it.type==='mitz'){ctx.fillStyle='rgba(255,255,255,.75)';ctx.beginPath();ctx.arc(it.x,it.y+bob,20,0,7);ctx.fill();ctx.font='26px serif';ctx.fillText(it.ic||'🕯️',it.x,it.y+bob+9);}
