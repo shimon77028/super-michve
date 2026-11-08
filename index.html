@@ -157,7 +157,7 @@ html{overflow:hidden!important;height:100%}body{box-sizing:border-box;height:100
 .icons{display:flex!important;flex-wrap:wrap;justify-content:center;overflow:visible!important}.icons .ibtn{width:76px}
 *{scrollbar-width:thin;scrollbar-color:rgba(201,162,39,.7) transparent}
 ::-webkit-scrollbar{width:7px;height:0}::-webkit-scrollbar-button{display:none;width:0;height:0}::-webkit-scrollbar-thumb{background:rgba(201,162,39,.7);border-radius:8px}::-webkit-scrollbar-track,::-webkit-scrollbar-corner{background:transparent}
-#amb{position:fixed;inset:0;width:100%;height:100%;filter:blur(22px) brightness(.6) saturate(1.2);transform:scale(1.2);pointer-events:none;z-index:0;opacity:0;transition:opacity .4s}
+#amb{position:fixed;inset:0;width:100%;height:100%;filter:brightness(.6);pointer-events:none;z-index:0;opacity:0;transition:opacity .4s}
 .cab{position:relative;z-index:1}
 .famcode{font:900 1.3em/1 ui-monospace,monospace;letter-spacing:2px;background:#fff6c8;border:3px dashed #c9a227;border-radius:12px;padding:4px 10px;display:inline-block}
 .famjoin input{font:800 18px ui-monospace,monospace;letter-spacing:2px;padding:8px 10px;border:3px solid var(--ink);border-radius:12px;width:min(260px,70vw);text-align:center;text-transform:uppercase}
@@ -431,9 +431,16 @@ try{document.documentElement.lang='he';document.documentElement.dir='rtl';}catch
 const $=id=>document.getElementById(id);
 const cv=$('game'),ctx=cv.getContext('2d'),fx=$('fx'),fctx=fx.getContext('2d');
 const W=960,H=540,GY=448;
-const DPR=Math.min(2,window.devicePixelRatio||1);
-for(const c of [cv,fx]){c.width=W*DPR;c.height=H*DPR;}
-ctx.setTransform(DPR,0,0,DPR,0,0);fctx.setTransform(DPR,0,0,DPR,0,0);
+const IS_TOUCH=(()=>{try{return matchMedia('(pointer: coarse)').matches||'ontouchstart' in window}catch(e){return false}})();
+const LOWEND=(navigator.hardwareConcurrency||8)<=4||(navigator.deviceMemory||8)<=3;
+const BDPR=Math.min(IS_TOUCH?(LOWEND?1.25:1.5):2,window.devicePixelRatio||1);
+let DPR=BDPR;
+function setDPR(d){DPR=d;for(const c of [cv,fx]){c.width=Math.round(W*DPR);c.height=Math.round(H*DPR);}ctx.setTransform(DPR,0,0,DPR,0,0);fctx.setTransform(DPR,0,0,DPR,0,0);}
+setDPR(DPR);
+/* adaptive quality: if the phone is struggling, render fewer pixels */
+const PERF={acc:0,n:0,t:0,steps:[1.25,1],lvl:0,low:false};
+function perfTick(dtMs){if(document.hidden)return;PERF.acc+=dtMs;PERF.n++;PERF.t+=dtMs;if(PERF.t<2500)return;const avg=PERF.acc/PERF.n;PERF.acc=0;PERF.n=0;PERF.t=0;
+ if(avg>26&&avg<200){const nx=PERF.steps.find(v=>v<DPR-.01);if(nx){setDPR(nx);}else PERF.low=true;}}
 const FONT='"Noto Sans Hebrew",system-ui,sans-serif';
 const panel=$('panel'),card=$('card'),hud=$('hud'),toastEl=$('toast');
 const rnd=a=>a[Math.floor(Math.random()*a.length)];
@@ -545,8 +552,8 @@ function makePortraits(){for(const k in FAM){const pc=document.createElement('ca
 function pimg(k){return `<img src="${portraits[k]}" alt="">`;}
 
 /* ================= BACKGROUND ================= */
-const bg=document.createElement('canvas');bg.width=W*DPR;bg.height=H*DPR;
-function drawBg(){const b=bg.getContext('2d');b.setTransform(DPR,0,0,DPR,0,0);b.clearRect(0,0,W,H);
+const bg=document.createElement('canvas');bg.width=W*BDPR;bg.height=H*BDPR;
+function drawBg(){const b=bg.getContext('2d');b.setTransform(BDPR,0,0,BDPR,0,0);b.clearRect(0,0,W,H);
  const stones=['#ead8b4','#e0c9a0','#f1e3c6','#d9c195'];
  const shops=[['פָלָאפֶל','#2f80ed'],['מַאֲפִיָּה','#b5651d'],['מַכֹּלֶת','#3fa34d'],['סְפָרִים','#7a4fc9'],['גְּלִידָה','#e2475e'],['צַעֲצוּעִים','#ff8c1a']];
  let x=-10,i=0;
@@ -570,7 +577,7 @@ function drawBg(){const b=bg.getContext('2d');b.setTransform(DPR,0,0,DPR,0,0);b.
 }
 drawBg();
 const BGS={street:bg};
-function mkBg(theme){const c=document.createElement('canvas');c.width=W*DPR;c.height=H*DPR;const b=c.getContext('2d');b.setTransform(DPR,0,0,DPR,0,0);const tree=(x,y,s)=>{b.fillStyle='#7a5235';b.fillRect(x-6*s,y-40*s,12*s,40*s);b.fillStyle='#4fb35f';b.beginPath();b.arc(x,y-58*s,30*s,0,7);b.arc(x-20*s,y-44*s,20*s,0,7);b.arc(x+20*s,y-44*s,20*s,0,7);b.fill();};
+function mkBg(theme){const c=document.createElement('canvas');c.width=W*BDPR;c.height=H*BDPR;const b=c.getContext('2d');b.setTransform(BDPR,0,0,BDPR,0,0);const tree=(x,y,s)=>{b.fillStyle='#7a5235';b.fillRect(x-6*s,y-40*s,12*s,40*s);b.fillStyle='#4fb35f';b.beginPath();b.arc(x,y-58*s,30*s,0,7);b.arc(x-20*s,y-44*s,20*s,0,7);b.arc(x+20*s,y-44*s,20*s,0,7);b.fill();};
  if(theme==='park'){b.fillStyle='#a6dc95';b.beginPath();b.moveTo(0,GY-60);for(let x=0;x<=W;x+=20)b.lineTo(x,GY-190+Math.sin(x*.008)*40);b.lineTo(W,GY-60);b.fill();b.fillStyle='#8fd07a';b.beginPath();b.moveTo(0,GY-60);for(let x=0;x<=W;x+=20)b.lineTo(x,GY-130+Math.sin(x*.013+2)*30);b.lineTo(W,GY-60);b.fill();
   for(let i=0;i<9;i++)tree(30+i*118,GY-60,.9+(i%3)*.15);
   b.strokeStyle='#e2475e';b.lineWidth=6;b.beginPath();b.moveTo(700,GY-60);b.lineTo(740,GY-170);b.lineTo(780,GY-60);b.stroke();b.beginPath();b.moveTo(740,GY-170);b.lineTo(860,GY-170);b.lineTo(880,GY-60);b.stroke();b.strokeStyle='#555';b.lineWidth=2;b.beginPath();b.moveTo(800,GY-170);b.lineTo(800,GY-100);b.moveTo(830,GY-170);b.lineTo(830,GY-100);b.stroke();b.fillStyle='#2f80ed';b.fillRect(794,GY-102,42,8);
@@ -1821,7 +1828,7 @@ function duel2End(w){const D=R.d2;D.over=true;const pl=D.p[w];sfx.big();celebrat
   show(`<h2>🏁 ${FAM[pl.k].name} ${FAM[pl.k].f?'נִצְּחָה':'נִצַּח'} בַּמֵּרוֹץ!</h2><div class="grid">${D.p.map((p,i)=>`<div class="tile ${i===w?'on':''}">${pimg(p.k)}${FAM[p.k].name}<small>⭐ ${p.score}${i===w?' · 🏆':''}</small></div>`).join('')}</div>${say('shimon',cheerPre()+FAM[pl.k].name+'! מֵרוֹץ מַדְהִים – וְכָל הַכָּבוֹד לִשְׁנֵיכֶם!')}<div class="btns row"><button data-act="again">עוֹד מֵרוֹץ!</button><button class="alt" data-act="back">לַזִּירָה</button></div>`);},1600);}
 function d2DrawHalf(pl,other,oy,hh,label){ctx.save();ctx.translate(0,oy);ctx.beginPath();ctx.rect(0,0,W,hh);ctx.clip();
  const g=ctx.createLinearGradient(0,0,0,170);g.addColorStop(0,'#7ec3ff');g.addColorStop(1,'#d9f0ff');ctx.fillStyle=g;ctx.fillRect(0,0,W,170);
- const off=(pl.dist*.25)%W;ctx.drawImage(bg,0,150*DPR,W*DPR,320*DPR,off-W,20,W,150);ctx.drawImage(bg,0,150*DPR,W*DPR,320*DPR,off,20,W,150);
+ const off=(pl.dist*.25)%W;ctx.drawImage(bg,0,150*BDPR,W*BDPR,320*BDPR,off-W,20,W,150);ctx.drawImage(bg,0,150*BDPR,W*BDPR,320*BDPR,off,20,W,150);
  ctx.fillStyle='#45454d';ctx.fillRect(0,170,W,hh-170);ctx.fillStyle='#f2f2f2';for(let x=-((pl.dist)%80);x<W;x+=80)ctx.fillRect(W-x-44,229,44,4);
  const LY=[205,258];const lane=Math.round(pl.ly);ctx.fillStyle='rgba(255,201,60,.14)';ctx.fillRect(0,lane?232:172,W,lane?38:58);
  const D=R.d2;for(let i=pl.ei;i<D.ev.length;i++){const e=D.ev[i];const dx=e.d-pl.dist;if(dx>980)break;const x=D2F-dx;
@@ -4447,7 +4454,7 @@ $('ru').addEventListener('pointerdown',e=>{e.preventDefault();runnerLane(0);});$
 
 /* ================= LOOP ================= */
 let last=performance.now();
-function frame(now){const dt0=Math.min(.05,(now-last)/1000);const dt=dt0*((PSET.slow||R.slowLive)&&cab.classList.contains('playing')?.65:1);last=now;R.t+=dt;if(PAD_SCENES.includes(R.scene)&&cab.classList.contains('isMP'))cab.classList.remove('isMP');{const pl=CLEAN&&panel.hidden&&!R.paused&&(PAD_SCENES.includes(R.scene)||PAUSE_SCENES.includes(R.scene));if(pl!==cab.classList.contains('playing'))cab.classList.toggle('playing',pl);keyHint(pl);}
+function frame(now){perfTick(now-last);const dt0=Math.min(.05,(now-last)/1000);const dt=dt0*((PSET.slow||R.slowLive)&&cab.classList.contains('playing')?.65:1);last=now;R.t+=dt;if(PAD_SCENES.includes(R.scene)&&cab.classList.contains('isMP'))cab.classList.remove('isMP');{const pl=CLEAN&&panel.hidden&&!R.paused&&(PAD_SCENES.includes(R.scene)||PAUSE_SCENES.includes(R.scene));if(pl!==cab.classList.contains('playing'))cab.classList.toggle('playing',pl);keyHint(pl);}
  cab.classList.toggle('canPause',PAUSE_SCENES.includes(R.scene)&&panel.hidden&&!R.paused);
  if(!R.paused){
  if(R.scene==='street')updateStreet(dt);
@@ -4495,7 +4502,7 @@ function frame(now){const dt0=Math.min(.05,(now-last)/1000);const dt=dt0*((PSET.
  else drawShowScene();
  for(const f of fl){f.life-=dt;f.y-=30*dt;ctx.globalAlpha=Math.min(1,f.life);ctx.font='800 20px '+FONT;ctx.textAlign='center';ctx.direction='rtl';ctx.lineWidth=5;ctx.strokeStyle='#111';ctx.strokeText(f.t,f.x,f.y);ctx.fillStyle=f.c;ctx.fillText(f.t,f.x,f.y);}
  ctx.globalAlpha=1;for(let i=fl.length-1;i>=0;i--)if(fl[i].life<=0)fl.splice(i,1);
- fctx.clearRect(0,0,W,H);
+ if(conf.length||R._fxDirty){fctx.clearRect(0,0,W,H);R._fxDirty=conf.length>0;}
  for(const p of conf){p.life-=dt;p.vy+=600*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;p.vx*=.99;p.r+=p.vr*dt;fctx.save();fctx.translate(p.x,p.y);fctx.rotate(p.r);fctx.globalAlpha=Math.min(1,p.life);fctx.fillStyle=p.c;fctx.fillRect(-5,-3,10,6);fctx.restore();}
  for(let i=conf.length-1;i>=0;i--)if(conf[i].life<=0||conf[i].y>H+20)conf.splice(i,1);
  for(const k in MK)MKP[k]=MK[k];
@@ -4586,6 +4593,6 @@ async function syncLink(){try{const o={};for(let i=0;i<localStorage.length;i++){
 /* phone: fill the screen (fullscreen + landscape on first touch) and soft backdrop instead of black bars */
 addEventListener('pointerdown',function fsOnce(e){if(e.pointerType!=='touch')return;removeEventListener('pointerdown',fsOnce,true);try{const d=document,el=d.documentElement;if(!(d.fullscreenElement||d.webkitFullscreenElement)){const f=el.requestFullscreen||el.webkitRequestFullscreen;if(f){const r=f.call(el,{navigationUI:'hide'});if(r&&r.then)r.then(()=>{try{screen.orientation&&screen.orientation.lock&&screen.orientation.lock('landscape').catch(()=>{});}catch(e){}}).catch(()=>{});}}}catch(e){}},true);
 (()=>{const a=document.createElement('canvas');a.id='amb';a.width=96;a.height=54;a.setAttribute('aria-hidden','true');document.body.prepend(a);const x=a.getContext('2d');const g=document.getElementById('game');
- setInterval(()=>{try{const sc=document.getElementById('screen').getBoundingClientRect();const bars=innerWidth-sc.width>24||innerHeight-sc.height>24;a.style.opacity=bars&&!document.hidden?'1':'0';if(bars&&!document.hidden)x.drawImage(g,0,0,96,54);}catch(e){}},150);})();
+ setInterval(()=>{try{const sc=document.getElementById('screen').getBoundingClientRect();const bars=innerWidth-sc.width>24||innerHeight-sc.height>24;a.style.opacity=bars&&!document.hidden?'1':'0';if(bars&&!document.hidden){x.imageSmoothingQuality='low';x.drawImage(g,0,0,24,14);x.drawImage(a,0,0,24,14,0,0,96,54);}}catch(e){}},700);})();
 })();
 </script>
