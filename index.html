@@ -228,6 +228,17 @@ button.pulse{animation:pulse2 1.2s ease-in-out infinite}@keyframes pulse2{50%{tr
 #card.tight2 .shelfit{padding:4px!important}#card.tight2 .shelfit span{font-size:24px}
 .pearls{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}.pearl{background:#fff;border:3px solid #c9a227;border-radius:14px;padding:6px 10px;display:flex;flex-direction:column;gap:2px}.pearl span{font-size:24px}.pearl.lock{background:#f1ede4;border-style:dashed;color:#888;align-items:center;justify-content:center}
 .tile.dbl{box-shadow:0 0 0 4px #ffd400,0 5px 0 var(--ink)!important}.dblb{font-style:normal;font-size:.75em;background:#ffd400;border-radius:999px;padding:0 8px;font-weight:900}
+.ladder{display:flex;flex-direction:row-reverse;justify-content:center;flex-wrap:wrap;gap:2px;background:rgba(26,20,16,.8);padding:4px 6px;border-radius:12px;margin:0 auto 4px;width:max-content;max-width:100%}
+.ladder span{min-width:30px;text-align:center;font-weight:900;font-size:13px;color:#aaa;border-radius:6px;line-height:1.35}.ladder span.got{color:#7ed957}.ladder span.cur{background:#ffd400;color:#1a1410}.ladder span.ms{font-size:15px}
+@media (max-height:600px){.ladder span{min-width:22px;font-size:11px}}
+.qlife{margin-inline-start:auto;display:inline-flex;gap:4px}.qlife button{min-height:34px!important;padding:2px 8px!important}
+.qtext{text-align:center;font-size:clamp(20px,3vw,28px)!important;margin:6px 0!important}
+.qans{display:grid;gap:8px}.qa{position:relative;display:flex!important;align-items:center;gap:10px;text-align:start;font-size:clamp(17px,2.2vw,21px)!important;background:#fff!important;border:4px solid var(--qc,#2667b3)!important;overflow:hidden}
+.qa b{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--qc,#2667b3);color:#fff;flex:none}
+.qa.qok{background:#c9f2d3!important;border-color:#2a7a37!important}.qa.qbad{background:#ffd6d6!important;border-color:#c0392b!important;animation:qshake .3s}.qa.gone{opacity:.25;justify-content:center}
+.qaud{position:absolute;inset-inline-start:0;bottom:0;height:6px;background:#ffd400}.qa em{margin-inline-start:auto;font-style:normal;font-weight:900;color:#7a5a20}
+@keyframes qshake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@media (prefers-reduced-motion:no-preference){#card.anim{animation:cardIn .22s ease-out}@keyframes cardIn{from{transform:scale(.94);opacity:.4}to{transform:none;opacity:1}}}
 #card .grps{display:flex;flex-wrap:wrap;gap:4px 14px}
 #card .grp{flex-grow:1;min-width:150px}
 #card.tight2 .grid .tile{position:relative}
@@ -747,7 +758,7 @@ function addPts(n){S.points+=n;R.stagePts+=n;save();}
 function mitzvaCoins(){let c=5;if(has('benny'))c+=2;if(has('noa'))c+=2;return c;}
 
 /* ================= UI HELPERS ================= */
-function show(html,low=false){card.innerHTML=html;panel.classList.toggle('low',low===true||low==='low');panel.classList.toggle('top',low==='top');panel.hidden=false;const b=card.querySelector('button');if(b)b.focus({preventScroll:true});fitCard();requestAnimationFrame(fitCard);ttsAfterShow();}
+function show(html,low=false){card.innerHTML=html;card.classList.remove('anim');void card.offsetWidth;card.classList.add('anim');panel.classList.toggle('low',low===true||low==='low');panel.classList.toggle('top',low==='top');panel.hidden=false;const b=card.querySelector('button');if(b)b.focus({preventScroll:true});fitCard();requestAnimationFrame(fitCard);ttsAfterShow();}
 function fitCard(){try{const c=card;if(panel.hidden)return;c.classList.remove('wide','tight','tight2');c.style.fontSize='';const over=()=>c.scrollHeight>c.clientHeight+3;if(!over())return;
  if(c.querySelector('.grid,.ggrid,.howgrid'))c.classList.add('wide');if(!over())return;let fs=parseFloat(getComputedStyle(c).fontSize)||18;while(over()&&fs>15){fs-=1;c.style.fontSize=fs+'px';}if(over())c.classList.add('tight');if(over()&&!/^(parents|rec|recStudio|pearls)$/.test(R.screen||'')){c.classList.add('tight2');while(over()&&fs>13){fs-=1;c.style.fontSize=fs+'px';}}}catch(e){}}
 addEventListener('resize',()=>requestAnimationFrame(fitCard));
@@ -755,7 +766,7 @@ function hide(){panel.hidden=true;ttsStop();cab.classList.remove('ttsOn');}
 const say=(k,text)=>`<div class="who">${pimg(k)}<span>${FAM[k].name}</span></div><p class="say" data-k="${k}">${text}</p>`;
 let ACT={};
 function bind(map){ACT=map;}
-card.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b.disabled)return;sfx.click();const a=b.dataset.act;if(a&&ACT[a])ACT[a](b.dataset.v,b);});
+card.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b.disabled)return;sfx.click();vib(6);const a=b.dataset.act;if(a&&ACT[a])ACT[a](b.dataset.v,b);});
 
 /* ================= CONTENT ================= */
 const STAGES=[
@@ -1544,14 +1555,28 @@ function arcadeScreen(msg=''){confirmLeave();R.screen='arcade';R.stage=0;R.scene
  <div class="btns row"><button class="alt" data-act="guide">❓ אֵיךְ מְשַׂחֲקִים?</button><button class="alt" data-act="map">🏠 בַּיִת</button></div>`);}
 
 /* ---- champions quiz ---- */
-function champQuiz(){R.scene='show';const pool=shuffle([...Object.values(QUIZ).flat(),...PARASHOT.flatMap(p=>p.q),...TRIVIA]);let i=0,lives=3,score=0,streak=0;
- const hearts=()=>'❤️'.repeat(lives)+'🤍'.repeat(3-lives);
- const ask=()=>{if(i>=pool.length){i=0;}const q=pool[i++];const tb=turnNow();let opts=[[q[1],1],[q[2],0],[q[3],0]];if(easy())opts=[opts[0],opts[1+Math.floor(Math.random()*2)]];opts=shuffle(opts);
-  bind({a:v=>{const ok=v==='1';if(ok){score++;streak++;addPts(5);celebrate(streak%5===0?`${cheerName()} ${streak} בָּרֶצֶף!`:cheerName(),streak%5===0?150:60,streak%5===0);}else{lives--;streak=0;sfx.oops();}
-    if(lives<=0){const nb=setBest('champ',score);dailyEvent('champ',score);addCoins(Math.min(30,score*2));bind({again:champQuiz,back:()=>arcadeScreen()});
-     show(`<h2>הַחִידוֹן נִגְמַר!</h2><p>עֲנִיתֶם נָכוֹן עַל <b>${score}</b> שְׁאֵלוֹת${nb?' – שִׂיא חָדָשׁ! 🏆':` · הַשִּׂיא: ${bestOf('champ')}`}</p>${q[4]&&!ok?`<p>הַתְּשׁוּבָה הָאַחֲרוֹנָה: <b>${q[1]}</b></p>`:''}${say('rabbi',score>=10?'אַלּוּפִים אֲמִתִּיִּים! יִישַׁר כֹּחַ!':'יָפֶה מְאֹד! כָּל פַּעַם לוֹמְדִים עוֹד.')}<div class="btns row"><button data-act="again">עוֹד פַּעַם!</button><button class="alt" data-act="back">לְפִנַּת הַמִּשְׂחָקִים</button></div>`);if(nb)celebrate('שִׂיא חָדָשׁ!',220,true);return;}
-    bind({nx:ask});show(`<h2>${ok?'נָכוֹן!':'כִּמְעַט!'} <span style="font-size:.7em">${hearts()}</span></h2>${ok?'':`<p>הַתְּשׁוּבָה: <b>${q[1]}</b></p>`}${q[4]?`<p class="fact">${q[4]}</p>`:''}<div class="btns row"><button data-act="nx">הַשְּׁאֵלָה הַבָּאָה</button></div>`);}});
-  show(`<div class="who">${pimg('rabbi')}<span>🧠 חִידוֹן הָאַלּוּפִים · ${hearts()} · נְקֻדּוֹת: ${score}</span></div>${tb}<h2>${q[0]}</h2><div class="btns">${opts.map((o,j)=>`<button class="alt" data-act="a" data-v="${o[1]}">${j+1}. ${o[0]}</button>`).join('')}</div>`);};
+function champQuiz(){R.scene='show';R.screen='champ';const easy_=easy();
+ const hq=HQ.filter(q=>easy_?q[0]<=1:q[0]>=1).map(q=>[q[1],q[2],q[3],q[4],q[5]]);
+ const extra=easy_?[]:[...Object.values(QUIZ).flat(),...PARASHOT.flatMap(p=>p.q),...TRIVIA];
+ const pool=shuffle([...hq,...hq,...extra]).filter((q,i,a)=>a.findIndex(z=>z[0]===q[0])===i);
+ const LAD=15,MS={5:'🥉',10:'🥈',15:'🥇'};let i=0,step=0,lives=easy_?3:2,streak=0;const life={cut:1,aud:1};
+ const ladder=()=>`<div class="ladder">${[...Array(LAD)].map((_,k)=>{const n=LAD-k;return`<span class="${n===step+1?'cur':n<=step?'got':''} ${MS[n]?'ms':''}">${MS[n]||n}</span>`;}).join('')}</div>`;
+ const hearts=()=>'❤️'.repeat(lives)+'🤍'.repeat((easy_?3:2)-lives);
+ const finish=(win)=>{const sc=step;const nb=setBest('champ',sc);dailyEvent('champ',sc);const prize=sc>=15?40:sc>=10?25:sc>=5?12:Math.max(2,sc);addCoins(prize);const medal=sc>=15?'🥇':sc>=10?'🥈':sc>=5?'🥉':'🎓';
+  if(win){confetti(260);sfx.big();}bind({again:champQuiz,back:()=>arcadeScreen()});
+  show(`<h2>${win?'🏆 אַלּוּף הַחִידוֹן!':'🧠 כָּל הַכָּבוֹד!'}</h2><div class="remoji">${medal}</div><p class="say" style="text-align:center;font-size:1.2em">✅ ${sc} / ${LAD} · 🪙 +${prize}${nb?' · 🆕 שִׂיא!':''}</p><div class="btns row"><button class="big1" data-act="again">🔁 עוֹד פַּעַם</button><button class="alt" data-act="back">🎮</button></div>`);if(nb)celebrate('🆕 🏆',200,true);};
+ const ask=()=>{if(i>=pool.length)i=0;const q=pool[i++];let opts=shuffle([[q[1],1],[q[2],0],[q[3],0]]);const hidden=new Set();let aud=null;
+  const render=()=>{bind({
+    a:v=>{const j=+v;const ok=opts[j][1]===1;const btns=[...card.querySelectorAll('[data-act="a"]')];btns.forEach((b,k)=>{b.disabled=true;if(opts[k][1]===1)b.classList.add('qok');else if(k===j)b.classList.add('qbad');});
+     if(ok){step++;streak++;addPts(5);beep(660+step*30,.1,'triangle',.05);beep(990+step*30,.12,'triangle',.05,.1);vib(18);if(MS[step]){celebrate(MS[step]+' '+step,170,true);confetti(120);}}else{lives--;streak=0;sfx.oops();vib(60);}
+     setTimeout(()=>{if(step>=LAD){finish(true);return;}if(lives<=0){finish(false);return;}
+      bind({nx:ask});show(`${ladder()}<h2>${ok?'✅ נָכוֹן!':'💡 הַתְּשׁוּבָה:'} <span style="font-size:.7em">${hearts()}</span></h2>${ok?'':`<p class="say" style="text-align:center"><b>${q[1]}</b></p>`}${q[4]?`<p class="fact">💡 ${q[4]}</p>`:''}<div class="btns row"><button class="big1" data-act="nx">▶</button></div>`);},ok?650:1100);},
+    cut:()=>{if(!life.cut)return;life.cut=0;const wr=opts.map((o,k)=>o[1]?-1:k).filter(k=>k>=0);hidden.add(rnd(wr));beep(500,.08,'square',.04);render();},
+    aud:()=>{if(!life.aud)return;life.aud=0;const c=opts.findIndex(o=>o[1]===1);const base=40+Math.floor(Math.random()*30);const rest=100-base;aud=opts.map((o,k)=>k===c?base:0);const others=opts.map((o,k)=>k).filter(k=>k!==c&&!hidden.has(k));others.forEach((k,n)=>{aud[k]=n===others.length-1?rest-others.slice(0,-1).reduce((a,kk)=>a+aud[kk],0):Math.floor(rest*Math.random());});beep(700,.08,'triangle',.04);render();},
+    say:()=>{try{speak([[q[0]+'. '+opts.filter((o,k)=>!hidden.has(k)).map(o=>o[0]).join('. '),'rabbi']]);}catch(e){}}});
+   const cols=['#2667b3','#c0392b','#2a7a37'];
+   show(`${ladder()}<div class="who">${pimg('rabbi')}<span>🧠 ${hearts()} ${streak>=3?'🔥'+streak:''}</span><span class="qlife"><button class="small ${life.cut?'alt':''}" data-act="cut" ${life.cut?'':'disabled'} aria-label="חֲצִי חֲצִי">✂️ 50:50</button><button class="small ${life.aud?'alt':''}" data-act="aud" ${life.aud?'':'disabled'} aria-label="עֶזְרַת הַקָּהָל">👨‍👩‍👧 קָהָל</button><button class="small alt" data-act="say" aria-label="הַקְרָאָה">🔊</button></span></div><h2 class="qtext">${q[0]}</h2><div class="qans">${opts.map((o,j)=>hidden.has(j)?`<button class="qa gone" disabled>✂️</button>`:`<button class="qa" data-act="a" data-v="${j}" style="--qc:${cols[j%3]}"><b>${'אבג'[j]}</b>${o[0]}${aud?`<i class="qaud" style="width:${aud[j]}%"></i><em>${aud[j]}%</em>`:''}</button>`).join('')}</div>`);};
+  render();};
  ask();}
 
 /* ---- minibus runner ---- */
