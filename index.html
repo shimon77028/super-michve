@@ -192,6 +192,16 @@ button.pulse{animation:pulse2 1.2s ease-in-out infinite}@keyframes pulse2{50%{tr
 .wptr{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:30px;color:#e2475e;z-index:2;text-shadow:0 2px 0 #1a1410}
 @media (max-height:520px){.wwrap{--ws:min(190px,40vh)}}
 .wcen{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:22%;aspect-ratio:1;border-radius:50%;background:#fff;border:5px solid #1a1410;display:flex;align-items:center;justify-content:center;font-size:clamp(18px,4vh,28px);z-index:2}
+.rblend{display:flex;justify-content:center;align-items:center;gap:10px;font-size:clamp(40px,8vh,72px);margin:6px 0;direction:rtl}
+.rblend span{display:inline-flex;align-items:center;justify-content:center;min-width:1.2em;padding:0 .15em;border-radius:16px}
+.rblend .bl1{background:#dff1ff;border:3px solid #2667b3}.rblend .bl2{background:#fff0c8;border:3px solid #c9a227}.rblend .bl3{background:#e3f8ea;border:3px solid #2a7a37}.rblend .blp{font-size:.6em;color:#7a5a20}
+@media (prefers-reduced-motion:no-preference){.rblend .bl3{animation:blpop 1.6s ease-in-out infinite}@keyframes blpop{50%{transform:scale(1.08)}}}
+.rslide .rdot{color:#c9a227;margin:0 .25em}
+.fluon{box-shadow:0 0 0 5px #7ed957;border-radius:16px}
+.fbars{display:flex;justify-content:center;align-items:flex-end;gap:16px;height:110px;margin:6px 0}.fbar{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;width:54px}.fbar i{display:block;width:100%;background:linear-gradient(#ffd400,#ff9d2e);border:3px solid #1a1410;border-radius:10px 10px 4px 4px;min-height:8px}.fbar b{font-size:15px}.fbar small{font-size:12px;color:#7a5a20}
+.rmap{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:6px 0;direction:rtl}.rmap span{min-width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;font-size:26px;border-radius:12px;background:#eee;border:3px solid #ccc;color:#999}
+.rmap .m3,.rmk.m3{background:#c9f2d3;border-color:#2a7a37;color:#1a1410}.rmap .m2,.rmk.m2{background:#fff0c8;border-color:#c9a227;color:#1a1410}.rmap .m1,.rmk.m1{background:#ffd6d6;border-color:#c0392b;color:#1a1410}.rmk{display:inline-block;padding:0 6px;border-radius:8px;border:2px solid}
+.tile.rnext{box-shadow:0 0 0 4px #ffd400,0 5px 0 var(--ink)!important}
 #card .grps{display:flex;flex-wrap:wrap;gap:4px 14px}
 #card .grp{flex-grow:1;min-width:150px}
 #card.tight2 .grid .tile{position:relative}
@@ -3526,19 +3536,62 @@ const RLES=[
  {id:5,n:'אוֹתִיּוֹת סוֹפִיּוֹת',ic:'🔚',k:'fin'},{id:6,n:'אוֹתִיּוֹת דּוֹמוֹת',ic:'👀',k:'sim'},
  {id:7,n:'נִקּוּד: קָמָץ, פַּתָּח, חִירִיק',ic:'✏️',k:'vow',g:['a','i']},{id:8,n:'נִקּוּד: צֵירֵי, סֶגּוֹל, חוֹלָם',ic:'✏️',k:'vow',g:['e','o'],all:['a','i','e','o']},{id:9,n:'נִקּוּד: שׁוּרוּק וְקֻבּוּץ',ic:'✏️',k:'vow',g:['u'],all:['a','i','e','o','u']},
  {id:10,n:'קוֹרְאִים מִלִּים',ic:'📗',k:'w1'},{id:11,n:'בּוֹנִים מִלִּים',ic:'🧱',k:'build'},{id:12,n:'מִלִּים אֲרֻכּוֹת',ic:'📘',k:'w2'},
- {id:13,n:'מַשְׁלִימִים מִשְׁפָּט',ic:'✍️',k:'sent'},{id:14,n:'נָכוֹן אוֹ לֹא?',ic:'🤔',k:'tf'},{id:15,n:'קוֹרְאִים סִפּוּר',ic:'📚',k:'story'}];
+ {id:13,n:'מַשְׁלִימִים מִשְׁפָּט',ic:'✍️',k:'sent'},{id:14,n:'נָכוֹן אוֹ לֹא?',ic:'🤔',k:'tf'},{id:15,n:'קוֹרְאִים סִפּוּר',ic:'📚',k:'story'},
+ {id:0,n:'שׁוֹמְעִים צְלִילִים',ic:'🎧',k:'phon'},{id:16,n:'צֵרוּף הֲבָרוֹת',ic:'🔗',k:'blend',after:9},{id:17,n:'קְרִיאָה שׁוֹטֶפֶת',ic:'🚀',k:'flu',after:13},{id:18,n:'קוֹרְאִים בְּלִי נִקּוּד',ic:'🎓',k:'nonik',after:12}];
 function RS(){S.read=S.read||{done:{},err:{},ok:{}};return S.read;}
 function rKid(){return FAM.me?'me':'dvora';}
 function rMark(key,ok){const r=RS();if(ok)r.ok[key]=(r.ok[key]||0)+1;else r.err[key]=(r.err[key]||0)+1;}
 function rWeak(){const r=RS();return Object.keys(r.err).map(k=>[k,(r.err[k]||0)-(r.ok[k]||0)*.5]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);}
-function rOpen(l){if(ALLOPEN)return true;return S.level!=='easy'||l.id===1||RS().done[l.id-1];}
+function rOpen(l){if(ALLOPEN)return true;if(l.id===0||l.id===1)return true;if(l.after!=null)return S.level!=='easy'||!!RS().done[l.after];return S.level!=='easy'||RS().done[l.id-1];}
+/* ===== reading upgrade: phonological awareness, explicit blending, fluency, fading nikud ===== */
+const NOVOW=t=>t.replace(/[֑-ׇ]/g,'');
+const SNDGRP=[['א','ע','ה'],['כ','ק'],['ת','ט'],['ס','ש'],['ו','ב'],['ח','כ']];
+function sameSound(a,b){if(a===b)return true;return SNDGRP.some(g=>g.includes(a)&&g.includes(b));}
+function firstL(w){return NOVOW(w[0])[0];}
+function qClap(w){const n=Math.min(3,w[2].length);return{p:'כַּמָּה הֲבָרוֹת יֵשׁ בַּמִּלָּה? מוֹחֲאִים כַּפַּיִם 👏',show:`<div class="remoji">${w[1]}</div><p style="text-align:center"><button class="small alt" data-act="hear">🔊 שׁוֹמְעִים</button></p>`,hear:w[0],o:[['👏',n===1],['👏👏',n===2],['👏👏👏',n===3]],big:1,key:'P:clap',g:w[1],auto:1};}
+function qSameStart(w){const f=firstL(w);const same=RW.filter(x=>x!==w&&x[1]!==w[1]&&firstL(x)===f);if(!same.length)return null;const ok=rnd(same);
+ const bad=shuffle(RW.filter(x=>!sameSound(firstL(x),f)&&x[1]!==w[1])).slice(0,2);
+ return{p:'אֵיזוֹ תְּמוּנָה מַתְחִילָה בְּאוֹתוֹ צְלִיל?',show:`<div class="remoji">${w[1]}</div><p style="text-align:center"><button class="small alt" data-act="hear">🔊 ${''}שׁוֹמְעִים</button></p>`,hear:w[0]+'... '+ok[0]+'... '+bad.map(b=>b[0]).join('... '),o:shuffle([[ok[1],1],...bad.map(b=>[b[1],0])]),emo:1,key:'P:start',g:w[1],auto:1};}
+function qLastSyl(w){if(w[2].length<2)return null;const last=w[2][w[2].length-1];const ok=RW.find(x=>x!==w&&x[1]!==w[1]&&x[2].length>=2&&NOVOW(x[2][x[2].length-1])===NOVOW(last));if(!ok)return null;
+ const bad=shuffle(RW.filter(x=>x[2].length>=2&&NOVOW(x[2][x[2].length-1])!==NOVOW(last)&&x[1]!==w[1])).slice(0,2);
+ return{p:'אֵיזוֹ תְּמוּנָה נִגְמֶרֶת כְּמוֹ...? 🎵',show:`<div class="remoji">${w[1]}</div><p style="text-align:center"><button class="small alt" data-act="hear">🔊 שׁוֹמְעִים</button></p>`,hear:w[0],o:shuffle([[ok[1],1],...bad.map(b=>[b[1],0])]),emo:1,key:'P:end',g:w[1],auto:1};}
+const BLB=['בּ','מ','ל','ד','שׁ','נ','ת','ר','ג','פּ','ס','כּ'];
+function blendHtml(b,g,i=0){const mk=g==='o'?'וֹ':g==='u'?'וּ':VOW[g].m[i];const sy=g==='o'?b+'וֹ':g==='u'?b+'וּ':b+VOW[g].m[i];
+ return`<div class="rblend rfont"><span class="bl1">${b}</span><span class="blp">+</span><span class="bl2">${g==='o'||g==='u'?mk:'◌'+mk}</span><span class="blp">=</span><span class="bl3">${sy}</span></div>`;}
+function qBlend(b,g){const others=shuffle(Object.keys(VOW).filter(x=>x!==g)).slice(0,1).map(x=>syl(b,x));const ob=rnd(BLB.filter(x=>x!==b));const opts=shuffle([[syl(b,g),1],[others[0],0],[syl(ob,g),0]]);
+ return{p:'מְצָרְפִים: אוֹת + נִקּוּד = ?',show:`<div class="rblend rfont"><span class="bl1">${b}</span><span class="blp">+</span><span class="bl2">${g==='o'?'וֹ':g==='u'?'וּ':'◌'+VOW[g].m[0]}</span><span class="blp">=</span><span class="bl3">?</span></div>`,o:opts,big:1,key:'V:'+g,g:syl(b,g)};}
+function qSlide(w){const sep=w[2].join('<span class="rdot">·</span>');const opts=shuffle([w,...shuffle(RW.filter(x=>x[1]!==w[1])).slice(0,2)]);
+ return{p:'קוֹרְאִים הֲבָרָה – הֲבָרָה, וְאָז אֶת כָּל הַמִּלָּה:',show:BIG(sep,'ttsSkip rslide'),o:opts.map(x=>[x[1],x===w]),emo:1,key:'W:'+w[0],g:w[0],help:w[2].join(' ... ')+' ... '+w[0]};}
+function qHearPick(w){const sim=RW.filter(x=>x[0]!==w[0]).sort((a,b)=>simScore(b[0],w[0])-simScore(a[0],w[0])).slice(0,4);const opts=shuffle([w,...shuffle(sim).slice(0,2)]);
+ return{p:'מַקְשִׁיבִים 🔊 – וּמוֹצְאִים אֶת הַמִּלָּה הַכְּתוּבָה:',show:`<p style="text-align:center"><button class="big1" data-act="hear">🔊 שׁוֹמְעִים</button></p>`,hear:w[0],o:opts.map(x=>[x[0],x===w]),big:1,key:'W:'+w[0],g:'🔊',auto:1};}
+function qNoNik(w){const opts=shuffle([w,...shuffle(RW.filter(x=>x[1]!==w[1])).slice(0,S.level==='easy'?2:3)]);return{p:'קוֹרְאִים בְּלִי נִקּוּד – אֵיזוֹ תְּמוּנָה?',show:BIG(NOVOW(w[0]),'ttsSkip'),o:opts.map(x=>[x[1],x===w]),emo:1,key:'N:'+w[0],g:NOVOW(w[0]),help:w[0]};}
+function qNoNikTF(t){return{p:'קוֹרְאִים בְּלִי נִקּוּד – נָכוֹן אוֹ לֹא?',show:BIG(NOVOW(t[0]),'rsent ttsSkip'),o:[['✅ נָכוֹן',t[1]===1],['❌ לֹא נָכוֹן',t[1]===0]],key:'N:'+t[0],g:'🎓',help:t[0]};}
+function fluTexts(){const easy=S.level==='easy';const a=shuffle(RPICS.map(x=>x[0]));const b=shuffle(RTF.filter(x=>x[1]===1).map(x=>x[0]));return easy?[a[0],a[1]]:[a[0]+' '+b[0],b[1]+' '+a[1]];}
+function qFlu(t){return{flu:t,g:'🚀',key:'F:'+t};}
+function fluRender(msg=''){const d=R.rd,q=d.qs[d.i];const f=d.flu||(d.flu={round:0,times:[],run:false,t0:0});
+ bind({go:()=>{f.run=true;f.t0=performance.now();fluRender();},stop:()=>{if(!f.run)return;f.run=false;const sec=Math.max(1,Math.round((performance.now()-f.t0)/100)/10);f.times.push(sec);f.round++;sfx.coin();if(f.round>=3){const best=Math.min(...f.times),imp=f.times[0]-best;const r=RS();r.flu=r.flu||[];r.flu.push({d:todayKey(),t:best});if(r.flu.length>30)r.flu.shift();save();fluRender();return;}fluRender();},
+  model:()=>speak([[q.flu,'rebbetzin']]),done:()=>{d.flu=null;readGood();}});
+ const bars=f.times.map((t,i)=>{const mx=Math.max(...f.times);return`<div class="fbar"><i style="height:${Math.round(t/mx*100)}%"></i><b>${t}</b><small>${i+1}</small></div>`;}).join('');
+ if(f.round>=3){const best=Math.min(...f.times);const better=f.times[2]<=f.times[0];
+  show(`${readHead()}<h2>🚀 ${better?'קָרָאתָ מַהֵר יוֹתֵר וּבְבִטָּחוֹן!':'כָּל הַכָּבוֹד עַל הַתִּרְגּוּל!'}</h2><div class="fbars">${bars}</div><p class="say" style="text-align:center">⏱️ ${best} שְׁנִיּוֹת · 💡 כָּל קְרִיאָה חוֹזֶרֶת – שׁוֹטֶפֶת יוֹתֵר!</p><div class="btns row"><button class="big1" data-act="done">▶</button></div>`);return;}
+ show(`${readHead()}${msg}<h2>🚀 קוֹרְאִים בְּקוֹל – ${['פַּעַם רִאשׁוֹנָה','פַּעַם שְׁנִיָּה','פַּעַם שְׁלִישִׁית'][f.round]}</h2>${BIG(q.flu,'rsent ttsSkip'+(f.run?' fluon':''))}${f.times.length?`<div class="fbars">${bars}</div>`:''}
+ <div class="btns row">${f.run?'<button class="big1 green" data-act="stop">✅ סִיַּמְתִּי!</button>':'<button class="big1" data-act="go">▶ מַתְחִילִים לִקְרֹא</button>'+(f.round===0?'<button class="alt" data-act="model">🔊 קֹדֶם מַקְשִׁיבִים</button>':'')}</div>`);}
+function rWarm(){const out=[];for(const [k] of rWeak().slice(0,2)){const v=k.slice(2);if(k[0]==='L'){const L=LETS.find(x=>x[0]===v);if(L)out.push(qName(L,LETS));}else if(k[0]==='V'&&VOW[v])out.push(qBlend(rnd(BLB),v));else if(k[0]==='W'){const w=RW.find(x=>x[0]===v);if(w)out.push(qWordPic(w));}}return out;}
+const RORDER=[0,1,2,3,4,5,6,7,8,9,16,10,11,12,13,14,15,17,18];
+const RSTAGES=[['🎧 שָׁלָב 1 – שׁוֹמְעִים צְלִילִים',[0]],['🔤 שָׁלָב 2 – אוֹתִיּוֹת',[1,2,3,4,5,6]],['✏️ שָׁלָב 3 – נִקּוּד וְצֵרוּף',[7,8,9,16]],['📗 שָׁלָב 4 – מִלִּים',[10,11,12]],['📚 שָׁלָב 5 – מִשְׁפָּטִים וְסִפּוּרִים',[13,14,15]],['🚀 שָׁלָב 6 – שֶׁטֶף וְעַצְמָאוּת',[17,18]]];
+function readMap(){R.screen='read';bind({m:readMenu});const r=RS();const lv=k=>{const ok=r.ok[k]||0,er=r.err[k]||0;return !ok&&!er?'':ok>=3&&ok>=er*2?'m3':ok>er?'m2':'m1';};
+ show(`<h2>🗺️ הַמַּפָּה שֶׁל ${FAM.me?FAM.me.name:'הַקּוֹרֵא'}</h2><div class="rmap rfont">${LETS.map(L=>`<span class="${lv('L:'+L[0])}">${L[0]}</span>`).join('')}</div><div class="rmap rfont">${Object.keys(VOW).map(g=>`<span class="${lv('V:'+g)}">${syl('בּ',g)}</span>`).join('')}</div>
+ <p class="tip" style="text-align:center"><span class="rmk m3">✓</span> שׁוֹלֵט · <span class="rmk m2">~</span> לוֹמֵד · <span class="rmk m1">!</span> צָרִיךְ חִזּוּק</p>${r.flu&&r.flu.length?`<p class="tip" style="text-align:center">🚀 שִׂיא קְרִיאָה שׁוֹטֶפֶת: ${Math.min(...r.flu.map(x=>x.t))} שְׁנִיּוֹת</p>`:''}<div class="btns row"><button class="alt" data-act="m">חֲזָרָה</button></div>`);}
+
 const BIG=(t,cls='')=>`<div class="rbig ${cls}">${t}</div>`;
-function readMenu(){confirmLeave();cab.classList.add('isMP');R.scene='read';R.screen='read';R.stage=0;R.rd={glyph:'א'};const r=RS();
- bind({go:id=>readStart(+id),prac:readPractice,back:()=>learnScreen()});const weak=rWeak().slice(0,5);
+function readMenu(){confirmLeave();if(R.screen!=='read')R.rstage=null;cab.classList.add('isMP');R.scene='read';R.screen='read';R.stage=0;R.rd={glyph:'א'};const r=RS();
+ bind({go:id=>readStart(+id),prac:readPractice,map:readMap,st:v=>{R.rstage=+v;readMenu();},back:()=>learnScreen()});const weak=rWeak().slice(0,5);
  show(`<h2>🏫 בֵּית הַסֵּפֶר לִקְרִיאָה</h2>${say('rebbetzin',(FAM.me?'שָׁלוֹם '+FAM.me.name+'! ':'')+'בּוֹאוּ נִלְמַד לִקְרֹא – צַעַד אַחַר צַעַד: אוֹתִיּוֹת, נִקּוּד, מִלִּים, מִשְׁפָּטִים וְסִפּוּרִים!')}
- <div class="grid">${RLES.map(l=>{const st=r.done[l.id];const op=rOpen(l);return`<div class="tile ${st?'on':''} ${op?'':'lock'}"><span class="ic">${l.ic}</span>${l.id}. ${l.n}<small>${st?'⭐'.repeat(st):op?'חָדָשׁ':'🔒 נִפְתָּח אַחֲרֵי הַקּוֹדֵם'}</small><button class="small ${st?'alt':''}" data-act="go" data-v="${l.id}" ${op?'':'disabled'}>${st?'שׁוּב':'לוֹמְדִים!'}</button></div>`}).join('')}</div>
+ ${(()=>{const nxt=RORDER.find(id=>{const l=RLES.find(x=>x.id===id);return l&&rOpen(l)&&!r.done[id];});if(R.rstage==null){const si=RSTAGES.findIndex(st=>st[1].includes(nxt));R.rstage=si<0?0:si;}
+ const tabs=`<div class="btns row rtabs">${RSTAGES.map((st,i)=>{const dn=st[1].filter(id=>r.done[id]).length;return`<button class="small ${i===R.rstage?'blue':'alt'}" data-act="st" data-v="${i}" aria-label="${st[0]}">${st[0].split(' ')[0]} ${i+1}${dn===st[1].length?' ✅':''}</button>`;}).join('')}</div>`;
+ return tabs+[RSTAGES[R.rstage]].map(([h,ids])=>`<h3 class="ghead">${h}</h3><div class="grid">${ids.map(id=>{const l=RLES.find(x=>x.id===id);const st=r.done[l.id];const op=rOpen(l);return`<div class="tile ${st?'on':''} ${op?'':'lock'} ${id===nxt?'rnext':''}"><span class="ic">${l.ic}</span>${l.n}<small>${st?'⭐'.repeat(st):op?'חָדָשׁ':'🔒 נִפְתָּח אַחֲרֵי הַקּוֹדֵם'}</small><button class="small ${st?'alt':''}" data-act="go" data-v="${l.id}" ${op?'':'disabled'}>${st?'שׁוּב':'לוֹמְדִים!'}</button></div>`}).join('')}</div>`).join('');})()}
  ${weak.length?`<p class="fact">🧠 תִּרְגּוּל חָכָם – מְחַזְּקִים אֶת מָה שֶׁעוֹד קָשֶׁה: ${weak.map(w=>`<b class="rfont">${w[0][0]==='V'&&VOW[w[0].slice(2)]?VOW[w[0].slice(2)].n[0]:w[0].slice(2)}</b>`).join(' · ')} <button class="small green" data-act="prac">לְתַרְגֵּל</button></p>`:''}
- <div class="btns row"><button class="alt" data-act="back">חֲזָרָה</button></div>`);}
+ <div class="btns row"><button class="alt" data-act="map">🗺️ הַמַּפָּה שֶׁלִּי</button><button class="alt" data-act="back">חֲזָרָה</button></div>`);}
 /* ---- question generators ---- */
 function vgroup(s){if(s.includes('וֹ'))return'o';if(s.includes('וּ')||s.includes('ֻ'))return'u';if(/[ֲַָ]/.test(s))return'a';if(/[ֱֵֶ]/.test(s))return'e';if(s.includes('ִ'))return'i';return null;}
 function sbase(s){const ch=[...s];let b=ch[0];for(let i=1;i<ch.length;i++){if(/[ּׁׂ]/.test(ch[i]))b+=ch[i];else if(!/[ְ-ֻ]/.test(ch[i]))break;}return b;}
@@ -3579,8 +3632,16 @@ function readBuildQs(l){const easy=S.level==='easy';let qs=[];
  else if(l.k==='w2'){qs=shuffle(RW.filter(w=>w[2].length>=3)).slice(0,8).map(w=>Math.random()<.5?qWordPic(w):qPicWord(w));}
  else if(l.k==='sent'){qs=shuffle([...shuffle(RSENT).slice(0,5).map(qSent),...shuffle(RPICS).slice(0,easy?3:5).map(qSentPic)]);}
  else if(l.k==='tf'){qs=shuffle(RTF).slice(0,easy?8:10).map(qTF);}
+ else if(l.k==='phon'){qs=[{intro:1,html:`<div class="remoji">👂👏</div><p class="say" data-k="rebbetzin" style="text-align:center">לִפְנֵי שֶׁקּוֹרְאִים – מַקְשִׁיבִים! כָּל מִלָּה בְּנוּיָה מִצְּלִילִים. בּוֹאוּ נִשְׁמַע אוֹתָם.</p>`,speak:[['לִפְנֵי שֶׁקּוֹרְאִים – מַקְשִׁיבִים! כָּל מִלָּה בְּנוּיָה מִצְּלִילִים.','rebbetzin']],g:'👂'}];
+  const pool=shuffle(RW);const quiz=[];for(const w of pool.filter(w=>w[2].length<=3).slice(0,4))quiz.push(qClap(w));for(const w of pool){if(quiz.length>=(easy?8:10))break;const q=Math.random()<.6?qSameStart(w):qLastSyl(w);if(q)quiz.push(q);}qs=qs.concat(shuffle(quiz));}
+ else if(l.k==='blend'){qs=[{intro:1,html:`${blendHtml('מ','a')}<p class="say" data-k="rebbetzin" style="text-align:center">מְצָרְפִים: הָאוֹת + הַנִּקּוּד = הֲבָרָה. מַ – מוֹ – מִי!</p>`,speak:[['מֶם, קָמָץ: מָה. מֶם, חוֹלָם: מוֹ.','rebbetzin']],g:'מָ'},{intro:1,html:`${blendHtml('ל','o')}${blendHtml('ד','i')}`,g:'לוֹ'}];
+  const quiz=[];const gs=Object.keys(VOW);for(let k=0;k<(easy?5:6);k++)quiz.push(qBlend(rnd(BLB),rnd(gs)));for(const w of shuffle(RW.filter(w=>w[2].length>=2)).slice(0,easy?3:4))quiz.push(qSlide(w));if(!easy)for(const w of shuffle(RW.filter(w=>w[2].length<=2)).slice(0,2))quiz.push(qHearPick(w));qs=qs.concat(shuffle(quiz));}
+ else if(l.k==='flu'){qs=[{intro:1,html:`<div class="remoji">🚀📖</div><p class="say" data-k="rebbetzin" style="text-align:center">קוֹרְאִים אֶת אוֹתוֹ טֶקְסְט 3 פְּעָמִים בְּקוֹל. כָּל פַּעַם – יוֹתֵר שׁוֹטֵף! לוֹחֲצִים ▶ כְּשֶׁמַּתְחִילִים וְ✅ כְּשֶׁמְּסַיְּמִים.</p>`,speak:[['קוֹרְאִים אֶת אוֹתוֹ טֶקְסְט שָׁלוֹשׁ פְּעָמִים בְּקוֹל. כָּל פַּעַם – יוֹתֵר שׁוֹטֵף!','rebbetzin']],g:'🚀'},...fluTexts().map(qFlu)];}
+ else if(l.k==='nonik'){qs=[{intro:1,html:`${BIG(NOVOW('שַׁבָּת')+' = שַׁבָּת')}<p class="say" data-k="rebbetzin" style="text-align:center">קוֹרְאִים גְּדוֹלִים יוֹדְעִים לִקְרֹא גַּם בְּלִי נִקּוּד! מִלִּים שֶׁאַתֶּם כְּבָר מַכִּירִים – בְּלִי הַנְּקֻדּוֹת.</p>`,g:'🎓'}];
+  qs=qs.concat(shuffle([...shuffle(RW.filter(w=>NOVOW(w[0]).length>=3)).slice(0,easy?5:7).map(qNoNik),...shuffle(RTF).slice(0,3).map(qNoNikTF)]));}
+ if(l.id>1&&l.k!=='flu'&&l.k!=='phon'){const wu=rWarm();if(wu.length){const at=qs.findIndex(q=>!q.intro);qs.splice(at<0?qs.length:at,0,...wu);}}
  return qs;}
-function readStart(id,qs){const l=RLES.find(x=>x.id===id)||{id:0,n:'תִּרְגּוּל חָכָם',ic:'🧠'};confirmLeave();cab.classList.add('isMP');R.scene='read';
+function readStart(id,qs){const l=(qs?null:RLES.find(x=>x.id===id))||{id:-1,n:'תִּרְגּוּל חָכָם',ic:'🧠'};confirmLeave();cab.classList.add('isMP');R.scene='read';
  if(l.k==='story'){storyPick();return;}
  R.rd={l,qs:qs||readBuildQs(l),i:0,mis:0,hints:0,glyph:'א',streak:0};readQ();}
 function readPractice(){const weak=rWeak().slice(0,8).map(w=>w[0]);const qs=[];
@@ -3591,6 +3652,7 @@ function readPractice(){const weak=rWeak().slice(0,8).map(w=>w[0]);const qs=[];
  if(!qs.length){readMenu();return;}readStart(0,shuffle(qs).slice(0,10));}
 function readHead(){const d=R.rd;const tot=d.qs.length;return `<div class="who">${pimg('rebbetzin')}<span>${d.l.ic} ${d.l.n} · ${d.i+1}/${tot}</span></div><div class="rprog"><i style="width:${Math.round(d.i/tot*100)}%"></i></div>`;}
 function readQ(msg=''){const d=R.rd;if(d.i>=d.qs.length){readEnd();return;}const q=d.qs[d.i];d.glyph=q.g||'א';d.locked=false;
+ if(q.flu){fluRender(msg);return;}if(q.auto&&!q._said&&q.hear){q._said=1;setTimeout(()=>{if(R.rd===d&&d.qs[d.i]===q)speak([[q.hear,'rebbetzin']]);},350);}
  if(q.intro){bind({nx:()=>{d.i++;readQ();},sp:()=>speak(q.speak||[])});show(`${readHead()}${q.html}<div class="btns row"><button data-act="nx">הַבָּא ➜</button>${q.speak?'<button class="small alt" data-act="sp">🔊 שׁוֹמְעִים</button>':''}</div>`);return;}
  if(q.grid){d.found=d.found||{};bind({g:v=>readGrid(+v),hear:()=>speak([[q.sp||'', 'rebbetzin']])});
   show(`${readHead()}${msg}<h2>${q.p}</h2><div class="rgrid">${q.grid.map((c,i)=>`<button class="rtile ${d.found[i]?'green':''}" data-act="g" data-v="${i}" ${d.found[i]?'disabled':''}>${c}</button>`).join('')}</div>`);return;}
@@ -3605,9 +3667,9 @@ function readAns(i){const d=R.rd,q=d.qs[d.i];if(d.locked)return;const o=q.o[i];i
 function readGrid(i){const d=R.rd,q=d.qs[d.i];if(d.locked||!d.found)return;if(q.grid[i]===q.t){d.found[i]=1;beep(700+Object.keys(d.found).length*80,.06,'triangle',.04);const left=q.grid.filter((c,j)=>c===q.t&&!d.found[j]).length;if(!left){d.found=null;if(!q.wrong)rMark(q.key,true);readGood();return;}readQ();}else{q.wrong=1;readBad(q);readQ(`<p class="say">זוֹ לֹא ${q.t}... מִסְתַּכְּלִים טוֹב 🔍</p>`);}}
 function readBuildTap(i){const d=R.rd,q=d.qs[d.i];if(d.locked||!d.built)return;if(i===d.built.length){d.built.push(i);beep(600+i*120,.07,'triangle',.05);if(d.built.length===q.build[2].length){d.built=null;d.tiles=null;if(!q.wrong)rMark(q.key,true);speak([[q.build[0],rKid()]]);readGood();return;}readQ();}else{q.wrong=1;readBad(q);readQ(`<p class="say">לֹא בַּסֵּדֶר הַזֶּה – מַתְחִילִים מִימִין! ➡️</p>`);}}
 function readEnd(){const d=R.rd;const tot=d.qs.filter(q=>!q.intro).length;const pen=d.mis+d.hints*.5;const stars=pen<=tot*.1?3:pen<=tot*.35?2:1;const r=RS();
- if(d.l.id){r.done[d.l.id]=Math.max(r.done[d.l.id]||0,stars);}addCoins(6+stars*4);save();dailyEvent('read',stars);
+ if(d.l.id>=0){r.done[d.l.id]=Math.max(r.done[d.l.id]||0,stars);}addCoins(6+stars*4);save();dailyEvent('read',stars);
  sfx.big();celebrate(stars===3?'קוֹרֵא אַלּוּף! ⭐⭐⭐':'כָּל הַכָּבוֹד!',200,true);const k=rKid();
- bind({again:()=>readStart(d.l.id||0,d.l.id?null:undefined),next:()=>readStart(d.l.id+1),m:readMenu});const nx=d.l.id&&RLES.find(x=>x.id===d.l.id+1);
+ bind({again:()=>(d.l.id>=0?readStart(d.l.id):readPractice()),next:()=>{const ni=RORDER.indexOf(d.l.id);readStart(RORDER[ni+1]);},m:readMenu});const ni=RORDER.indexOf(d.l.id);const nx=d.l.id>=0&&ni>=0&&RLES.find(x=>x.id===RORDER[ni+1]);
  show(`<h2>🎉 ${d.l.n} – ${'⭐'.repeat(stars)}</h2>${say('rebbetzin',stars===3?'וַאו! קְרִיאָה מְצֻיֶּנֶת! אֲנִי כָּל כָּךְ גֵּאָה בְּךָ!':'יָפֶה מְאוֹד! כָּל פַּעַם שֶׁמְּתַרְגְּלִים – קוֹרְאִים טוֹב יוֹתֵר!')}${say('shimon',cheerName(k))}<p class="fact">💡 "אֵין הַבַּיִשָּׁן לָמֵד" – מִי שֶׁשּׁוֹאֵל וּמְנַסֶּה, לוֹמֵד הֲכִי טוֹב!</p>
  <div class="btns row">${nx?'<button data-act="next">לַשִּׁעוּר הַבָּא ➜</button>':''}<button class="alt" data-act="m">לְבֵית הַסֵּפֶר</button></div>`);}
 /* ---- stories ---- */
