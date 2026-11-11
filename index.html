@@ -1554,7 +1554,7 @@ function pmapScreen(bk){confirmLeave();campStop();actPadOff();cab.classList.add(
  const now=parshaNow();const curKs=now.p.k.split('+');const ci=PSH.findIndex(x=>x.k===curKs[0]);
  if(bk==null)bk=R.pmBk!=null?R.pmBk:PBOOKS.findIndex(b=>ci>=b[2]&&ci<=b[3]);R.pmBk=bk;
  const B=PBOOKS[bk];const C=innerWidth<600?4:6;let got=0,stars=0;PSH.forEach(p=>{const s=pshStars(p.k);if(s)got++;stars+=s;});
- const items=PSH.slice(B[2],B[3]+1).map((p,j)=>{const i=B[2]+j,row=Math.floor(j/C),col=row%2?C-1-j%C:j%C;const s=pshStars(p.k),cur=curKs.includes(p.k);
+ const items=PSH.slice(B[2],B[3]+1).map((p,j)=>{const i=B[2]+j,row=Math.floor(j/C),col=j%C;const s=pshStars(p.k),cur=curKs.includes(p.k);
   return`<button class="pst ${s?'done':''} ${cur?'cur':''}" data-act="st" data-v="${i}" style="grid-row:${row+1};grid-column:${col+1}">${cur?'<em>📍</em>':''}<span>${p.ic}</span><small>${p.n}</small><i>${s?'⭐'.repeat(s):'☆'}</i></button>`;}).join('');
  bind({bk:v=>pmapScreen(+v),st:v=>{R.pshBack=()=>pmapScreen();parshaScreen({p:PSH[+v]});},week:()=>{R.pshBack=()=>pmapScreen();parshaScreen();},
   play:()=>{R.pshBack=()=>pmapScreen();pgStart(now.p);},back:appHome});
